@@ -229,30 +229,58 @@ namespace AdventOfCode.Day1.Tests
         };
 
         [Fact]
-        public void ShouldFixExpenseReport()
+        public void ShouldFixExpenseReportWithTwoEntries()
         {
             //Given
             var expectedFixedExpenseReportValue = 787776;
 
             //When
-            var fixedExpenseReportValue = ReportRepair.GetFixedExpenseReportValue(ExpenseReport);
+            var fixedExpenseReportValue = ReportRepair.GetFixedExpenseReportValueWithTwoEntries(ExpenseReport);
 
             //Then
-            output.WriteLine($"The fixed expense report value is {fixedExpenseReportValue}");
+            output.WriteLine($"The fixed expense report value with two entries is {fixedExpenseReportValue}");
             Assert.Equal(expectedFixedExpenseReportValue, fixedExpenseReportValue);
         }
 
         [Fact]
-        public void ShouldFixExampleExpenseReport()
+        public void ShouldFixExpenseReportWithThreeEntries()
+        {
+            //Given
+            var expectedFixedExpenseReportValue = 262738554;
+
+            //When
+            var fixedExpenseReportValue = ReportRepair.GetFixedExpenseReportValueWithThreeEntries(ExpenseReport);
+
+            //Then
+            output.WriteLine($"The fixed expense report value with three entries is {fixedExpenseReportValue}");
+            Assert.Equal(expectedFixedExpenseReportValue, fixedExpenseReportValue);
+        }
+
+        [Fact]
+        public void ShouldFixExampleExpenseReportWithTwoEntries()
         {
             //Given
             var expectedFixedExpenseReportValue = 514579;
 
             //When
-            var fixedExpenseReportValue = ReportRepair.GetFixedExpenseReportValue(ExampleExpenseReport);
+            var fixedExpenseReportValue = ReportRepair.GetFixedExpenseReportValueWithTwoEntries(ExampleExpenseReport);
 
             //Then
-            output.WriteLine($"The fixed expense report value from example is is {fixedExpenseReportValue}");
+            output.WriteLine($"The fixed expense report value with two entries from example is is {fixedExpenseReportValue}");
+            Assert.Equal(expectedFixedExpenseReportValue, fixedExpenseReportValue);
+        }
+
+        [Fact]
+        public void ShouldFixExampleExpenseReportWithThreeEntries()
+        {
+            //Given
+            var expectedFixedExpenseReportValue = 241861950;
+
+            //When
+            var fixedExpenseReportValue = ReportRepair.GetFixedExpenseReportValueWithThreeEntries(ExampleExpenseReport);
+
+            //Then
+            output.WriteLine($"The fixed expense report value with three entries from example is is {fixedExpenseReportValue}");
             Assert.Equal(expectedFixedExpenseReportValue, fixedExpenseReportValue);
         }
 
