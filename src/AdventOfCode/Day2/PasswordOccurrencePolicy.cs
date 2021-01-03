@@ -2,13 +2,13 @@
 
 namespace AdventOfCode.Day2.Tests
 {
-    public class PasswordPolicy
+    public class PasswordOccurrencePolicy : IPasswordPolicy
     {
         private readonly int atLeast;
         private readonly int atMost;
         private readonly char character;
 
-        public PasswordPolicy(
+        public PasswordOccurrencePolicy(
             int atLeast,
             int atMost,
             char character)

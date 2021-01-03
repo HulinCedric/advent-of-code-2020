@@ -3,13 +3,13 @@
     public class Password
     {
         private readonly string password;
-        private readonly PasswordPolicy policy;
+        private readonly IPasswordPolicy policy;
 
         public Password(
             string password,
-            PasswordPolicy policy)
+            IPasswordPolicy policy)
         {
-            this.password = password;
+            this.password = password.Trim();
             this.policy = policy;
         }
 

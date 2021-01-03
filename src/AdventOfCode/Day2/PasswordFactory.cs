@@ -2,18 +2,26 @@
 {
     public class PasswordFactory
     {
-        public static Password CreatePassword(string passwordAndPoliciyDescriptions)
+        public static Password CreatePasswordWithOccurrencePolicy(string passwordAndPoliciyDescriptions)
             => new Password(
                 GetPassword(passwordAndPoliciyDescriptions),
-                new PasswordPolicy(
-                    GetAtLeast(passwordAndPoliciyDescriptions),
-                    GetAtMost(passwordAndPoliciyDescriptions),
+                new PasswordOccurrencePolicy(
+                    GetFirstParameterPolicy(passwordAndPoliciyDescriptions),
+                    GetSecondParameterPolicy(passwordAndPoliciyDescriptions),
                     GetCharacter(passwordAndPoliciyDescriptions)));
 
-        private static int GetAtLeast(string passwordAndPoliciyDescriptions)
+        public static Password CreatePasswordWithPositionPolicy(string passwordAndPoliciyDescriptions)
+            => new Password(
+                GetPassword(passwordAndPoliciyDescriptions),
+                new PasswordPositionPolicy(
+                    GetFirstParameterPolicy(passwordAndPoliciyDescriptions),
+                    GetSecondParameterPolicy(passwordAndPoliciyDescriptions),
+                    GetCharacter(passwordAndPoliciyDescriptions)));
+
+        private static int GetFirstParameterPolicy(string passwordAndPoliciyDescriptions)
             => int.Parse(passwordAndPoliciyDescriptions[..IndexOfPolicySeparator(passwordAndPoliciyDescriptions)]);
 
-        private static int GetAtMost(string passwordAndPoliciyDescriptions)
+        private static int GetSecondParameterPolicy(string passwordAndPoliciyDescriptions)
             => int.Parse(passwordAndPoliciyDescriptions[(IndexOfPolicySeparator(passwordAndPoliciyDescriptions) + 1)..IndexOfCharacterSeparator(passwordAndPoliciyDescriptions)]);
 
         private static char GetCharacter(string passwordAndPoliciyDescriptions)

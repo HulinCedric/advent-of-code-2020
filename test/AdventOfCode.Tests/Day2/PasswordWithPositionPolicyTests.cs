@@ -2,13 +2,14 @@ using Xunit;
 
 namespace AdventOfCode.Day2.Tests
 {
-    public class PasswordFactoryTests
+    public class PasswordWithPositionPolicyTests
     {
         [Fact]
-        public void Invalid_When_DescriptionIs_1_3_b_cdefg()
+        public void Invalid_When_Both_Position_2_And_9_Contain_c_ForPassword_ccccccccc()
         {
             //Given
-            var password = PasswordFactory.CreatePasswordWithOccurrencePolicy("1-3 b: cdefg");
+            var passwordPolicy = new PasswordPositionPolicy(2, 9, 'c');
+            var password = new Password("ccccccccc", passwordPolicy);
             var expectedPasswordValidity = false;
 
             //When
@@ -19,11 +20,12 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void Valid_When_DescriptionIs_1_3_a_abcde()
+        public void Invalid_When_Neither_Position_1_Nor_Position_3_Contains_b_ForPassword_cdefg()
         {
             //Given
-            var password = PasswordFactory.CreatePasswordWithOccurrencePolicy("1-3 a: abcde");
-            var expectedPasswordValidity = true;
+            var passwordPolicy = new PasswordPositionPolicy(1, 3, 'b');
+            var password = new Password("cdefg", passwordPolicy);
+            var expectedPasswordValidity = false;
 
             //When
             var passwordValidity = password.IsValid();
@@ -33,10 +35,11 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void Valid_When_DescriptionIs_2_9_c_ccccccccc()
+        public void Valid_When_Position_1_Contains_a_And_Position_3_DoesNot()
         {
             //Given
-            var password = PasswordFactory.CreatePasswordWithOccurrencePolicy("2-9 c: ccccccccc");
+            var passwordPolicy = new PasswordPositionPolicy(1, 3, 'a');
+            var password = new Password("abcde", passwordPolicy);
             var expectedPasswordValidity = true;
 
             //When
