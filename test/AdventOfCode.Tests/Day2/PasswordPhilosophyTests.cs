@@ -1,0 +1,56 @@
+using System;
+using System.IO;
+using System.Linq;
+using Xunit;
+
+namespace AdventOfCode.Day2.Tests
+{
+    public class PasswordPhilosophyTests
+    {
+        private readonly string[] passwordsAndPoliciesDescriptions;
+
+        private readonly string[] passwordsAndPoliciesDescriptionsExample = new string[]
+        {
+            "1-3 a: abcde",
+            "1-3 b: cdefg",
+            "2-9 c: ccccccccc",
+        };
+
+        public PasswordPhilosophyTests()
+        {
+            passwordsAndPoliciesDescriptions = File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Day2/input.txt"));
+        }
+
+        [Fact]
+        public void ValidPasswordCount_2_For_Example()
+        {
+            //Given
+            var passwords = passwordsAndPoliciesDescriptionsExample.Select(description => PasswordFactory.CreatePassword(description));
+            var expectedValidPasswordsCount = 2;
+
+            //When
+            var validPasswordsCount = passwords
+                .Where(password => password.IsValid())
+                .Count();
+
+            //Then
+            Assert.Equal(expectedValidPasswordsCount, validPasswordsCount);
+        }
+
+        [Fact]
+        public void ValidPasswordCount_ShouldBe_474()
+        {
+            //Given
+            var passwords = passwordsAndPoliciesDescriptions.Select(description => PasswordFactory.CreatePassword(description));
+            var expectedValidPasswordsCount = 474;
+
+            //When
+            var validPasswordsCount = passwords
+                .Where(password => password.IsValid())
+                .Count();
+
+            //Then
+            Assert.Equal(expectedValidPasswordsCount, validPasswordsCount);
+        }
+    }
+}
