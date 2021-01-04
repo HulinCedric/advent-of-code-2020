@@ -1,11 +1,11 @@
 using Xunit;
 
-namespace AdventOfCode.Day2.Tests
+namespace AdventOfCode.Day02.Tests
 {
-    public class PasswordWithPositionPolicyTests
+    public class PasswordWithPositionPolicyShould
     {
         [Fact]
-        public void Invalid_When_Both_Position_2_And_9_Contain_c_ForPassword_ccccccccc()
+        public void Be_Invalid_when_both_position_2_and_9_contain_c_for_Password_ccccccccc()
         {
             //Given
             var passwordPolicy = new PasswordPositionPolicy(2, 9, 'c');
@@ -20,7 +20,7 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void Invalid_When_Neither_Position_1_Nor_Position_3_Contains_b_ForPassword_cdefg()
+        public void Be_Invalid_when_neither_position_1_nor_position_3_contains_b_for_Password_cdefg()
         {
             //Given
             var passwordPolicy = new PasswordPositionPolicy(1, 3, 'b');
@@ -35,7 +35,7 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void Valid_When_Position_1_Contains_a_And_Position_3_DoesNot()
+        public void Be_valid_when_position_1_contains_a_and_position_3_does_not_for_Password_abcde()
         {
             //Given
             var passwordPolicy = new PasswordPositionPolicy(1, 3, 'a');

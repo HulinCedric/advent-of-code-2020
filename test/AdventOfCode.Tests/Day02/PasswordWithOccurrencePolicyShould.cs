@@ -1,11 +1,11 @@
 using Xunit;
 
-namespace AdventOfCode.Day2.Tests
+namespace AdventOfCode.Day02.Tests
 {
-    public class PasswordWithOccurrencePolicyTests
+    public class PasswordWithOccurrencePolicyShould
     {
         [Fact]
-        public void Invalid_When_AtLeast_1_And_AtMost_3_Charater_b_ForPassword_cdefg()
+        public void Be_Invalid_when_AtLeast_1_and_AtMost_3_charater_b_for_Password_cdefg()
         {
             //Given
             var passwordPolicy = new PasswordOccurrencePolicy(1, 3, 'b');
@@ -20,7 +20,7 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void Valid_When_AtLeast_1_And_AtMost_3_Charater_a_ForPassword_abcde()
+        public void Be_Valid_when_AtLeast_1_and_AtMost_3_charater_a_for_Password_abcde()
         {
             //Given
             var passwordPolicy = new PasswordOccurrencePolicy(1, 3, 'a');
@@ -35,7 +35,7 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void Valid_When_AtLeast_2_And_AtMost_9_Charater_c_ForPassword_ccccccccc()
+        public void Be_Valid_when_AtLeast_2_and_AtMost_9_charater_c_for_Password_ccccccccc()
         {
             //Given
             var passwordPolicy = new PasswordOccurrencePolicy(2, 9, 'c');

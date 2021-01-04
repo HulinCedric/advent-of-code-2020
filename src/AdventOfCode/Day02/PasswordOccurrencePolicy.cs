@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace AdventOfCode.Day2.Tests
+namespace AdventOfCode.Day02.Tests
 {
     public class PasswordOccurrencePolicy : IPasswordPolicy
     {

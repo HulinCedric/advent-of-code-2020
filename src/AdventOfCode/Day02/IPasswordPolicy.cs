@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Day2.Tests
+﻿namespace AdventOfCode.Day02.Tests
 {
     public interface IPasswordPolicy
     {

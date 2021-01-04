@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using Xunit;
 
-namespace AdventOfCode.Day2.Tests
+namespace AdventOfCode.Day02.Tests
 {
-    public class PasswordPhilosophyTests
+    public class PasswordPhilosophyShould
     {
         private readonly string[] passwordsAndPoliciesDescriptions;
 
@@ -16,13 +16,13 @@ namespace AdventOfCode.Day2.Tests
             "2-9 c: ccccccccc",
         };
 
-        public PasswordPhilosophyTests()
+        public PasswordPhilosophyShould()
         {
-            passwordsAndPoliciesDescriptions = File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Day2/input.txt"));
+            passwordsAndPoliciesDescriptions = File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Day02/input.txt"));
         }
 
         [Fact]
-        public void ValidPasswordCount_1_With_PositionPolicy_For_Example()
+        public void Have_1_valid_Password_with_PositionPolicy_for_example()
         {
             //Given
             var passwords = passwordsAndPoliciesDescriptionsExample.Select(description => PasswordFactory.CreatePasswordWithPositionPolicy(description));
@@ -38,7 +38,7 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void ValidPasswordCount_2_With_OccurencePolicy_For_Example()
+        public void Have_2_valid_Password_with_OccurencePolicy_for_example()
         {
             //Given
             var passwords = passwordsAndPoliciesDescriptionsExample.Select(description => PasswordFactory.CreatePasswordWithOccurrencePolicy(description));
@@ -54,7 +54,7 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void ValidPasswordCount_ShouldBe_474_With_OccurencePolicy()
+        public void Have_474_valid_Password_with_OccurencePolicy()
         {
             //Given
             var passwords = passwordsAndPoliciesDescriptions.Select(description => PasswordFactory.CreatePasswordWithOccurrencePolicy(description));
@@ -70,7 +70,7 @@ namespace AdventOfCode.Day2.Tests
         }
 
         [Fact]
-        public void ValidPasswordCount_ShouldBe_745_With_PositionPolicy()
+        public void Have_745_valid_Password_with_PositionPolicy()
         {
             //Given
             var passwords = passwordsAndPoliciesDescriptions.Select(description => PasswordFactory.CreatePasswordWithPositionPolicy(description));

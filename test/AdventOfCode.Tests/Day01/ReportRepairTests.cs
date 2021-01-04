@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace AdventOfCode.Day1.Tests
+namespace AdventOfCode.Day01.Tests
 {
     public class ReportRepairTests
     {
