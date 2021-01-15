@@ -5,7 +5,6 @@ namespace AdventOfCode.Day03
 {
     public class Toboggan
     {
-        private const int StartingLineNumber = 1;
         private const int StartingPositon = 1;
         private readonly Map map;
         private readonly Slope slope;
@@ -21,10 +20,10 @@ namespace AdventOfCode.Day03
             this.slope = slope;
         }
 
-        public int GetNumberOfTreesEncounteredOnTrajectory()
+        public long GetNumberOfTreesEncounteredOnTrajectory()
         {
             var positon = StartingPositon;
-            var treesEncountered = 0;
+            var treesEncountered = 0L;
             foreach (var line in GetLinesOnTrajectory())
             {
                 positon = GiveNextPosition(positon);
@@ -37,7 +36,7 @@ namespace AdventOfCode.Day03
 
         private IEnumerable<MapLine> GetLinesOnTrajectory()
             => map.Lines
-            .Skip(StartingLineNumber)
+            .Skip(slope.Down)
             .Where((_, index) => index % slope.Down == 0);
 
         private int GiveNextPosition(int positon)
