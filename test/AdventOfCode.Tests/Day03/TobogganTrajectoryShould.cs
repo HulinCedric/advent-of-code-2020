@@ -1,24 +1,35 @@
-using System;
-using System.IO;
-using System.Linq;
 using Xunit;
 
 namespace AdventOfCode.Day03.Tests
 {
     public class TobogganTrajectoryShould
     {
+        [Fact]
+        public void Encounter_189_trees_for_problem()
+        {
+            //Given
+            var toboggan = new Toboggan(new Map(MapDescription.ProblemDescription));
+            var expectedNumberOfTreesEncountered = 189;
+
+            //When
+            var numberOfTreesEncountered = toboggan.GetNumberOfTreesEncounteredOnTrajectory();
+
+            //Then
+            Assert.Equal(expectedNumberOfTreesEncountered, numberOfTreesEncountered);
+        }
 
         [Fact]
         public void Encounter_7_trees_for_example()
         {
             //Given
-            var expectedEncounteredTreesCount = 7;
+            var toboggan = new Toboggan(new Map(MapDescription.ExampleDescription));
+            var expectedNumberOfTreesEncountered = 7;
 
             //When
-            var encounteredTreesCount = 0;
+            var numberOfTreesEncountered = toboggan.GetNumberOfTreesEncounteredOnTrajectory();
 
             //Then
-            Assert.Equal(expectedEncounteredTreesCount, encounteredTreesCount);
+            Assert.Equal(expectedNumberOfTreesEncountered, numberOfTreesEncountered);
         }
     }
 }
