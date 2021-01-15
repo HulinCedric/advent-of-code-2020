@@ -4,13 +4,14 @@ namespace AdventOfCode.Day03
 {
     public class MapLine
     {
+        private const char TreeDescription = '#';
         private readonly string description;
 
         public MapLine(string description)
             => this.description = description;
 
-        public char GetElementDescriptionAtPosition(int position)
-            => description.ElementAt(GetIndexForPosition(position));
+        public bool GetTreePresenceAtPosition(int position)
+            => description.ElementAt(GetIndexForPosition(position)) == TreeDescription;
 
         private int GetIndexForPosition(int position)
             => GetIndexWithPatternRepeats(position - 1);
