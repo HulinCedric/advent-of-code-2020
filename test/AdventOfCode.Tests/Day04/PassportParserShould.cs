@@ -38,5 +38,21 @@ namespace AdventOfCode.Day04.Tests
             //Then
             Assert.Equal(expectedPassportFieldsCount, passportFieldsCount);
         }
+
+        [Theory]
+        [InlineData("byr:2002", "byr", "2002")]
+        [InlineData("hgt:190in", "hgt", "190in")]
+        public void Give_passeport_field_informations_separate_by_colon(
+            string passportFieldDescription,
+            string expectedPassportFieldName,
+            string expectedPassportFieldValue)
+        {
+            //When
+            var passportFieldInformations = PassportParser.ParsePassportFieldDescription(passportFieldDescription);
+
+            //Then
+            Assert.Equal(expectedPassportFieldName, passportFieldInformations.Name);
+            Assert.Equal(expectedPassportFieldValue, passportFieldInformations.Value);
+        }
     }
 }

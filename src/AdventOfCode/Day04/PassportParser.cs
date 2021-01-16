@@ -20,5 +20,11 @@ namespace AdventOfCode.Day04
         .Replace(Environment.NewLine, " ")
         .Split(" ")
         .Select(passportFieldDescription => passportFieldDescription);
+
+        public static PassportFieldInformations ParsePassportFieldDescription(
+            string passportFieldDescription)
+            => new PassportFieldInformations(
+                passportFieldDescription.Split(":").First(),
+                passportFieldDescription.Split(":").Last());
     }
 }
