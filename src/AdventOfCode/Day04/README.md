@@ -65,6 +65,7 @@ You can continue to ignore the cid field, but each other field has strict rules 
 - `ecl` (Eye Color) - exactly one of: `amb` `blu` `brn` `gry` `grn` `hzl` `oth`.
 - `pid` (Passport ID) - a nine-digit number, including leading zeroes.
 - `cid` (Country ID) - ignored, missing or not.
+
 Your job is to count the passports where all required fields are both **present** and **valid** according to the above rules. Here are some example values:
 
 ``` ?
