@@ -2,12 +2,11 @@ using System.Collections.Generic;
 
 namespace AdventOfCode.Day04
 {
-    public class Passport : AbstractPassport
+    public class Credential : AbstractPassport
     {
-        internal Passport(string passportDescription)
+        internal Credential(string passportDescription)
         : base(passportDescription)
         {
-
         }
 
         protected override IEnumerable<string> GetRequiredFieldsDescritpions()
@@ -18,8 +17,7 @@ namespace AdventOfCode.Day04
             "hgt",
             "hcl",
             "ecl",
-            "pid",
-            "cid"
+            "pid"
         };
     }
 }
