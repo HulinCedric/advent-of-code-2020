@@ -1,0 +1,42 @@
+using System.Linq;
+using Xunit;
+
+namespace AdventOfCode.Day04.Tests
+{
+    public class PassportParserShould
+    {
+        [Fact]
+        public void Give_passeports_separate_by_blank_lines()
+        {
+            //Given
+            var batchFileDescription = BatchFileDescription.ExampleDescription;
+            var expectedPassportsCount = 4;
+
+            //When
+            var passportsCount = PassportParser.ParseBatchFile(batchFileDescription).Count();
+
+            //Then
+            Assert.Equal(expectedPassportsCount, passportsCount);
+        }
+
+        [Theory]
+        [InlineData(0, 8)]
+        [InlineData(1, 7)]
+        [InlineData(2, 7)]
+        [InlineData(3, 6)]
+        public void Give_passeport_fields_separate_by_spaces_or_newlines(int passportNumber, int expectedPassportFieldsCount)
+        {
+            //Given
+            var batchFileDescription = BatchFileDescription.ExampleDescription;
+
+            //When
+            var passportFieldsCount = PassportParser.ParsePassportDescription(
+                PassportParser
+                .ParseBatchFile(batchFileDescription)
+                .ElementAt(passportNumber)).Count();
+
+            //Then
+            Assert.Equal(expectedPassportFieldsCount, passportFieldsCount);
+        }
+    }
+}
