@@ -13,6 +13,7 @@ namespace AdventOfCode.Day04
                 ("hcl", _) passportFieldInformations => new HairColorPassportField(passportFieldInformations.Value),
                 ("ecl", _) passportFieldInformations => new EyeColorPassportField(passportFieldInformations.Value),
                 ("pid", _) passportFieldInformations => new PassportIdPassportField(passportFieldInformations.Value),
+                ("cid", _) passportFieldInformations => new CountryIdPassportField(passportFieldInformations.Value),
                 _ => new PassportField(PassportParser.ParsePassportFieldDescription(passportFieldDescription).Value),
             };
     }
