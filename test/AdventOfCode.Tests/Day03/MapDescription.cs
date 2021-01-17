@@ -6,21 +6,21 @@ namespace AdventOfCode.Day03.Tests
     public static class MapDescription
     {
         public static readonly string ExampleDescription =
-            "..##......." + Environment.NewLine +
-            "#...#...#.." + Environment.NewLine +
-            ".#....#..#." + Environment.NewLine +
-            "..#.#...#.#" + Environment.NewLine +
-            ".#...##..#." + Environment.NewLine +
-            "..#.##....." + Environment.NewLine +
-            ".#.#.#....#" + Environment.NewLine +
-            ".#........#" + Environment.NewLine +
-            "#.##...#..." + Environment.NewLine +
-            "#...##....#" + Environment.NewLine +
+            "..##......." + "\n" +
+            "#...#...#.." + "\n" +
+            ".#....#..#." + "\n" +
+            "..#.#...#.#" + "\n" +
+            ".#...##..#." + "\n" +
+            "..#.##....." + "\n" +
+            ".#.#.#....#" + "\n" +
+            ".#........#" + "\n" +
+            "#.##...#..." + "\n" +
+            "#...##....#" + "\n" +
             ".#..#...#.#";
 
         public static string ProblemDescription
             => string.Join(
-                Environment.NewLine,
+                "\n",
                 File.ReadAllLines(
                     Path.Combine(
                         AppDomain.CurrentDomain.BaseDirectory, "Day03/input.txt")));

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode.Day03
@@ -20,7 +19,7 @@ namespace AdventOfCode.Day03
 
         private static IEnumerable<MapLine> Parse(string mapDescription)
             => mapDescription
-            .Split(Environment.NewLine)
+            .Split("\n")
             .Select(lineDescription => new MapLine(lineDescription));
     }
 }

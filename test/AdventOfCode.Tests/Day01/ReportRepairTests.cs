@@ -6,7 +6,6 @@ namespace AdventOfCode.Day01.Tests
 {
     public class ReportRepairTests
     {
-
         private readonly ITestOutputHelper output;
 
         public ReportRepairTests(ITestOutputHelper output)
@@ -283,7 +282,5 @@ namespace AdventOfCode.Day01.Tests
             output.WriteLine($"The fixed expense report value with three entries from example is is {fixedExpenseReportValue}");
             Assert.Equal(expectedFixedExpenseReportValue, fixedExpenseReportValue);
         }
-
     }
-
 }

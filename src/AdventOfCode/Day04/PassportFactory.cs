@@ -6,7 +6,7 @@ namespace AdventOfCode.Day04
     {
         private const string CredentialMissingFieldDiscriminator = "cid";
 
-        public static AbstractPassport Create(string description) 
+        public static AbstractPassport Create(string description)
         => IsPassport(description) ?
         new Passport(description) :
         new Credential(description);

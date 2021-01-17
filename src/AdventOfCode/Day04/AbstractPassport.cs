@@ -19,7 +19,7 @@ namespace AdventOfCode.Day04
                 .Any(passportFieldType => requiredFieldType.IsAssignableFrom(passportFieldType)));
 
         public bool ContainsAllRequiredValidFields()
-            => ContainsAllRequiredFields() && 
+            => ContainsAllRequiredFields() &&
             passportFields.All(passportField => passportField.IsValid());
 
         protected abstract IEnumerable<Type> GetRequiredFields();
