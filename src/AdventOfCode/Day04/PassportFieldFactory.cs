@@ -12,6 +12,7 @@ namespace AdventOfCode.Day04
                 ("hgt", _) passportFieldInformations when passportFieldInformations.Value.EndsWith("in") => new HeightInInchPassportField(passportFieldInformations.Value),
                 ("hcl", _) passportFieldInformations => new HairColorPassportField(passportFieldInformations.Value),
                 ("ecl", _) passportFieldInformations => new EyeColorPassportField(passportFieldInformations.Value),
+                ("pid", _) passportFieldInformations => new PassportIdPassportField(passportFieldInformations.Value),
                 _ => new PassportField(PassportParser.ParsePassportFieldDescription(passportFieldDescription).Value),
             };
     }
