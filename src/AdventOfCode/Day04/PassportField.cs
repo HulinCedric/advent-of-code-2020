@@ -8,6 +8,6 @@
             => this.value = value;
 
         public virtual bool IsValid()
-            => true;
+            => false;
     }
 }

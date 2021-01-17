@@ -9,13 +9,14 @@ namespace AdventOfCode.Day04.Tests
         [InlineData("eyr:2030")]
         public void Be_valid_when_composed_of_four_digits_at_least_2020_and_at_most_2030(string passportFieldDescription)
         {
-            var birthYearPassportField = PassportFieldFactory.Create(passportFieldDescription);
+            //Given
+            var passportField = PassportFieldFactory.Create(passportFieldDescription);
 
             //When
-            var birthYearPassportFieldValidty = birthYearPassportField.IsValid();
+            var passportFieldValidty = passportField.IsValid();
 
             //Then
-            Assert.True(birthYearPassportFieldValidty);
+            Assert.True(passportFieldValidty);
         }
 
         [Theory]
@@ -27,13 +28,14 @@ namespace AdventOfCode.Day04.Tests
         [InlineData("eyr:2031")]
         public void Be_invalid_for(string passportFieldDescription)
         {
-            var birthYearPassportField = PassportFieldFactory.Create(passportFieldDescription);
+            //Given
+            var passportField = PassportFieldFactory.Create(passportFieldDescription);
 
             //When
-            var birthYearPassportFieldValidty = birthYearPassportField.IsValid();
+            var passportFieldValidty = passportField.IsValid();
 
             //Then
-            Assert.False(birthYearPassportFieldValidty);
+            Assert.False(passportFieldValidty);
         }
     }
 }
