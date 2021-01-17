@@ -1,22 +1,22 @@
+using System;
 using Xunit;
 
 namespace AdventOfCode.Day04.Tests
 {
     public class PassportFieldFactoryShould
     {
-        [Fact]
-        public void Create_a_birth_year_passport_field_for_passport_field_description()
+        [Theory]
+        [InlineData("byr:2002", typeof(BirthYearPassportField))]
+        [InlineData("iyr:2014", typeof(IssueYearPassportField))]
+        public void Create_a_passport_field_for_passport_field_description(
+            string passportFieldDescription,
+            Type expectedPassportFieldType)
         {
-            //Given
-            var passportFieldDescription = "byr:2002";
-            var expectedPassportFieldType = typeof(BirthYearPassportField);
-
             //When
             var passportField = PassportFieldFactory.Create(passportFieldDescription);
 
             //Then
             Assert.IsType(expectedPassportFieldType, passportField);
         }
-
     }
 }

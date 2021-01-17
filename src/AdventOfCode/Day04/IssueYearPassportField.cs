@@ -2,13 +2,13 @@ using System.Linq;
 
 namespace AdventOfCode.Day04
 {
-    public class BirthYearPassportField
+    public class IssueYearPassportField
         : PassportField
     {
-        private const int AtLeast = 1920;
-        private const int AtMost = 2002;
+        private const int AtLeast = 2010;
+        private const int AtMost = 2020;
 
-        public BirthYearPassportField(string value)
+        public IssueYearPassportField(string value)
             : base(value)
         { }
 
