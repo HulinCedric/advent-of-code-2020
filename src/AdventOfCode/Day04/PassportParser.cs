@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,9 +6,7 @@ namespace AdventOfCode.Day04
 {
     public static class PassportParser
     {
-        private static readonly string BlankLineDescription =
-        "\n" +
-        "\n";
+        private static readonly string BlankLineDescription = "\n\n";
 
         public static IEnumerable<string> ParseBatchFile(string batchFileDescription)
         => batchFileDescription
@@ -16,8 +15,7 @@ namespace AdventOfCode.Day04
 
         public static IEnumerable<string> ParsePassportDescription(string passportDescription)
         => passportDescription
-        .Replace("\n", " ")
-        .Split(" ")
+        .Split(new[] { " ", "\n" }, StringSplitOptions.RemoveEmptyEntries)
         .Select(passportFieldDescription => passportFieldDescription);
 
         public static PassportFieldInformations ParsePassportFieldDescription(
