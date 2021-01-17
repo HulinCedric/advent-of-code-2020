@@ -8,7 +8,14 @@ namespace AdventOfCode.Day04
             => PassportParser
             .ParseBatchFile(batchFileDescription)
             .Select(passportDescription => PassportFactory.Create(passportDescription))
-            .Where(passport => passport.IsValid())
+            .Where(passport => passport.ContainsAllRequiredFields())
             .Count();
+
+        public static int CountValidPassportsWithValidValues(string batchFileDescription)
+           => PassportParser
+           .ParseBatchFile(batchFileDescription)
+           .Select(passportDescription => PassportFactory.Create(passportDescription))
+           .Where(passport => passport.ContainsAllRequiredValidFields())
+           .Count();
     }
 }

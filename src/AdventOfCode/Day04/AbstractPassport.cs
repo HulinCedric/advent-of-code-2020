@@ -6,17 +6,22 @@ namespace AdventOfCode.Day04
 {
     public abstract class AbstractPassport
     {
-        private IEnumerable<string> fieldsDescriptions;
+        private IEnumerable<PassportField> passportFields;
 
-        protected abstract IEnumerable<string> GetRequiredFieldsDescritpions();
+        protected AbstractPassport(string passportDescription)
+        => this.passportFields = PassportParser.ParsePassportDescription(passportDescription)
+            .Select(passportFieldDescription => PassportFieldFactory.Create(passportFieldDescription));
 
-        protected AbstractPassport(string passportDescription) 
-        => this.fieldsDescriptions = PassportParser.ParsePassportDescription(passportDescription);
+        public bool ContainsAllRequiredFields()
+            => GetRequiredFields()
+            .All(requiredFieldType => passportFields
+                .Select(passportField => passportField.GetType())
+                .Any(passportFieldType => requiredFieldType.IsAssignableFrom(passportFieldType)));
 
-        public bool IsValid()
-        => GetRequiredFieldsDescritpions()
-              .All(requiredFieldDescription
-              => fieldsDescriptions.Any(fieldDescription
-                  => fieldDescription.StartsWith(requiredFieldDescription)));
+        public bool ContainsAllRequiredValidFields()
+            => ContainsAllRequiredFields() && 
+            passportFields.All(passportField => passportField.IsValid());
+
+        protected abstract IEnumerable<Type> GetRequiredFields();
     }
 }

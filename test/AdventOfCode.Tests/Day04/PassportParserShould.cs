@@ -9,7 +9,7 @@ namespace AdventOfCode.Day04.Tests
         public void Give_passeports_separate_by_blank_lines()
         {
             //Given
-            var batchFileDescription = BatchFileDescription.ExampleDescription;
+            var batchFileDescription = BatchFileDescription.PartOneExampleDescription;
             var expectedPassportsCount = 4;
 
             //When
@@ -27,7 +27,7 @@ namespace AdventOfCode.Day04.Tests
         public void Give_passeport_fields_separate_by_spaces_or_newlines(int passportNumber, int expectedPassportFieldsCount)
         {
             //Given
-            var batchFileDescription = BatchFileDescription.ExampleDescription;
+            var batchFileDescription = BatchFileDescription.PartOneExampleDescription;
 
             //When
             var passportFieldsCount = PassportParser.ParsePassportDescription(

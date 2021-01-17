@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace AdventOfCode.Day04
@@ -7,19 +8,19 @@ namespace AdventOfCode.Day04
         internal Passport(string passportDescription)
         : base(passportDescription)
         {
-
         }
 
-        protected override IEnumerable<string> GetRequiredFieldsDescritpions()
-        => new HashSet<string> {
-            "byr",
-            "iyr",
-            "eyr",
-            "hgt",
-            "hcl",
-            "ecl",
-            "pid",
-            "cid"
-        };
+        protected override IEnumerable<Type> GetRequiredFields()
+            => new HashSet<Type>
+            {
+                typeof(BirthYearPassportField),
+                typeof(IssueYearPassportField),
+                typeof(ExpirationYearPassportField),
+                typeof(HeightPassportField),
+                typeof(HairColorPassportField),
+                typeof(EyeColorPassportField),
+                typeof(PassportIdPassportField),
+                typeof(CountryIdPassportField),
+            };
     }
 }

@@ -1,13 +1,12 @@
 ﻿namespace AdventOfCode.Day04
 {
-    public class PassportField
+    public abstract class PassportField
     {
         protected readonly string value;
 
         public PassportField(string value)
             => this.value = value;
 
-        public virtual bool IsValid()
-            => false;
+        public abstract bool IsValid();
     }
 }

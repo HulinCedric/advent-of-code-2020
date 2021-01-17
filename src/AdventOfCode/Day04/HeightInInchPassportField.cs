@@ -3,7 +3,7 @@ using System.Linq;
 namespace AdventOfCode.Day04
 {
     public class HeightInInchPassportField
-        : PassportField
+        : HeightPassportField
     {
         private const int AtLeast = 59;
         private const int AtMost = 76;
