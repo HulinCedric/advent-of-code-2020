@@ -8,7 +8,7 @@ namespace AdventOfCode.Day04
         private const int AtLeast = 2020;
         private const int AtMost = 2030;
 
-        public ExpirationYearPassportField(string value)
+        internal ExpirationYearPassportField(string value)
             : base(value)
         { }
 

@@ -4,7 +4,7 @@
     {
         protected readonly string value;
 
-        public PassportField(string value)
+        protected PassportField(string value)
             => this.value = value;
 
         public abstract bool IsValid();

@@ -3,7 +3,7 @@
     public class UnknownPassportField
         : PassportField
     {
-        public UnknownPassportField(string value)
+        internal UnknownPassportField(string name, string value)
             : base(value)
         { }
 

@@ -5,7 +5,7 @@ namespace AdventOfCode.Day04
     public class PassportIdPassportField
         : PassportField
     {
-        public PassportIdPassportField(string value)
+        internal PassportIdPassportField(string value)
             : base(value)
         { }
 

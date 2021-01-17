@@ -10,7 +10,7 @@ namespace AdventOfCode.Day04
         private const int Exactly6 = 6;
         private const string StartWithSharp = "#";
 
-        public HairColorPassportField(string value)
+        internal HairColorPassportField(string value)
             : base(value)
         { }
 

@@ -8,7 +8,7 @@ namespace AdventOfCode.Day04
         private const int AtLeast = 1920;
         private const int AtMost = 2002;
 
-        public BirthYearPassportField(string value)
+        internal BirthYearPassportField(string value)
             : base(value)
         { }
 

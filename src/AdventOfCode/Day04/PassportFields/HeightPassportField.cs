@@ -3,7 +3,7 @@
     public class HeightPassportField
         : PassportField
     {
-        public HeightPassportField(string value)
+        internal HeightPassportField(string value)
             : base(value)
         { }
 

@@ -17,7 +17,7 @@ namespace AdventOfCode.Day04
             "oth",
         };
 
-        public EyeColorPassportField(string value)
+        internal EyeColorPassportField(string value)
             : base(value)
         { }
 

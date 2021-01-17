@@ -8,7 +8,7 @@ namespace AdventOfCode.Day04
         private const int AtLeast = 2010;
         private const int AtMost = 2020;
 
-        public IssueYearPassportField(string value)
+        internal IssueYearPassportField(string value)
             : base(value)
         { }
 

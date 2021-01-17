@@ -8,7 +8,7 @@ namespace AdventOfCode.Day04
         private const int AtLeast = 150;
         private const int AtMost = 193;
 
-        public HeightInCentimetrePassportField(string value)
+        internal HeightInCentimetrePassportField(string value)
             : base(value)
         { }
 
