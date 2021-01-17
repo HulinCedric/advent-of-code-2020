@@ -10,6 +10,7 @@ namespace AdventOfCode.Day04
                 ("eyr", _) passportFieldInformations => new ExpirationYearPassportField(passportFieldInformations.Value),
                 ("hgt", _) passportFieldInformations when passportFieldInformations.Value.EndsWith("cm") => new HeightInCentimetrePassportField(passportFieldInformations.Value),
                 ("hgt", _) passportFieldInformations when passportFieldInformations.Value.EndsWith("in") => new HeightInInchPassportField(passportFieldInformations.Value),
+                ("hcl", _) passportFieldInformations => new HairColorPassportField(passportFieldInformations.Value),
                 _ => new PassportField(PassportParser.ParsePassportFieldDescription(passportFieldDescription).Value),
             };
     }

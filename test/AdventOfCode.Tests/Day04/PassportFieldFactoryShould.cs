@@ -11,6 +11,7 @@ namespace AdventOfCode.Day04.Tests
         [InlineData("eyr:2021", typeof(ExpirationYearPassportField))]
         [InlineData("hgt:165cm", typeof(HeightInCentimetrePassportField))]
         [InlineData("hgt:74in", typeof(HeightInInchPassportField))]
+        [InlineData("hcl:#a97842", typeof(HairColorPassportField))]
         public void Create_a_passport_field_for_passport_field_description(
             string passportFieldDescription,
             Type expectedPassportFieldType)
