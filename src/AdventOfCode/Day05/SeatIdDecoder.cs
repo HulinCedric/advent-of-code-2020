@@ -5,17 +5,17 @@ namespace AdventOfCode.Day05
 {
     public static class SeatIdDecoder
     {
-        public static int Decode(string seatDescription)
-            => Convert.ToInt32(MapToBinary(seatDescription), 2);
+        public static int Decode(string boardingPassDescription)
+            => Convert.ToInt32(MapToBinary(boardingPassDescription), 2);
 
-        private static string MapToBinary(string seatDescription)
+        private static string MapToBinary(string boardingPassDescription)
             => new string(
-                seatDescription
-                .Select(seatCharacterDescription => MapToBit(seatCharacterDescription))
+                boardingPassDescription
+                .Select(boardingPassCharacterDescription => MapToBit(boardingPassCharacterDescription))
                 .ToArray());
 
-        private static char MapToBit(char seatDescriptionCharacter)
-            => seatDescriptionCharacter switch
+        private static char MapToBit(char boardingPassCharacterDescription)
+            => boardingPassCharacterDescription switch
             {
                 'F' => '0',
                 'L' => '0',

@@ -10,11 +10,11 @@ namespace AdventOfCode.Day05.Tests
         [InlineData("FFFBBBFRRR", 119)]
         [InlineData("BBFFBBFRLL", 820)]
         public void Decode_seat_description_to_seat_id(
-            string seatDescription,
+            string boardingPassDescription,
             int expectedSeatId)
         {
             //When
-            var seatId = SeatIdDecoder.Decode(seatDescription);
+            var seatId = SeatIdDecoder.Decode(boardingPassDescription);
 
             //Then
             Assert.Equal(expectedSeatId, seatId);
