@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 
 namespace AdventOfCode.Day06
@@ -12,7 +11,6 @@ namespace AdventOfCode.Day06
             .Select(groupAnswers => new string(groupAnswers.Distinct().ToArray()))
             .Select(distinctGroupAnswers => distinctGroupAnswers.Count())
             .Aggregate((accumulator, distinctGroupAnswersCount) => accumulator + distinctGroupAnswersCount);
-
 
         public static int SumQuestionsToWhichEveryoneAnsweredYes(string groupsAnswersDescription)
             => groupsAnswersDescription
