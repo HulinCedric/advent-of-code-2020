@@ -10,7 +10,7 @@ namespace AdventOfCode.Day03
         public Map(string description)
             => lines = Parse(description);
 
-        public IEnumerable<MapLine> Lines => lines;
+        internal IEnumerable<MapLine> Lines => lines;
 
         public bool GetTreePresenceAt(int lineNumber, int position)
             => lines

@@ -5,7 +5,7 @@ namespace AdventOfCode.Day03.Tests
 {
     public static class MapDescription
     {
-        public static readonly string ExampleDescription =
+        public const string ExampleDescription =
             "..##......." + "\n" +
             "#...#...#.." + "\n" +
             ".#....#..#." + "\n" +
@@ -17,12 +17,5 @@ namespace AdventOfCode.Day03.Tests
             "#.##...#..." + "\n" +
             "#...##....#" + "\n" +
             ".#..#...#.#";
-
-        public static string ProblemDescription
-            => string.Join(
-                "\n",
-                File.ReadAllLines(
-                    Path.Combine(
-                        AppDomain.CurrentDomain.BaseDirectory, "Day03/input.txt")));
     }
 }

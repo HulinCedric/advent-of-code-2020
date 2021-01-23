@@ -8,20 +8,20 @@ namespace AdventOfCode
 {
     public class InputFileDataAttribute : DataAttribute
     {
-        private readonly object expected;
         private readonly string filePath;
+        private readonly object[] parameters;
 
         /// <summary>
         /// Load data from a input file as the data source for a theory.
         /// </summary>
         /// <param name="filePath">The absolute or relative path to the input file to load.</param>
-        /// <param name="expected">The expected value.</param>
+        /// <param name="parameters">The parameters.</param>
         public InputFileDataAttribute(
             string filePath,
-            object expected)
+            params object[] parameters)
         {
             this.filePath = filePath;
-            this.expected = expected;
+            this.parameters = parameters;
         }
 
         /// <inheritDoc />
@@ -39,11 +39,13 @@ namespace AdventOfCode
                 throw new ArgumentException($"Could not find file at path: {path}");
             }
 
-            yield return new[]
+            var result = new List<object> { GetFileContent(filePath) };
+            foreach (var parameter in parameters)
             {
-                GetFileContent(filePath),
-                expected,
-            };
+                result.Add(parameter);
+            }
+
+            yield return result.ToArray();
         }
 
         /// <summary>
