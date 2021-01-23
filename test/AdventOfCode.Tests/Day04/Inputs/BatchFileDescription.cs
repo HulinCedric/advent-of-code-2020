@@ -5,7 +5,7 @@ namespace AdventOfCode.Day04.Tests
 {
     public static class BatchFileDescription
     {
-        public static readonly string PartOneExampleDescription =
+        public const string PartOneExampleDescription =
         PassportDescription.First +
         "\n" +
         "\n" +
@@ -17,7 +17,7 @@ namespace AdventOfCode.Day04.Tests
         "\n" +
         PassportDescription.Fourth;
 
-        public static readonly string PartTwoValidExampleDescription =
+        public const string PartTwoValidExampleDescription =
             "pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980" + "\n" +
             "hcl:#623a2f" + "\n" +
             "\n" +
@@ -31,7 +31,7 @@ namespace AdventOfCode.Day04.Tests
             "\n" +
             "iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719";
 
-        public static readonly string PartTwoInvalidExampleDescription =
+        public const string PartTwoInvalidExampleDescription =
             "eyr:1972 cid:100" + "\n" +
             "hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926" + "\n" +
             "\n" +
