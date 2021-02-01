@@ -1,0 +1,31 @@
+using System.Linq;
+using Xunit;
+
+namespace AdventOfCode.Day07.Tests
+{
+    public class BagContentsRulesParserShould
+    {
+        [Theory]
+        [InlineData("bright white bags contain 1 shiny gold bag.\nmuted yellow bags contain 2 shiny gold bags", 2)]
+        public void Parse_bag_contents_rules_separated_by_new_line(
+            string bagContentsRulesDescription,
+            int expectedBagContentsRulesCount)
+        {
+            //When
+            var bagContentsRulesCount = BagContentsRulesParser
+                .Parse(bagContentsRulesDescription)
+                .Count();
+
+            //Then
+            Assert.Equal(expectedBagContentsRulesCount, bagContentsRulesCount);
+        }
+    }
+    
+    internal class BagContentsRulesParser
+    {
+        internal static BagContentRules Parse(string bagContentsRulesDescription)
+        {
+            return new BagContentRules(bagContentsRulesDescription.Split("\n").ToList());
+        }
+    }
+}

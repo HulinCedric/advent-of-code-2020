@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -32,18 +33,29 @@ namespace AdventOfCode.Day07.Tests
     internal record Bag(string Color);
 
     internal class BagContentRules
+        : IEnumerable<string>
     {
+        private List<string> bagContentRules;
+
+        public BagContentRules(List<string> bagContentsRulesDescription)
+        {
+
+            bagContentRules = bagContentsRulesDescription;
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            return bagContentRules.GetEnumerator();
+        }
+
         internal IEnumerable<Bag> GetBagsContaining(Bag shinyGoldBag)
         {
             return Enumerable.Range(0, 4).Select(i => new Bag($"{i}"));
         }
-    }
 
-    internal class BagContentsRulesParser
-    {
-        internal static BagContentRules Parse(string bagContentsRulesDescription)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return new BagContentRules();
+            return this.GetEnumerator();
         }
     }
 }
