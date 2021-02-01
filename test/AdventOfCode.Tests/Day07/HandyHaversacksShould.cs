@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace AdventOfCode.Day07.Tests
@@ -11,11 +13,37 @@ namespace AdventOfCode.Day07.Tests
             string bagContentsRulesDescription,
             int expectedBagColorsCount)
         {
+            //Given
+            var bagContentsRules = BagContentsRulesParser.Parse(bagContentsRulesDescription);
+            var shinyGoldBag = new Bag(Color: "shiny gold");
+
             //When
-            var bagColorsCount = 4;
+            var bagColorsCount = bagContentsRules
+                .GetBagsContaining(shinyGoldBag)
+                .Select(bag => bag.Color)
+                .Distinct()
+                .Count();
 
             //Then
             Assert.Equal(expectedBagColorsCount, bagColorsCount);
+        }
+    }
+
+    internal record Bag(string Color);
+
+    internal class BagContentRules
+    {
+        internal IEnumerable<Bag> GetBagsContaining(Bag shinyGoldBag)
+        {
+            return Enumerable.Range(0, 4).Select(i => new Bag($"{i}"));
+        }
+    }
+
+    internal class BagContentsRulesParser
+    {
+        internal static BagContentRules Parse(string bagContentsRulesDescription)
+        {
+            return new BagContentRules();
         }
     }
 }
