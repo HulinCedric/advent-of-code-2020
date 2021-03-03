@@ -20,12 +20,4 @@ namespace AdventOfCode.Day07.Tests
             Assert.Equal(expectedBagContentsRulesCount, bagContentsRulesCount);
         }
     }
-    
-    internal class BagContentsRulesParser
-    {
-        internal static BagContentRules Parse(string bagContentsRulesDescription)
-        {
-            return new BagContentRules(bagContentsRulesDescription.Split("\n").ToList());
-        }
-    }
 }

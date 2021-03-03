@@ -14,6 +14,6 @@ namespace AdventOfCode.Day07.Tests
             "dark olive bags contain 3 faded blue bags, 4 dotted black bags.\n" +
             "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.\n" +
             "faded blue bags contain no other bags.\n" +
-            "dotted black bags contain no other bags.\n";
+            "dotted black bags contain no other bags.";
     }
 }
