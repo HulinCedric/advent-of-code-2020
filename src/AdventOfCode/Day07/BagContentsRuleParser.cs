@@ -9,9 +9,9 @@ namespace AdventOfCode.Day07
         public static BagContentsRule Parse(string bagContentRuleDescription)
         {
             var bagColor = ExtractBagColor(bagContentRuleDescription);
-            var holdBagColors = ExtractHoldBagColors(bagContentRuleDescription);
+            var holdBagCounts = ExtractHoldBagCounts(bagContentRuleDescription);
 
-            return new BagContentsRule(new Bag(bagColor), holdBagColors);
+            return new BagContentsRule(new Bag(bagColor), holdBagCounts);
         }
 
         private static string ExtractBagColor(string bagContentRuleDescription)
@@ -20,11 +20,11 @@ namespace AdventOfCode.Day07
             return bagContentRuleDescription[0..bagIndex];
         }
 
-        private static IEnumerable<Bag> ExtractHoldBagColors(string bagContentRuleDescription)
+        private static IEnumerable<BagCount> ExtractHoldBagCounts(string bagContentRuleDescription)
         {
             if (bagContentRuleDescription.Contains("no other bags"))
             {
-                return Enumerable.Empty<Bag>();
+                return Enumerable.Empty<BagCount>();
             }
 
             var contentDelimiterIndex = bagContentRuleDescription.IndexOf("contain ") + "contain ".Length;
@@ -32,7 +32,20 @@ namespace AdventOfCode.Day07
 
             return contentDescription
                 .Split(",", options: StringSplitOptions.TrimEntries)
-                .Select(holdBagDescription => new Bag(ExtractHoldBagColor(holdBagDescription)));
+                .Select(holdBagDescription => ExtractHoldBagCount(holdBagDescription));
+        }
+
+        private static BagCount ExtractHoldBagCount(string contentDescription)
+        {
+            var holdBagNumber = ExtractHoldBagNumber(contentDescription);
+            var holdBagColor = ExtractHoldBagColor(contentDescription);
+            return new BagCount(holdBagNumber, new Bag(holdBagColor));
+        }
+
+        private static int ExtractHoldBagNumber(string contentDescription)
+        {
+            var holdBagIndex = contentDescription.IndexOf(" ");
+            return int.Parse(contentDescription[..holdBagIndex]);
         }
 
         private static string ExtractHoldBagColor(string contentDescription)

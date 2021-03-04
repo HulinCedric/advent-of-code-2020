@@ -15,5 +15,14 @@ namespace AdventOfCode.Day07.Tests
             "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.\n" +
             "faded blue bags contain no other bags.\n" +
             "dotted black bags contain no other bags.";
+
+        public const string AdditionalExampleDescription =
+            "shiny gold bags contain 2 dark red bags.\n" +
+            "dark red bags contain 2 dark orange bags.\n" +
+            "dark orange bags contain 2 dark yellow bags.\n" +
+            "dark yellow bags contain 2 dark green bags.\n" +
+            "dark green bags contain 2 dark blue bags.\n" +
+            "dark blue bags contain 2 dark violet bags.\n" +
+            "dark violet bags contain no other bags.";
     }
 }

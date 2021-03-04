@@ -5,10 +5,13 @@ namespace AdventOfCode.Day07.Tests
     public class BagContentsRuleParserShould
     {
         [Theory]
-        [InlineData("bright white bags contain 1 shiny gold bag.", "bright white", "shiny gold")]
+        [InlineData(
+            "bright white bags contain 1 shiny gold bag.",
+            "bright white", 1, "shiny gold")]
         public void Parse_bag_content_rule_hold_one_bag_type(
             string bagContentsRuleDescription,
             string expectedBagColor,
+            int expectedHoldBagNumber,
             string expectedHoldBagColor)
         {
             // When
@@ -17,17 +20,25 @@ namespace AdventOfCode.Day07.Tests
 
             //Then
             Assert.Equal(expectedBagColor, bagContentsRule.Bag.Color);
-            Assert.Collection(bagContentsRule.HoldBags,
-                holdBag => Assert.Equal(new Bag(expectedHoldBagColor), holdBag));
+            Assert.Collection(bagContentsRule.HoldBagCounts,
+                holdBagCount => Assert.Equal(
+                    new BagCount(expectedHoldBagNumber, new Bag(expectedHoldBagColor)),
+                    holdBagCount));
         }
 
         [Theory]
-        [InlineData("light red bags contain 1 bright white bag, 2 muted yellow bags.", "light red", "bright white", "muted yellow")]
-        [InlineData("dark orange bags contain 3 bright white bags, 4 muted yellow bags.", "dark orange", "bright white", "muted yellow")]
+        [InlineData(
+            "light red bags contain 1 bright white bag, 2 muted yellow bags.",
+            "light red", 1, "bright white", 2, "muted yellow")]
+        [InlineData(
+            "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
+            "dark orange", 3, "bright white", 4, "muted yellow")]
         public void Parse_bag_content_rule_hold_two_bag_types(
             string bagContentsRuleDescription,
             string expectedBagColor,
+            int firstExpectedHoldBagNumber,
             string firstExpectedHoldBagColor,
+            int secondExpectedHoldBagNumber,
             string secondExpectedHoldBagColor)
         {
             // When
@@ -36,25 +47,33 @@ namespace AdventOfCode.Day07.Tests
 
             //Then
             Assert.Equal(bagContentsRule.Bag.Color, expectedBagColor);
-            Assert.Collection(bagContentsRule.HoldBags,
-                holdBag => Assert.Equal(new Bag(firstExpectedHoldBagColor), holdBag),
-                holdBag => Assert.Equal(new Bag(secondExpectedHoldBagColor), holdBag));
+            Assert.Collection(bagContentsRule.HoldBagCounts,
+                holdBagCount => Assert.Equal(
+                    new BagCount(firstExpectedHoldBagNumber, new Bag(firstExpectedHoldBagColor)),
+                    holdBagCount),
+                holdBagCount => Assert.Equal(
+                    new BagCount(secondExpectedHoldBagNumber, new Bag(secondExpectedHoldBagColor)),
+                    holdBagCount));
         }
 
         [Theory]
         [InlineData(
             "vibrant indigo bags contain 2 striped purple bags, 4 vibrant green bags, 3 dotted purple bags, 1 vibrant turquoise bag.",
             "vibrant indigo",
-            "striped purple",
-            "vibrant green",
-            "dotted purple",
-            "vibrant turquoise")]
+            2, "striped purple",
+            4, "vibrant green",
+            3, "dotted purple",
+            1, "vibrant turquoise")]
         public void Parse_bag_content_rule_hold_four_bag_types(
             string bagContentsRuleDescription,
             string expectedBagColor,
+            int firstExpectedHoldBagNumber,
             string firstExpectedHoldBagColor,
+            int secondExpectedHoldBagNumber,
             string secondExpectedHoldBagColor,
+            int thirdExpectedHoldBagNumber,
             string thirdExpectedHoldBagColor,
+            int fourthExpectedHoldBagNumber,
             string fourthExpectedHoldBagColor)
         {
             // When
@@ -63,11 +82,19 @@ namespace AdventOfCode.Day07.Tests
 
             //Then
             Assert.Equal(bagContentsRule.Bag.Color, expectedBagColor);
-            Assert.Collection(bagContentsRule.HoldBags,
-                holdBag => Assert.Equal(new Bag(firstExpectedHoldBagColor), holdBag),
-                holdBag => Assert.Equal(new Bag(secondExpectedHoldBagColor), holdBag),
-                holdBag => Assert.Equal(new Bag(thirdExpectedHoldBagColor), holdBag),
-                holdBag => Assert.Equal(new Bag(fourthExpectedHoldBagColor), holdBag));
+            Assert.Collection(bagContentsRule.HoldBagCounts,
+                holdBagCount => Assert.Equal(
+                    new BagCount(firstExpectedHoldBagNumber, new Bag(firstExpectedHoldBagColor)),
+                    holdBagCount),
+                holdBagCount => Assert.Equal(
+                    new BagCount(secondExpectedHoldBagNumber, new Bag(secondExpectedHoldBagColor)),
+                    holdBagCount),
+                holdBagCount => Assert.Equal(
+                    new BagCount(thirdExpectedHoldBagNumber, new Bag(thirdExpectedHoldBagColor)),
+                    holdBagCount),
+                holdBagCount => Assert.Equal(
+                    new BagCount(fourthExpectedHoldBagNumber, new Bag(fourthExpectedHoldBagColor)),
+                    holdBagCount));
         }
 
         [Theory]
@@ -83,7 +110,7 @@ namespace AdventOfCode.Day07.Tests
 
             //Then
             Assert.Equal(expectedBagColor, bagContentsRule.Bag.Color);
-            Assert.Empty(bagContentsRule.HoldBags);
+            Assert.Empty(bagContentsRule.HoldBagCounts);
         }
     }
 }
