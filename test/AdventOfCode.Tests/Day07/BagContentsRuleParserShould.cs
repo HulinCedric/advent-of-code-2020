@@ -16,9 +16,9 @@ namespace AdventOfCode.Day07.Tests
                 .Parse(bagContentsRuleDescription);
 
             //Then
-            Assert.Equal(expectedBagColor, bagContentsRule.BagColor);
-            Assert.Collection(bagContentsRule.HoldBagsColor,
-                holdBagColor => Assert.Equal(expectedHoldBagColor, holdBagColor));
+            Assert.Equal(expectedBagColor, bagContentsRule.Bag.Color);
+            Assert.Collection(bagContentsRule.HoldBags,
+                holdBag => Assert.Equal(new Bag(expectedHoldBagColor), holdBag));
         }
 
         [Theory]
@@ -35,10 +35,10 @@ namespace AdventOfCode.Day07.Tests
                 .Parse(bagContentsRuleDescription);
 
             //Then
-            Assert.Equal(bagContentsRule.BagColor, expectedBagColor);
-            Assert.Collection(bagContentsRule.HoldBagsColor,
-                holdBagColor => Assert.Equal(firstExpectedHoldBagColor, holdBagColor),
-                holdBagColor => Assert.Equal(secondExpectedHoldBagColor, holdBagColor));
+            Assert.Equal(bagContentsRule.Bag.Color, expectedBagColor);
+            Assert.Collection(bagContentsRule.HoldBags,
+                holdBag => Assert.Equal(new Bag(firstExpectedHoldBagColor), holdBag),
+                holdBag => Assert.Equal(new Bag(secondExpectedHoldBagColor), holdBag));
         }
 
         [Theory]
@@ -62,12 +62,12 @@ namespace AdventOfCode.Day07.Tests
                 .Parse(bagContentsRuleDescription);
 
             //Then
-            Assert.Equal(bagContentsRule.BagColor, expectedBagColor);
-            Assert.Collection(bagContentsRule.HoldBagsColor,
-                holdBagColor => Assert.Equal(firstExpectedHoldBagColor, holdBagColor),
-                holdBagColor => Assert.Equal(secondExpectedHoldBagColor, holdBagColor),
-                holdBagColor => Assert.Equal(thirdExpectedHoldBagColor, holdBagColor),
-                holdBagColor => Assert.Equal(fourthExpectedHoldBagColor, holdBagColor));
+            Assert.Equal(bagContentsRule.Bag.Color, expectedBagColor);
+            Assert.Collection(bagContentsRule.HoldBags,
+                holdBag => Assert.Equal(new Bag(firstExpectedHoldBagColor), holdBag),
+                holdBag => Assert.Equal(new Bag(secondExpectedHoldBagColor), holdBag),
+                holdBag => Assert.Equal(new Bag(thirdExpectedHoldBagColor), holdBag),
+                holdBag => Assert.Equal(new Bag(fourthExpectedHoldBagColor), holdBag));
         }
 
         [Theory]
@@ -82,8 +82,8 @@ namespace AdventOfCode.Day07.Tests
                 .Parse(bagContentsRuleDescription);
 
             //Then
-            Assert.Equal(expectedBagColor, bagContentsRule.BagColor);
-            Assert.Empty(bagContentsRule.HoldBagsColor);
+            Assert.Equal(expectedBagColor, bagContentsRule.Bag.Color);
+            Assert.Empty(bagContentsRule.HoldBags);
         }
     }
 }

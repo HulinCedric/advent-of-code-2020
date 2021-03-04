@@ -24,9 +24,9 @@ namespace AdventOfCode.Day07
         public IEnumerable<Bag> GetBagsContaining(Bag targetBag)
         {
             foreach (var directBagHolder in bagContentRules
-                                            .Where(rule => rule.HoldBagsColor
-                                                .Any(color => color == targetBag.Color))
-                                            .Select(rule => new Bag(rule.BagColor)))
+                                            .Where(rule => rule.HoldBags
+                                                .Any(holdBag => holdBag.Equals(targetBag)))
+                                            .Select(rule => rule.Bag))
             {
                 yield return directBagHolder;
 
