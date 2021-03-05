@@ -37,18 +37,18 @@ namespace AdventOfCode.Day07
             }
         }
 
-        public int GetRequiredBagCount(Bag targetBag)
+        public int SumRequiredBagsFor(Bag targetBag)
         {
-            var sum = 0;
+            var requiredBadSum = 0;
             foreach (var requiredBagsCount in bagContentRules
                                             .Where(rule => rule.Bag == targetBag)
                                             .SelectMany(rule => rule.HoldBagCounts))
             {
-                sum += requiredBagsCount.BagNumber;
-                sum += requiredBagsCount.BagNumber * GetRequiredBagCount(requiredBagsCount.Bag);
+                requiredBadSum += requiredBagsCount.BagNumber;
+                requiredBadSum += requiredBagsCount.BagNumber * SumRequiredBagsFor(requiredBagsCount.Bag);
             }
 
-            return sum;
+            return requiredBadSum;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

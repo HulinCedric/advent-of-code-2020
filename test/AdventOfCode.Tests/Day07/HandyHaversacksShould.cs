@@ -31,7 +31,7 @@ namespace AdventOfCode.Day07.Tests
         [InlineData(BagContentsRulesDescription.ExampleDescription, 32)]
         [InlineData(BagContentsRulesDescription.AdditionalExampleDescription, 126)]
         [InputFileData("Day07/input.txt", 5956)]
-        public void Count_individual_bags_required_inside_a_single_shiny_gold_bag(
+        public void Sum_individual_bags_required_inside_a_single_shiny_gold_bag(
             string bagContentsRulesDescription,
             int expectedBagColorsCount)
         {
@@ -41,7 +41,7 @@ namespace AdventOfCode.Day07.Tests
 
             //When
             var requiredBagsCount = bagContentsRules
-                .GetRequiredBagCount(shinyGoldBag);
+                .SumRequiredBagsFor(shinyGoldBag);
 
             //Then
             Assert.Equal(expectedBagColorsCount, requiredBagsCount);
