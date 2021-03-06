@@ -1,6 +1,7 @@
+using AdventOfCode.Day08.Tests;
 using Xunit;
 
-namespace AdventOfCode.Day08.Tests
+namespace AdventOfCode.Day08
 {
     public class IsolatedProgramRunnerShould
     {
@@ -12,35 +13,30 @@ namespace AdventOfCode.Day08.Tests
             int expectedAccumulatorValue)
         {
             //Given
-            Program program = ProgramParser.Parse(programDescription);
+            var program = ProgramParser.Parse(programDescription);
 
             //When
-            ProgramExecutionResult executionResult = IsolatedProgramRunner.Execute(program);
-            int accumulatorValue = executionResult.AccumulatorValue;
+            var executionResult = IsolatedProgramRunner.Execute(program);
+            var actualAccumulatorValue = executionResult.AccumulatorValue;
 
             //Then
-            Assert.Equal(expectedAccumulatorValue, accumulatorValue);
+            Assert.Equal(expectedAccumulatorValue, actualAccumulatorValue);
         }
     }
 
-    internal class IsolatedProgramRunner
+    internal static class IsolatedProgramRunner
     {
-        internal static ProgramExecutionResult Execute(Program program)
-        {
-            return new ProgramExecutionResult { AccumulatorValue = 5 };
-        }
+        internal static ProgramExecutionResult Execute(Program program) =>
+            new ProgramExecutionResult(AccumulatorValue: 5);
     }
 
     internal class Program
     {
     }
 
-    internal class ProgramExecutionResult
-    {
-        public int AccumulatorValue { get; internal set; }
-    }
+    internal record ProgramExecutionResult(int AccumulatorValue);
 
-    internal class ProgramParser
+    internal static class ProgramParser
     {
         internal static Program Parse(string programDescription)
         {
