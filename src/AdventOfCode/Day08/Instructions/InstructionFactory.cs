@@ -9,11 +9,11 @@ namespace AdventOfCode.Day08.Instructions
             var (operation, argument) = InstructionParser.Parse(instructionDescription);
             return operation switch
             {
-                "acc" => new AccumulatorInstruction(argument),
-                "jmp" => new JumpInstruction(argument),
-                "nop" => new NoOperationInstruction(argument),
+                AccumulatorInstruction.OperationName => new AccumulatorInstruction(argument),
+                JumpInstruction.OperationName => new JumpInstruction(argument),
+                NoOperationInstruction.OperationName => new NoOperationInstruction(argument),
                 _ => throw new ArgumentException(
-                    $"Instruction {operation} is unknown", 
+                    $"Instruction {operation} is unknown",
                     nameof(instructionDescription))
             };
         }

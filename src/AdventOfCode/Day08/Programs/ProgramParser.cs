@@ -1,6 +1,6 @@
 using System;
 
-namespace AdventOfCode.Day08
+namespace AdventOfCode.Day08.Programs
 {
     public static class ProgramParser
     {

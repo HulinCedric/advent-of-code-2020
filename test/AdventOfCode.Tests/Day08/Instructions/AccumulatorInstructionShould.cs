@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using AdventOfCode.Day08.Programs;
+using Xunit;
 
 namespace AdventOfCode.Day08.Instructions
 {
