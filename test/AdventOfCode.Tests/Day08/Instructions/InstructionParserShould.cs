@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace AdventOfCode.Day08
+namespace AdventOfCode.Day08.Instructions
 {
     public class InstructionParserShould
     {
@@ -14,10 +14,10 @@ namespace AdventOfCode.Day08
             string expectedOperationDescription,
             int expectedArgumentDescription)
         {
-            var instruction = InstructionParser.Parse(instructionDescription);
+            var (operation, argument) = InstructionParser.Parse(instructionDescription);
 
-            Assert.Equal(instruction.Operation, expectedOperationDescription);
-            Assert.Equal(instruction.Argument, expectedArgumentDescription);
+            Assert.Equal(operation, expectedOperationDescription);
+            Assert.Equal(argument, expectedArgumentDescription);
         }
     }
 }
