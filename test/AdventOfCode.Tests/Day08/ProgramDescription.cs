@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Day08.Tests
+﻿namespace AdventOfCode.Day08
 {
     public static class ProgramDescription
     {

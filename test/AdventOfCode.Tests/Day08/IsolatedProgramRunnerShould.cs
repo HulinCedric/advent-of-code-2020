@@ -1,4 +1,3 @@
-using AdventOfCode.Day08.Tests;
 using Xunit;
 
 namespace AdventOfCode.Day08
