@@ -18,7 +18,7 @@ namespace AdventOfCode.Day08
             var program = ProgramParser.Parse(programDescription);
 
             // When
-            var executionResult = new IsolatedProgramRunner().Execute(program);
+            var executionResult = IsolatedProgramRunner.Execute(program);
             var actualAccumulatorValue = executionResult.AccumulatorValue;
 
             // Then
@@ -26,15 +26,14 @@ namespace AdventOfCode.Day08
         }
     }
 
-    internal class IsolatedProgramRunner
+    internal static class IsolatedProgramRunner
     {
-        private readonly List<int> executedInstructionsIndexes = new();
-        private int accumulator;
-        private int currentInstructionIndex;
-
-        internal ProgramExecutionResult Execute(Program program)
+        internal static ProgramExecutionResult Execute(Program program)
         {
-            var isProgramExecuted = false;
+            var accumulator = 0;
+            var executedInstructionsIndexes = new List<int>();
+            var currentInstructionIndex = 0;
+
             do
             {
                 if (executedInstructionsIndexes.Contains(currentInstructionIndex))
@@ -48,9 +47,7 @@ namespace AdventOfCode.Day08
                 accumulator = executionResult.AccumulatorValue;
                 currentInstructionIndex = executionResult.NextInstructionIndex;
 
-                if (currentInstructionIndex >= program.Count())
-                    isProgramExecuted = true;
-            } while (isProgramExecuted == false);
+            } while (true);
 
             return new ProgramExecutionResult(accumulator);
         }
