@@ -7,7 +7,7 @@ namespace AdventOfCode.Day08.Programs
 {
     public class Program : IEnumerable<Instruction>
     {
-        private readonly List<Instruction> instructions;
+        private readonly IList<Instruction> instructions;
 
         public Program(IEnumerable<string> instructionsDescriptions)
             => instructions = instructionsDescriptions.Select(InstructionFactory.Create).ToList();
@@ -18,13 +18,17 @@ namespace AdventOfCode.Day08.Programs
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
 
-        public Program GetCopy()
+        public Program SwitchInstructionAt<T>(int index) where T : Instruction
+        {
+            var programCopy = GetCopy();
+            programCopy.instructions[index] = programCopy.instructions[index].SwitchTo<T>();
+            return programCopy;
+        }
+
+        private Program GetCopy()
             => new(
                 instructions
                     .Select(instruction => instruction.ToString())
                     .ToList());
-
-        public void SwitchInstructionAt<T>(int index) where T : Instruction
-            => instructions[index] = instructions[index].SwitchTo<T>();
     }
 }
