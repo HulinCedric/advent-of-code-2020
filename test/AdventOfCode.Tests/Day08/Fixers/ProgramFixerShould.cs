@@ -1,4 +1,5 @@
 using AdventOfCode.Day08.Programs;
+using AdventOfCode.Day08.Runners;
 using Xunit;
 
 namespace AdventOfCode.Day08.Fixers
@@ -15,19 +16,33 @@ namespace AdventOfCode.Day08.Fixers
         {
             // Given
             var infiniteLoopProgram = ProgramParser.Parse(infiniteLoopProgramDescription);
-            var expectedTerminableProgram = ProgramParser.Parse(expectedTerminableProgramDescription);
+            var expectedFixedProgram = ProgramParser.Parse(expectedTerminableProgramDescription);
 
             // When
-            var actualTerminableProgram = ProgramFixer.Fix(infiniteLoopProgram);
+            var actualFixedProgram = ProgramFixer.Fix(infiniteLoopProgram);
+            var executionResult = IsolatedProgramRunner.Execute(actualFixedProgram);
 
             // Then
-            Assert.Equal(expectedTerminableProgram, actualTerminableProgram);
+            Assert.Equal(expectedFixedProgram, actualFixedProgram);
+            Assert.True(executionResult.IsProgramTerminates);
         }
-    }
 
-    public static class ProgramFixer
-    {
-        public static Program Fix(Program program) =>
-            ProgramParser.Parse(ProgramDescription.TerminableExampleDescription);
+        [Theory]
+        [InlineData(ProgramDescription.InfiniteLoopExampleDescription, 8)]
+        [InputFileData("Day08/input.txt", 1375)]
+        public void Fix_program_and_give_terminates_program_accumulator(
+            string infiniteLoopProgramDescription,
+            int expectedAccumulator)
+        {
+            // Given
+            var infiniteLoopProgram = ProgramParser.Parse(infiniteLoopProgramDescription);
+
+            // When
+            var fixedProgram = ProgramFixer.Fix(infiniteLoopProgram);
+            var executionResult = IsolatedProgramRunner.Execute(fixedProgram);
+
+            // Then
+            Assert.Equal(expectedAccumulator, executionResult.AccumulatorValue);
+        }
     }
 }

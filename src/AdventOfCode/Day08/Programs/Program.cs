@@ -7,15 +7,27 @@ namespace AdventOfCode.Day08.Programs
 {
     public class Program : IEnumerable<Instruction>
     {
-        private readonly IEnumerable<Instruction> instructionsDescriptions;
+        private readonly List<Instruction> instructions;
 
         public Program(IEnumerable<string> instructionsDescriptions)
-            => this.instructionsDescriptions = instructionsDescriptions.Select(InstructionFactory.Create);
+            => this.instructions = instructionsDescriptions.Select(InstructionFactory.Create).ToList();
 
         public IEnumerator<Instruction> GetEnumerator()
-            => instructionsDescriptions.GetEnumerator();
+            => instructions.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
+
+        public Program GetCopy()
+            => new Program(instructions.Select(instruction=>instruction.ToString()).ToList());
+
+        public int Count
+            => instructions.Count;
+        
+        public int IndexOf(Instruction instruction)
+            => instructions.IndexOf(instruction);
+
+        public void Replace(int index, Instruction instruction)
+            => instructions[index] = instruction;
     }
 }

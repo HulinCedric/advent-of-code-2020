@@ -13,7 +13,7 @@ namespace AdventOfCode.Day08.Runners
             var currentInstructionIndex = 0;
             var isInfiniteLoopProgram = false;
             var isProgramTerminates = false;
-            var terminatesInstructionIndex = program.Count();
+            var terminatesInstructionIndex = program.Count;
 
             do
             {
