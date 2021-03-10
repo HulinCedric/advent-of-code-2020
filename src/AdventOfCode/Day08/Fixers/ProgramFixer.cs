@@ -7,7 +7,41 @@ namespace AdventOfCode.Day08.Fixers
 {
     public static class ProgramFixer
     {
+        /// <summary>
+        /// Fix a program by switching only one instruction.
+        /// </summary>
+        /// <param name="program"></param>
+        /// <returns></returns>
+        /// <remarks>Functional way.</remarks>
         public static Program Fix(Program program)
+            => program
+                .Select((instruction, index) => (instruction, index))
+                .Where(switchable =>
+                    switchable.instruction is JumpInstruction ||
+                    switchable.instruction is NoOperationInstruction)
+                .Select(switchable
+                    => FixInstruction(
+                        program,
+                        switchable.instruction,
+                        switchable.index))
+                .Select(possiblyFixedProgram
+                    => (
+                        program: possiblyFixedProgram,
+                        executionResult: IsolatedProgramRunner.Execute(possiblyFixedProgram)))
+                .Where(possiblyFixedProgram
+                    => possiblyFixedProgram.executionResult.IsProgramTerminates)
+                .Select(fixedProgram => fixedProgram.program)
+                .DefaultIfEmpty(program)
+                .FirstOrDefault()!;
+
+        
+        /// <summary>
+        /// Fix a program by switching only one instruction.
+        /// </summary>
+        /// <param name="program"></param>
+        /// <returns></returns>
+        /// <remarks>Imperative way.</remarks>
+        public static Program ImperativeFix(Program program)
         {
             foreach (var (switchableInstruction, switchableIndex) in program
                 .Select((instruction, index) => (instruction, index))
