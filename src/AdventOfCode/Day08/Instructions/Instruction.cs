@@ -36,7 +36,7 @@ namespace AdventOfCode.Day08.Instructions
         public override int GetHashCode()
             => HashCode.Combine(Argument, Operation);
 
-        public T SwitchTo<T>() where T:  Instruction
+        public T SwitchTo<T>() where T : Instruction
             => (Activator.CreateInstance(typeof(T), Argument) as T)!;
     }
 }

@@ -16,15 +16,16 @@ namespace AdventOfCode.Day08.Fixers
                     instructionAndIndex.instruction is NoOperationInstruction)
                 .ToList())
             {
-                var switchedInstruction = switchableInstruction switch
-                {
-                    JumpInstruction => switchableInstruction.SwitchTo<NoOperationInstruction>(),
-                    NoOperationInstruction => switchableInstruction.SwitchTo<JumpInstruction>(),
-                    _ => switchableInstruction
-                };
-
                 var fixedProgramCopy = program.GetCopy();
-                fixedProgramCopy.Replace(switchableIndex, switchedInstruction);
+                switch (switchableInstruction)
+                {
+                    case JumpInstruction:
+                        fixedProgramCopy.SwitchInstructionAt<NoOperationInstruction>(switchableIndex);
+                        break;
+                    case NoOperationInstruction:
+                        fixedProgramCopy.SwitchInstructionAt<JumpInstruction>(switchableIndex);
+                        break;
+                }
 
                 var executionResult = IsolatedProgramRunner.Execute(fixedProgramCopy);
                 if (executionResult.IsProgramTerminates)

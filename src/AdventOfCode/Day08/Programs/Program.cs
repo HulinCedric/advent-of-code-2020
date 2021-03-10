@@ -10,7 +10,7 @@ namespace AdventOfCode.Day08.Programs
         private readonly List<Instruction> instructions;
 
         public Program(IEnumerable<string> instructionsDescriptions)
-            => this.instructions = instructionsDescriptions.Select(InstructionFactory.Create).ToList();
+            => instructions = instructionsDescriptions.Select(InstructionFactory.Create).ToList();
 
         public IEnumerator<Instruction> GetEnumerator()
             => instructions.GetEnumerator();
@@ -19,15 +19,12 @@ namespace AdventOfCode.Day08.Programs
             => GetEnumerator();
 
         public Program GetCopy()
-            => new Program(instructions.Select(instruction=>instruction.ToString()).ToList());
+            => new(
+                instructions
+                    .Select(instruction => instruction.ToString())
+                    .ToList());
 
-        public int Count
-            => instructions.Count;
-        
-        public int IndexOf(Instruction instruction)
-            => instructions.IndexOf(instruction);
-
-        public void Replace(int index, Instruction instruction)
-            => instructions[index] = instruction;
+        public void SwitchInstructionAt<T>(int index) where T : Instruction
+            => instructions[index] = instructions[index].SwitchTo<T>();
     }
 }
