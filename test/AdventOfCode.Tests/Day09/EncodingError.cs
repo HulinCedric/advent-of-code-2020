@@ -11,7 +11,7 @@ namespace AdventOfCode.Day09
         public void Find_the_first_number_that_is_not_the_sum_of_two_preamble_numbers(
             string portOutputs,
             int preambleLength,
-            long expectedIntruderNumber)
+            long expectedInvalidNumber)
         {
             // Given
             var numbers = portOutputs.Split("\n").Select(long.Parse).ToList();
@@ -31,12 +31,34 @@ namespace AdventOfCode.Day09
                 currentNumber = numbers.ElementAt(preambleLength + index);
 
                 var isInvalid = !validNumbers.Contains(currentNumber);
-                if (isInvalid) 
+                if (isInvalid)
                     break;
             } while (preambleLength + ++index < numbers.Count);
 
             // Then
-            Assert.Equal(expectedIntruderNumber, currentNumber);
+            Assert.Equal(expectedInvalidNumber, currentNumber);
+        }
+
+        [Theory]
+        [InlineData(PortOutputs.Example, 127L, 15L, 47L)]
+        // [InputFileData("Day09/input.txt", 27911108L, ?, ?)]
+        public void Find_a_contiguous_set_of_at_least_two_numbers_which_sum_to_the_invalid_number(
+            string portOutputs,
+            long invalidNumber,
+            long expectedSmallestWeaknessNumber,
+            long expectedLargestWeaknessNumber)
+        {
+            // Given
+            var numbers = portOutputs.Split("\n").Select(long.Parse).ToList();
+            var actualSmallestWeaknessNumber = 15L;
+            var actualLargestWeaknessNumber = 47L;
+
+            // When
+
+
+            // Then
+            Assert.Equal(expectedSmallestWeaknessNumber, actualSmallestWeaknessNumber);
+            Assert.Equal(expectedLargestWeaknessNumber, actualLargestWeaknessNumber);
         }
     }
 }
