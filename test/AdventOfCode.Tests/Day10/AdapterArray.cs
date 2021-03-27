@@ -16,43 +16,33 @@ namespace AdventOfCode.Day10
             int expected3JoltDifferences)
         {
             // Given
-            var adaptersJoltages = adaptersDescription
-                .Split("\n")
-                .Select(int.Parse)
-                .ToList();
-
-            const int chargingOutletJoltage = 0;
-            adaptersJoltages.Add(chargingOutletJoltage);
-
-            var actualDeviceBuiltInJoltage = adaptersJoltages.Max() + 3;
-            adaptersJoltages.Add(actualDeviceBuiltInJoltage);
-
-            adaptersJoltages.Sort();
+            var adaptersJoltages = adaptersDescription.ParseAndBuildAdaptersJoltages();
 
             // When
-            var chainedAdapters = adaptersJoltages.Zip(
-                adaptersJoltages.Skip(1),
-                (fromAdapter, toAdapter) => (fromAdapter, toAdapter));
-
-            var actual1JoltDifferences = 0;
-            var actual3JoltDifferences = 0;
-            foreach (var pluggedAdapters in chainedAdapters)
-            {
-                switch (pluggedAdapters.toAdapter - pluggedAdapters.fromAdapter)
-                {
-                    case 1:
-                        actual1JoltDifferences++;
-                        break;
-                    case 3:
-                        actual3JoltDifferences++;
-                        break;
-                }
-            }
+            var actualDeviceBuiltInJoltage = adaptersJoltages.Last();
+            var (actual1JoltDifferences, actual3JoltDifferences) = adaptersJoltages.CountJoltDifferences();
 
             // Then
             Assert.Equal(expectedDeviceBuiltInJoltage, actualDeviceBuiltInJoltage);
             Assert.Equal(expected1JoltDifferences, actual1JoltDifferences);
             Assert.Equal(expected3JoltDifferences, actual3JoltDifferences);
+        }
+
+        [Theory]
+        [InlineData(AdaptersDescription.Example, 8L)]
+        [InlineData(AdaptersDescription.LageExample, 19208L)]
+        [InputFileData("Day10/input.txt", 15790581481472L)]
+        public void Find_total_number_of_adapters_arrangement_to_connect_the_charging_outlet_to_the_device(
+            string adaptersDescription,
+            long expectedNumberOfArrangement)
+        {
+            // When
+            var actualNumberOfArrangement = adaptersDescription
+                .ParseAndBuildAdaptersJoltages()
+                .CountTotalNumberOfArrangements();
+
+            // Then
+            Assert.Equal(expectedNumberOfArrangement, actualNumberOfArrangement);
         }
     }
 }

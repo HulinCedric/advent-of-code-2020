@@ -41,7 +41,7 @@ Because adapters can only connect to a source 1-3 jolts lower than its rating, i
 - The charging outlet has an effective rating of `0` jolts, so the only adapters that could connect to it directly would need to have a joltage rating of `1`, `2`, or `3` jolts. Of these, only one you have is an adapter rated `1` jolt (difference of **`1`**).
 - From your `1`-jolt rated adapter, the only choice is your `4`-jolt rated adapter (difference of **`3`**).
 - From the `4`-jolt rated adapter, the adapters rated `5`, `6`, or `7` are valid choices. However, in order to not skip any adapters, you have to pick the adapter rated `5` jolts (difference of **`1`**).
-- Similarly, the next choices would need to be the adapter rated `6` and then the adapter rated `7` (with difference of **`1**` and **`1`**).
+- Similarly, the next choices would need to be the adapter rated `6` and then the adapter rated `7` (with difference of **`1`** and **`1`**).
 - The only adapter that works with the `7`-jolt rated adapter is the one rated `10` jolts (difference of **`3`**).
 - From `10`, the choices are `11` or `12`; choose `11` (difference of **`1`**) and then `12` (difference of **`1`**).
 - After `12`, only valid adapter has a rating of `15` (difference of **`3`**), then `16` (difference of **`1`**), then `19` (difference of **`3`**).
