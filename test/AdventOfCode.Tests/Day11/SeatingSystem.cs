@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Xunit;
 
 namespace AdventOfCode.Day11
@@ -9,7 +9,7 @@ namespace AdventOfCode.Day11
     {
         [Theory]
         [InlineData(SeatLayoutDescription.Example, 37)]
-        // [InputFileData("Day11/input.txt", 37)]
+        [InputFileData("Day11/input.txt", 2277)]
         public void Count_seats_occupied_when_people_stop_moving(
             string seatLayoutDescription,
             int expectedSeatsOccupiedCount)
@@ -22,8 +22,8 @@ namespace AdventOfCode.Day11
             do
             {
                 seatLayout = nextSeatLayoutSimulation;
-                nextSeatLayoutSimulation = PeopleSeatChoiceSimulator.Simulate(seatLayout);
-            } while (!nextSeatLayoutSimulation.Equals(seatLayout));
+                nextSeatLayoutSimulation = seatLayout.NextRound();
+            } while (nextSeatLayoutSimulation != seatLayout);
 
             var actualSeatsOccupiedCount = seatLayout.CountOccupiedSeats();
 
@@ -32,135 +32,62 @@ namespace AdventOfCode.Day11
         }
     }
 
-    public static class PeopleSeatChoiceSimulator
-    {
-        public static SeatLayout Simulate(SeatLayout seatLayout)
-            => seatLayout.With(SimulateAndGetSeatTopology(seatLayout));
-
-        private static IEnumerable<Seat> SimulateAndGetSeatTopology(SeatLayout seatLayout)
-            => from seat in seatLayout
-                let adjacentSeats = seatLayout.GetAdjacentSeats(seat)
-                select seat.State switch
-                {
-                    SeatState.Empty when adjacentSeats.All(seat => seat.State != SeatState.Occupied) => seat with
-                    {
-                        State = SeatState.Occupied
-                    },
-                    SeatState.Occupied when adjacentSeats.Count(seat => seat.State == SeatState.Occupied) >= 4
-                        => seat with
-                        {
-                            State = SeatState.Empty
-                        },
-                    _ => seat
-                };
-    }
-
-    public record Seat : SeatLayoutElement
-    {
-        private Seat(int x, int y, SeatState state)
-            : base(x, y)
-            => State = state;
-
-        public SeatState State { get; init; }
-
-        public static Seat Occupied(int x, int y)
-            => new(x, y, SeatState.Occupied);
-
-        public static Seat Empty(int x, int y)
-            => new(x, y, SeatState.Empty);
-    }
-
-    public enum SeatState
-    {
-        Empty,
-        Occupied
-    }
-
-    public record Floor : SeatLayoutElement
-    {
-        public Floor(int x, int y)
-            : base(x, y)
-        {
-        }
-    }
-
-    public abstract record SeatLayoutElement
-    {
-        protected SeatLayoutElement(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public int X { get; }
-        public int Y { get; }
-
-        internal static SeatLayoutElement Create(int x, int y, char seatLayoutElementDescription)
-        {
-            return seatLayoutElementDescription switch
-            {
-                'L' => Seat.Empty(x, y),
-                '#' => Seat.Occupied(x, y),
-                '.' => new Floor(x, y),
-                _ => null
-            };
-        }
-    }
-
-
     public class SeatLayout
-        : IEnumerable<Seat>
     {
-        private readonly List<SeatLayoutElement> seatLayout;
+        private readonly int maxColumnIndex;
+        private readonly int maxRowIndex;
+        private readonly int minColumnIndex = 0;
+        private readonly int minRowIndex = 0;
+        private readonly string[] seatLayout;
 
-        public SeatLayout(List<SeatLayoutElement> seatLayout)
-            => this.seatLayout = seatLayout;
-
-        public IEnumerator<Seat> GetEnumerator()
-            => seatLayout.OfType<Seat>().GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        public SeatLayout(string[] seatLayout)
+        {
+            this.seatLayout = seatLayout;
+            maxRowIndex = seatLayout.Length - 1;
+            maxColumnIndex = seatLayout.First().Length - 1;
+        }
 
         public int CountOccupiedSeats()
-            => seatLayout
-                .OfType<Seat>()
-                .Count(seat => seat.State == SeatState.Occupied);
+            => string.Join('\n', seatLayout)
+                .Count(seat => seat == '#');
 
-        public IEnumerable<Seat> GetAdjacentSeats(Seat seat)
+        private IEnumerable<char> GetAdjacentSeatsDescription(int rowIndex, int columnIndex)
         {
-            var seats = seatLayout.OfType<Seat>().ToList();
-            if (seats.FirstOrDefault(s => s.X == seat.X - 1 && s.Y == seat.Y) is var upperSeat &&
-                upperSeat is not null)
-                yield return upperSeat;
+            for (var i = rowIndex - 1; i <= rowIndex + 1; i++)
+            for (var j = columnIndex - 1; j <= columnIndex + 1; j++)
+                if (i >= minRowIndex &&
+                    i <= maxRowIndex &&
+                    j >= minColumnIndex &&
+                    j <= maxColumnIndex &&
+                    !(i == rowIndex && j == columnIndex))
+                    yield return seatLayout[i][j];
+        }
 
-            if (seats.FirstOrDefault(s => s.X == seat.X + 1 && s.Y == seat.Y) is var downSeat &&
-                downSeat is not null)
-                yield return downSeat;
+        public SeatLayout NextRound()
+        {
+            var simulation = new string[seatLayout.Length];
+            for (var rowIndex = 0; rowIndex < seatLayout.Length; rowIndex++)
+            {
+                var seatRow = seatLayout[rowIndex];
+                var seatRowBuilder = new StringBuilder();
+                for (var columnIndex = 0; columnIndex < seatRow.Length; columnIndex++)
+                {
+                    var seat = seatRow[columnIndex];
+                    var adjacentSeats = GetAdjacentSeatsDescription(rowIndex, columnIndex);
+                    var newSeat = seat switch
+                    {
+                        'L' when adjacentSeats.All(s => s != '#') => '#',
+                        '#' when adjacentSeats.Count(s => s == '#') >= 4 => 'L',
+                        _ => seat
+                    };
 
-            if (seats.FirstOrDefault(s => s.X == seat.X && s.Y == seat.Y + 1) is var rightSeat &&
-                rightSeat is not null)
-                yield return rightSeat;
+                    seatRowBuilder.Append(newSeat);
+                }
 
-            if (seats.FirstOrDefault(s => s.X == seat.X && s.Y == seat.Y - 1) is var leftSeat &&
-                leftSeat is not null)
-                yield return leftSeat;
+                simulation[rowIndex] = seatRowBuilder.ToString();
+            }
 
-            if (seats.FirstOrDefault(s => s.X == seat.X + 1 && s.Y == seat.Y - 1) is var upRightSeat &&
-                upRightSeat is not null)
-                yield return upRightSeat;
-
-            if (seats.FirstOrDefault(s => s.X == seat.X + 1 && s.Y == seat.Y + 1) is var downRightSeat &&
-                downRightSeat is not null)
-                yield return downRightSeat;
-
-            if (seats.FirstOrDefault(s => s.X == seat.X - 1 && s.Y == seat.Y - 1) is var upLeftSeat &&
-                upLeftSeat is not null)
-                yield return upLeftSeat;
-
-            if (seats.FirstOrDefault(s => s.X == seat.X - 1 && s.Y == seat.Y + 1) is var downLeftSeat &&
-                downLeftSeat is not null)
-                yield return downLeftSeat;
+            return new SeatLayout(simulation);
         }
 
         private bool Equals(SeatLayout other)
@@ -170,7 +97,7 @@ namespace AdventOfCode.Day11
                         => Equals(seatsElementsToCompare.First, seatsElementsToCompare.Second));
 
         public override bool Equals(object obj)
-            => obj.GetType() == GetType() && Equals((SeatLayout) obj);
+            => obj?.GetType() == GetType() && Equals((SeatLayout) obj);
 
         public override int GetHashCode()
             => seatLayout != null ? seatLayout.GetHashCode() : 0;
@@ -180,39 +107,11 @@ namespace AdventOfCode.Day11
 
         public static bool operator !=(SeatLayout left, SeatLayout right)
             => !Equals(left, right);
-
-        public SeatLayout With(IEnumerable<Seat> seatTopology)
-            => new(ReplaceMatchingSeatElement(seatTopology).ToList());
-
-        private IEnumerable<SeatLayoutElement> ReplaceMatchingSeatElement(IEnumerable<Seat> seatDescription)
-        {
-            foreach (var seatLayoutElement in seatLayout)
-                if (seatDescription.FirstOrDefault(s => s.X == seatLayoutElement.X && s.Y == seatLayoutElement.Y) is var
-                        matchingSeat &&
-                    matchingSeat is not null)
-                    yield return matchingSeat;
-                else
-                    yield return seatLayoutElement;
-        }
     }
 
     public static class SeatLayoutParser
     {
         public static SeatLayout Parse(string seatLayoutDescription)
-            => new(ParseAndConvert(seatLayoutDescription).ToList());
-
-        private static IEnumerable<SeatLayoutElement> ParseAndConvert(string seatLayoutDescription)
-        {
-            var seatRows = seatLayoutDescription.Split("\n");
-            for (var seatIndex = 0; seatIndex < seatRows.Length; seatIndex++)
-            {
-                var seatRow = seatRows[seatIndex];
-                for (var seatColumnIndex = 0; seatColumnIndex < seatRow.Length; seatColumnIndex++)
-                {
-                    var seatLayoutItemDescription = seatRow[seatColumnIndex];
-                    yield return SeatLayoutElement.Create(seatIndex, seatColumnIndex, seatLayoutItemDescription);
-                }
-            }
-        }
+            => new(seatLayoutDescription.Split("\n"));
     }
 }

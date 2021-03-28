@@ -12,6 +12,6 @@
             "..L.L.....\n" +
             "LLLLLLLLLL\n" +
             "L.LLLLLL.L\n" +
-            "L.LLLLL.LL\n";
+            "L.LLLLL.LL";
     }
 }
