@@ -16,6 +16,7 @@ namespace AdventOfCode.Day11
             int expectedSeatsOccupiedCount)
         {
             // Given
+            const int peopleTolerance = 4;
             var seatLayout = SeatLayoutParser.Parse(seatLayoutDescription);
             var nextSeatLayoutSimulation = seatLayout;
 
@@ -23,7 +24,7 @@ namespace AdventOfCode.Day11
             do
             {
                 seatLayout = nextSeatLayoutSimulation;
-                nextSeatLayoutSimulation = seatLayout.NextRound();
+                nextSeatLayoutSimulation = seatLayout.NextRound(peopleTolerance);
             } while (nextSeatLayoutSimulation != seatLayout);
 
             var actualSeatsOccupiedCount = seatLayout.CountOccupiedSeats();
@@ -68,7 +69,7 @@ namespace AdventOfCode.Day11
                     yield return seatLayout[seatRowIndex][seatColumnIndex];
         }
 
-        public SeatLayout NextRound()
+        public SeatLayout NextRound(int peopleTolerance)
         {
             var nextRoundSeatLayout = new string[seatLayout.Length];
             for (var rowIndex = 0; rowIndex < seatLayout.Length; rowIndex++)
@@ -82,7 +83,7 @@ namespace AdventOfCode.Day11
                     var newSeat = seat switch
                     {
                         'L' when adjacentSeats.All(s => s != '#') => '#',
-                        '#' when adjacentSeats.Count(s => s == '#') >= 4 => 'L',
+                        '#' when adjacentSeats.Count(s => s == '#') >= peopleTolerance => 'L',
                         _ => seat
                     };
 
