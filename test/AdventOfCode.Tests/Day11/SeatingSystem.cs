@@ -17,10 +17,13 @@ namespace AdventOfCode.Day11
         {
             // Given
             const int peopleTolerance = 4;
+            var adjacentSeatsFinderStrategy = new DirectAdjacentSeatsFinder();
             var seatLayout = SeatLayoutParser.Parse(seatLayoutDescription);
 
             // When
-            var allocationSimulation = new SeatAllocationSimulator(peopleTolerance).SimulateAllocation(seatLayout);
+            var allocationSimulation =
+                new SeatAllocationSimulator(peopleTolerance, adjacentSeatsFinderStrategy)
+                    .SimulateAllocation(seatLayout);
             var actualSeatsOccupiedCount = allocationSimulation.CountOccupiedSeats();
 
             // Then
@@ -30,10 +33,16 @@ namespace AdventOfCode.Day11
 
     public class SeatAllocationSimulator
     {
+        private readonly IAdjacentSeatsFinder adjacentSeatsFinderStrategy;
         private readonly int peopleTolerance;
 
-        public SeatAllocationSimulator(int peopleTolerance)
-            => this.peopleTolerance = peopleTolerance;
+        public SeatAllocationSimulator(
+            int peopleTolerance,
+            IAdjacentSeatsFinder adjacentSeatsFinderStrategy)
+        {
+            this.peopleTolerance = peopleTolerance;
+            this.adjacentSeatsFinderStrategy = adjacentSeatsFinderStrategy;
+        }
 
         public SeatLayout SimulateAllocation(SeatLayout initialSeatLayout)
         {
@@ -44,36 +53,33 @@ namespace AdventOfCode.Day11
             do
             {
                 seatLayout = nextSeatLayoutSimulation;
-                nextSeatLayoutSimulation = seatLayout.NextRound(peopleTolerance);
+                nextSeatLayoutSimulation = seatLayout.NextRound(peopleTolerance, adjacentSeatsFinderStrategy);
             } while (nextSeatLayoutSimulation != seatLayout);
 
             return seatLayout;
         }
     }
 
-    public class SeatLayout
+    public interface IAdjacentSeatsFinder
     {
-        private readonly int layoutMaxColumnIndex;
-        private readonly int layoutMaxRowIndex;
-        private readonly int layoutMinColumnIndex = 0;
-        private readonly int layoutMinRowIndex = 0;
-        private readonly string[] seatLayout;
+        IEnumerable<char> GetAdjacentSeatsDescriptionForSeat(
+            string[] seatLayoutDescription,
+            int centralSeatRowIndex,
+            int centralSeatColumnIndex);
+    }
 
-        public SeatLayout(string[] seatLayout)
-        {
-            this.seatLayout = seatLayout;
-            layoutMaxRowIndex = seatLayout.Length - 1;
-            layoutMaxColumnIndex = seatLayout.First().Length - 1;
-        }
-
-        public int CountOccupiedSeats()
-            => string.Join('\n', seatLayout)
-                .Count(seat => seat == '#');
-
-        private IEnumerable<char> GetAdjacentSeatsDescriptionForSeat(
+    internal class DirectAdjacentSeatsFinder : IAdjacentSeatsFinder
+    {
+        public IEnumerable<char> GetAdjacentSeatsDescriptionForSeat(
+            string[] seatLayoutDescription,
             int centralSeatRowIndex,
             int centralSeatColumnIndex)
         {
+            var layoutMaxColumnIndex = seatLayoutDescription[0].Length - 1;
+            var layoutMaxRowIndex = seatLayoutDescription.Length - 1;
+            var layoutMinColumnIndex = 0;
+            var layoutMinRowIndex = 0;
+
             for (var seatRowIndex = centralSeatRowIndex - 1; seatRowIndex <= centralSeatRowIndex + 1; seatRowIndex++)
             for (var seatColumnIndex = centralSeatColumnIndex - 1;
                 seatColumnIndex <= centralSeatColumnIndex + 1;
@@ -83,10 +89,23 @@ namespace AdventOfCode.Day11
                     seatColumnIndex >= layoutMinColumnIndex &&
                     seatColumnIndex <= layoutMaxColumnIndex &&
                     !(seatRowIndex == centralSeatRowIndex && seatColumnIndex == centralSeatColumnIndex))
-                    yield return seatLayout[seatRowIndex][seatColumnIndex];
+                    yield return seatLayoutDescription[seatRowIndex][seatColumnIndex];
         }
+    }
 
-        public SeatLayout NextRound(int peopleTolerance)
+    public class SeatLayout
+    {
+        private readonly string[] seatLayout;
+
+        public SeatLayout(string[] seatLayout)
+            => this.seatLayout = seatLayout;
+
+
+        public int CountOccupiedSeats()
+            => string.Join('\n', seatLayout)
+                .Count(seat => seat == '#');
+
+        public SeatLayout NextRound(int peopleTolerance, IAdjacentSeatsFinder adjacentSeatsFinder)
         {
             var nextRoundSeatLayout = new string[seatLayout.Length];
             for (var rowIndex = 0; rowIndex < seatLayout.Length; rowIndex++)
@@ -96,7 +115,10 @@ namespace AdventOfCode.Day11
                 for (var columnIndex = 0; columnIndex < seatRow.Length; columnIndex++)
                 {
                     var seat = seatRow[columnIndex];
-                    var adjacentSeats = GetAdjacentSeatsDescriptionForSeat(rowIndex, columnIndex);
+                    var adjacentSeats = adjacentSeatsFinder.GetAdjacentSeatsDescriptionForSeat(
+                        seatLayout,
+                        rowIndex,
+                        columnIndex);
                     var newSeat = seat switch
                     {
                         'L' when adjacentSeats.All(s => s != '#') => '#',
