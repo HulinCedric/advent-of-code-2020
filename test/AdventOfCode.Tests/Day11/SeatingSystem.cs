@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,38 +35,42 @@ namespace AdventOfCode.Day11
 
     public class SeatLayout
     {
-        private readonly int maxColumnIndex;
-        private readonly int maxRowIndex;
-        private readonly int minColumnIndex = 0;
-        private readonly int minRowIndex = 0;
+        private readonly int layoutMaxColumnIndex;
+        private readonly int layoutMaxRowIndex;
+        private readonly int layoutMinColumnIndex = 0;
+        private readonly int layoutMinRowIndex = 0;
         private readonly string[] seatLayout;
 
         public SeatLayout(string[] seatLayout)
         {
             this.seatLayout = seatLayout;
-            maxRowIndex = seatLayout.Length - 1;
-            maxColumnIndex = seatLayout.First().Length - 1;
+            layoutMaxRowIndex = seatLayout.Length - 1;
+            layoutMaxColumnIndex = seatLayout.First().Length - 1;
         }
 
         public int CountOccupiedSeats()
             => string.Join('\n', seatLayout)
                 .Count(seat => seat == '#');
 
-        private IEnumerable<char> GetAdjacentSeatsDescription(int rowIndex, int columnIndex)
+        private IEnumerable<char> GetAdjacentSeatsDescriptionForSeat(
+            int centralSeatRowIndex,
+            int centralSeatColumnIndex)
         {
-            for (var i = rowIndex - 1; i <= rowIndex + 1; i++)
-            for (var j = columnIndex - 1; j <= columnIndex + 1; j++)
-                if (i >= minRowIndex &&
-                    i <= maxRowIndex &&
-                    j >= minColumnIndex &&
-                    j <= maxColumnIndex &&
-                    !(i == rowIndex && j == columnIndex))
-                    yield return seatLayout[i][j];
+            for (var seatRowIndex = centralSeatRowIndex - 1; seatRowIndex <= centralSeatRowIndex + 1; seatRowIndex++)
+            for (var seatColumnIndex = centralSeatColumnIndex - 1;
+                seatColumnIndex <= centralSeatColumnIndex + 1;
+                seatColumnIndex++)
+                if (seatRowIndex >= layoutMinRowIndex &&
+                    seatRowIndex <= layoutMaxRowIndex &&
+                    seatColumnIndex >= layoutMinColumnIndex &&
+                    seatColumnIndex <= layoutMaxColumnIndex &&
+                    !(seatRowIndex == centralSeatRowIndex && seatColumnIndex == centralSeatColumnIndex))
+                    yield return seatLayout[seatRowIndex][seatColumnIndex];
         }
 
         public SeatLayout NextRound()
         {
-            var simulation = new string[seatLayout.Length];
+            var nextRoundSeatLayout = new string[seatLayout.Length];
             for (var rowIndex = 0; rowIndex < seatLayout.Length; rowIndex++)
             {
                 var seatRow = seatLayout[rowIndex];
@@ -73,7 +78,7 @@ namespace AdventOfCode.Day11
                 for (var columnIndex = 0; columnIndex < seatRow.Length; columnIndex++)
                 {
                     var seat = seatRow[columnIndex];
-                    var adjacentSeats = GetAdjacentSeatsDescription(rowIndex, columnIndex);
+                    var adjacentSeats = GetAdjacentSeatsDescriptionForSeat(rowIndex, columnIndex);
                     var newSeat = seat switch
                     {
                         'L' when adjacentSeats.All(s => s != '#') => '#',
@@ -84,17 +89,20 @@ namespace AdventOfCode.Day11
                     seatRowBuilder.Append(newSeat);
                 }
 
-                simulation[rowIndex] = seatRowBuilder.ToString();
+                nextRoundSeatLayout[rowIndex] = seatRowBuilder.ToString();
             }
 
-            return new SeatLayout(simulation);
+            return new SeatLayout(nextRoundSeatLayout);
         }
 
         private bool Equals(SeatLayout other)
             => seatLayout.Zip(other.seatLayout)
                 .All(
                     seatsElementsToCompare
-                        => Equals(seatsElementsToCompare.First, seatsElementsToCompare.Second));
+                        => string.Equals(
+                            seatsElementsToCompare.First,
+                            seatsElementsToCompare.Second,
+                            StringComparison.OrdinalIgnoreCase));
 
         public override bool Equals(object obj)
             => obj?.GetType() == GetType() && Equals((SeatLayout) obj);
