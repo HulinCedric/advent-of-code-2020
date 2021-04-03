@@ -18,6 +18,26 @@ namespace AdventOfCode.Day11
             // Given
             const int peopleTolerance = 4;
             var seatLayout = SeatLayoutParser.Parse(seatLayoutDescription);
+
+            // When
+            var allocationSimulation = new SeatAllocationSimulator(peopleTolerance).SimulateAllocation(seatLayout);
+            var actualSeatsOccupiedCount = allocationSimulation.CountOccupiedSeats();
+
+            // Then
+            Assert.Equal(expectedSeatsOccupiedCount, actualSeatsOccupiedCount);
+        }
+    }
+
+    public class SeatAllocationSimulator
+    {
+        private readonly int peopleTolerance;
+
+        public SeatAllocationSimulator(int peopleTolerance)
+            => this.peopleTolerance = peopleTolerance;
+
+        public SeatLayout SimulateAllocation(SeatLayout initialSeatLayout)
+        {
+            var seatLayout = initialSeatLayout;
             var nextSeatLayoutSimulation = seatLayout;
 
             // When
@@ -27,10 +47,7 @@ namespace AdventOfCode.Day11
                 nextSeatLayoutSimulation = seatLayout.NextRound(peopleTolerance);
             } while (nextSeatLayoutSimulation != seatLayout);
 
-            var actualSeatsOccupiedCount = seatLayout.CountOccupiedSeats();
-
-            // Then
-            Assert.Equal(expectedSeatsOccupiedCount, actualSeatsOccupiedCount);
+            return seatLayout;
         }
     }
 
