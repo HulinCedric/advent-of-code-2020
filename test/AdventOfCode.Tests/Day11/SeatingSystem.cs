@@ -9,15 +9,17 @@ namespace AdventOfCode.Day11
     public class SeatingSystem
     {
         [Theory]
-        [InlineData(SeatLayoutDescription.Example, 37)]
-        [InputFileData("Day11/input.txt", 2277)]
+        [InlineData(SeatLayoutDescription.Example, 4, typeof(DirectAdjacentSeatsFinder), 37)]
+        [InputFileData("Day11/input.txt", 4, typeof(DirectAdjacentSeatsFinder), 2277)]
         public void Count_seats_occupied_when_people_stop_moving(
             string seatLayoutDescription,
+            int peopleTolerance,
+            Type adjacentSeatsFinderStrategyType,
             int expectedSeatsOccupiedCount)
         {
             // Given
-            const int peopleTolerance = 4;
-            var adjacentSeatsFinderStrategy = new DirectAdjacentSeatsFinder();
+            var adjacentSeatsFinderStrategy =
+                Activator.CreateInstance(adjacentSeatsFinderStrategyType) as IAdjacentSeatsFinder;
             var seatLayout = SeatLayoutParser.Parse(seatLayoutDescription);
 
             // When
