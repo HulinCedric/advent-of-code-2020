@@ -9,8 +9,10 @@ namespace AdventOfCode.Day11
     public class SeatingSystem
     {
         [Theory]
-        [InlineData(SeatLayoutDescription.Example, 4, typeof(DirectAdjacentSeatsFinder), 37)]
-        [InputFileData("Day11/input.txt", 4, typeof(DirectAdjacentSeatsFinder), 2277)]
+        [InlineData(SeatLayoutDescription.Example, 4, typeof(ImmediatelyAdjacentSeatsFinder), 37)]
+        [InlineData(SeatLayoutDescription.Example, 5, typeof(FirstEncounteredAdjacentSeatsFinder), 26)]
+        [InputFileData("Day11/input.txt", 4, typeof(ImmediatelyAdjacentSeatsFinder), 2277)]
+        [InputFileData("Day11/input.txt", 5, typeof(FirstEncounteredAdjacentSeatsFinder), 2066)]
         public void Count_seats_occupied_when_people_stop_moving(
             string seatLayoutDescription,
             int peopleTolerance,
@@ -70,7 +72,7 @@ namespace AdventOfCode.Day11
             int centralSeatColumnIndex);
     }
 
-    internal class DirectAdjacentSeatsFinder : IAdjacentSeatsFinder
+    internal class ImmediatelyAdjacentSeatsFinder : IAdjacentSeatsFinder
     {
         public IEnumerable<char> GetAdjacentSeatsDescriptionForSeat(
             string[] seatLayoutDescription,
@@ -92,6 +94,74 @@ namespace AdventOfCode.Day11
                     seatColumnIndex <= layoutMaxColumnIndex &&
                     !(seatRowIndex == centralSeatRowIndex && seatColumnIndex == centralSeatColumnIndex))
                     yield return seatLayoutDescription[seatRowIndex][seatColumnIndex];
+        }
+    }
+
+    internal static class Directions
+    {
+        private static readonly (int, int) Up = (-1, 0);
+        private static readonly (int, int) Down = (1, 0);
+        private static readonly (int, int) Left = (0, -1);
+        private static readonly (int, int) Right = (0, 1);
+        private static readonly (int, int) UpRight = (-1, 1);
+        private static readonly (int, int) DownRight = (1, 1);
+        private static readonly (int, int) UpLeft = (-1, -1);
+        private static readonly (int, int) DownLeft = (1, -1);
+
+        internal static readonly (int, int)[] All =
+        {
+            Up, Down, Left, Right, UpRight, DownRight, UpLeft, DownLeft
+        };
+    }
+
+    internal class FirstEncounteredAdjacentSeatsFinder : IAdjacentSeatsFinder
+    {
+        public IEnumerable<char> GetAdjacentSeatsDescriptionForSeat(
+            string[] seatLayoutDescription,
+            int centralSeatRowIndex,
+            int centralSeatColumnIndex)
+            => from direction in Directions.All
+                select FirstSeatInDirection(
+                    seatLayoutDescription,
+                    centralSeatRowIndex,
+                    centralSeatColumnIndex,
+                    direction)
+                into potentialSeat
+                where potentialSeat != null
+                select potentialSeat.Value;
+
+        private static char? FirstSeatInDirection(
+            IReadOnlyList<string> seatLayoutDescription,
+            int centralSeatRowIndex,
+            int centralSeatColumnIndex,
+            (int rowDirection, int columnDirection) direction)
+
+        {
+            var layoutMaxColumnIndex = seatLayoutDescription[0].Length - 1;
+            var layoutMaxRowIndex = seatLayoutDescription.Count - 1;
+            var layoutMinColumnIndex = 0;
+            var layoutMinRowIndex = 0;
+
+            var currentSeatCoords = (rowIndex: centralSeatRowIndex, columnIndex: centralSeatColumnIndex);
+            do
+            {
+                currentSeatCoords = (
+                    currentSeatCoords.rowIndex + direction.rowDirection,
+                    currentSeatCoords.columnIndex + direction.columnDirection);
+
+                if (currentSeatCoords.rowIndex < layoutMinRowIndex ||
+                    currentSeatCoords.rowIndex > layoutMaxRowIndex ||
+                    currentSeatCoords.columnIndex < layoutMinColumnIndex ||
+                    currentSeatCoords.columnIndex > layoutMaxColumnIndex)
+                    break;
+
+                var currentSeatDescription =
+                    seatLayoutDescription[currentSeatCoords.rowIndex][currentSeatCoords.columnIndex];
+                if (currentSeatDescription != '.')
+                    return currentSeatDescription;
+            } while (true);
+
+            return null;
         }
     }
 
