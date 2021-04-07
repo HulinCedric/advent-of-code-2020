@@ -45,7 +45,7 @@ namespace AdventOfCode.Day12
                 .Split("\n")
                 .Select(
                     navigationInstructionDescription =>
-                        new NavigationInstruction(
+                        NavigationInstructionBase.CreateInstance(
                             ExtractAction(navigationInstructionDescription),
                             ExtractValue(navigationInstructionDescription)));
 
@@ -56,15 +56,30 @@ namespace AdventOfCode.Day12
             => navigationInstructionDescription[0];
     }
 
-    public record NavigationInstruction
+    public abstract record NavigationInstructionBase
     {
-        public NavigationInstruction(char action, int value)
+        protected NavigationInstructionBase(char action, int value)
         {
             Action = action;
             Value = value;
         }
 
-        public char Action { get; }
-        public int Value { get; }
+        protected char Action { get; }
+        protected int Value { get; }
+
+        public static NavigationInstruction CreateInstance(char action, int value)
+            => action switch
+            {
+                _ => new NavigationInstruction(action, value)
+            };
+    }
+
+    public record NavigationInstruction
+        : NavigationInstructionBase
+    {
+        public NavigationInstruction(char action, int value)
+            : base(action, value)
+        {
+        }
     }
 }
