@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -45,7 +46,7 @@ namespace AdventOfCode.Day12
                 .Split("\n")
                 .Select(
                     navigationInstructionDescription =>
-                        NavigationInstructionBase.CreateInstance(
+                        NavigationInstruction.CreateInstance(
                             ExtractAction(navigationInstructionDescription),
                             ExtractValue(navigationInstructionDescription)));
 
@@ -56,28 +57,81 @@ namespace AdventOfCode.Day12
             => navigationInstructionDescription[0];
     }
 
-    public abstract record NavigationInstructionBase
+    public abstract record NavigationInstruction(char Action, int Value)
     {
-        protected NavigationInstructionBase(char action, int value)
-        {
-            Action = action;
-            Value = value;
-        }
-
-        protected char Action { get; }
-        protected int Value { get; }
-
         public static NavigationInstruction CreateInstance(char action, int value)
             => action switch
             {
-                _ => new NavigationInstruction(action, value)
+                'N' => new NorthNavigationInstruction(action, value),
+                'S' => new SouthNavigationInstruction(action, value),
+                'E' => new EastNavigationInstruction(action, value),
+                'W' => new WestNavigationInstruction(action, value),
+                'L' => new LeftNavigationInstruction(action, value),
+                'R' => new RightNavigationInstruction(action, value),
+                'F' => new ForwardNavigationInstruction(action, value),
+                _ => throw new ArgumentOutOfRangeException(nameof(action), action, null)
             };
     }
 
-    public record NavigationInstruction
-        : NavigationInstructionBase
+    public record ForwardNavigationInstruction
+        : NavigationInstruction
     {
-        public NavigationInstruction(char action, int value)
+        public ForwardNavigationInstruction(char Action, int Value)
+            : base(Action, Value)
+        {
+        }
+    }
+
+    public record RightNavigationInstruction
+        : NavigationInstruction
+    {
+        public RightNavigationInstruction(char Action, int Value)
+            : base(Action, Value)
+        {
+        }
+    }
+
+    public record LeftNavigationInstruction
+        : NavigationInstruction
+    {
+        public LeftNavigationInstruction(char action, int value)
+            : base(action, value)
+        {
+        }
+    }
+
+    public record WestNavigationInstruction
+        : NavigationInstruction
+    {
+        public WestNavigationInstruction(char action, int value)
+            : base(action, value)
+        {
+        }
+    }
+
+    public record EastNavigationInstruction
+        : NavigationInstruction
+    {
+        public EastNavigationInstruction(char action, int value)
+            : base(action, value)
+
+        {
+        }
+    }
+
+    public record NorthNavigationInstruction
+        : NavigationInstruction
+    {
+        public NorthNavigationInstruction(char action, int value)
+            : base(action, value)
+        {
+        }
+    }
+
+    public record SouthNavigationInstruction
+        : NavigationInstruction
+    {
+        public SouthNavigationInstruction(char action, int value)
             : base(action, value)
         {
         }
