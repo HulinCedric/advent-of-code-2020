@@ -31,12 +31,31 @@ namespace AdventOfCode.Day12
 
     public class Ship
     {
+        private Direction direction;
+        private int lattitude;
+        private int longitude;
+        
+        public Ship()
+        {
+            direction = Direction.East;
+            longitude = 0;
+            lattitude = 0;
+        }
+
         public void Navigate(NavigationInstruction navigationInstruction)
         {
         }
 
         public int GetManhattanDistance()
             => 25;
+    }
+
+    public enum Direction
+    {
+        North,
+        East,
+        South,
+        West
     }
 
     public static class NavigationInstructionsParser
