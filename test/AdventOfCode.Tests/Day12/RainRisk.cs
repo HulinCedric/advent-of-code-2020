@@ -73,23 +73,23 @@ namespace AdventOfCode.Day12
         }
 
         public void TurnRight(int degree)
-            => direction = degree switch
+            => direction = (degree, direction) switch
             {
-                90 when direction == Direction.East => Direction.South,
-                180 when direction == Direction.East => Direction.West,
-                270 when direction == Direction.East => Direction.North,
+                (90, Direction.East) => Direction.South,
+                (180, Direction.East) => Direction.West,
+                (270, Direction.East) => Direction.North,
 
-                90 when direction == Direction.South => Direction.West,
-                180 when direction == Direction.South => Direction.North,
-                270 when direction == Direction.South => Direction.East,
+                (90, Direction.South) => Direction.West,
+                (180, Direction.South) => Direction.North,
+                (270, Direction.South) => Direction.East,
 
-                90 when direction == Direction.West => Direction.North,
-                180 when direction == Direction.West => Direction.East,
-                270 when direction == Direction.West => Direction.South,
+                (90, Direction.West) => Direction.North,
+                (180, Direction.West) => Direction.East,
+                (270, Direction.West) => Direction.South,
 
-                90 when direction == Direction.North => Direction.East,
-                180 when direction == Direction.North => Direction.South,
-                270 when direction == Direction.North => Direction.West,
+                (90, Direction.North) => Direction.East,
+                (180, Direction.North) => Direction.South,
+                (270, Direction.North) => Direction.West,
 
                 _ => direction
             };
