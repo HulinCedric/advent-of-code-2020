@@ -16,7 +16,7 @@ namespace AdventOfCode.Day12
         {
             // Given
             var navigationInstructions = NavigationInstructionsParser.Parse(navigationInstructionsDescription);
-            var ship = new Ship(Direction.East, 0, 0);
+            var ship = new ShipWithDirection(Direction.East, 0, 0);
 
             // When
             foreach (var navigationInstruction in navigationInstructions)
@@ -29,25 +29,21 @@ namespace AdventOfCode.Day12
         }
     }
 
-    public class Ship
+    public abstract class Ship
     {
-        private Direction direction;
-        private Position position;
+        protected Ship(int x, int y)
+            => Position = new Position(x, y);
 
-        public Ship(Direction direction, int x, int y)
-        {
-            this.direction = direction;
-            position = new Position(x, y);
-        }
+        protected Position Position { get; set; }
 
         public void Navigate(NavigationInstruction navigationInstruction)
             => navigationInstruction.Execute(this);
 
         public int GetManhattanDistance()
-            => Math.Abs(position.X) + Math.Abs(position.Y);
+            => Math.Abs(Position.X) + Math.Abs(Position.Y);
 
         public void MoveForward(int unit)
-            => Move(direction, unit);
+            => Move(unit);
 
         public void MoveWest(int value)
             => Move(Direction.West, value);
@@ -67,10 +63,29 @@ namespace AdventOfCode.Day12
         public void TurnLeft(int degree)
             => Turn(360 - degree);
 
-        private void Move(Direction instructionDirection, int unit)
-            => position = GetNewPosition(position, instructionDirection, unit);
+        protected abstract void Move(int unit);
+        protected abstract void Move(Direction instructionDirection, int unit);
+        protected abstract void Turn(int degree);
+    }
 
-        private void Turn(int degree)
+    public record Position(int X, int Y);
+
+    public class ShipWithDirection
+        : Ship
+    {
+        private Direction direction;
+
+        public ShipWithDirection(Direction direction, int x, int y)
+            : base(x, y)
+            => this.direction = direction;
+
+        protected override void Move(int unit)
+            => Move(direction, unit);
+
+        protected override void Move(Direction instructionDirection, int unit)
+            => Position = GetNewPosition(Position, instructionDirection, unit);
+
+        protected override void Turn(int degree)
             => direction = GetNewDirection(direction, degree);
 
         private static Position GetNewPosition(
@@ -119,8 +134,6 @@ namespace AdventOfCode.Day12
 
                 _ => initialDirection
             };
-
-        public record Position(int X, int Y);
     }
 
     public enum Direction
