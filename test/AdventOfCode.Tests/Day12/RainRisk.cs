@@ -16,7 +16,7 @@ namespace AdventOfCode.Day12
         {
             // Given
             var navigationInstructions = NavigationInstructionsParser.Parse(navigationInstructionsDescription);
-            var ship = new Ship();
+            var ship = new Ship(Direction.East, 0, 0);
 
             // When
             foreach (var navigationInstruction in navigationInstructions)
@@ -32,48 +32,74 @@ namespace AdventOfCode.Day12
     public class Ship
     {
         private Direction direction;
-        private int x;
-        private int y;
+        private Position position;
 
-        public Ship()
+        public Ship(Direction direction, int x, int y)
         {
-            direction = Direction.East;
-            y = 0;
-            x = 0;
+            this.direction = direction;
+            position = new Position(x, y);
         }
 
         public void Navigate(NavigationInstruction navigationInstruction)
             => navigationInstruction.Execute(this);
 
         public int GetManhattanDistance()
-            => Math.Abs(x) + Math.Abs(y);
+            => Math.Abs(position.X) + Math.Abs(position.Y);
 
         public void MoveForward(int unit)
-            => MoveTo(direction, unit);
+            => Move(direction, unit);
 
-        public void MoveTo(Direction instructionDirection, int unit)
-        {
-            switch (instructionDirection)
-            {
-                case Direction.North:
-                    x += unit;
-                    break;
-                case Direction.East:
-                    y += unit;
-                    break;
-                case Direction.South:
-                    x -= unit;
-                    break;
-                case Direction.West:
-                    y -= unit;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+        public void MoveWest(int value)
+            => Move(Direction.West, value);
+
+        public void MoveEst(int value)
+            => Move(Direction.East, value);
+
+        public void MoveNorth(int value)
+            => Move(Direction.North, value);
+
+        public void MoveSouth(int value)
+            => Move(Direction.South, value);
 
         public void TurnRight(int degree)
-            => direction = (degree, direction) switch
+            => Turn(degree);
+
+        public void TurnLeft(int degree)
+            => Turn(360 - degree);
+
+        private void Move(Direction instructionDirection, int unit)
+            => position = GetNewPosition(position, instructionDirection, unit);
+
+        private void Turn(int degree)
+            => direction = GetNewDirection(direction, degree);
+
+        private static Position GetNewPosition(
+            Position initialPosition,
+            Direction instructionDirection,
+            int unit)
+            => instructionDirection switch
+            {
+                Direction.North => initialPosition with
+                {
+                    X = initialPosition.X + unit
+                },
+                Direction.East => initialPosition with
+                {
+                    Y = initialPosition.Y + unit
+                },
+                Direction.South => initialPosition with
+                {
+                    X = initialPosition.X - unit
+                },
+                Direction.West => initialPosition with
+                {
+                    Y = initialPosition.Y - unit
+                },
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+        private static Direction GetNewDirection(Direction initialDirection, int degree)
+            => (degree, initialDirection) switch
             {
                 (90, Direction.East) => Direction.South,
                 (180, Direction.East) => Direction.West,
@@ -91,11 +117,10 @@ namespace AdventOfCode.Day12
                 (180, Direction.North) => Direction.South,
                 (270, Direction.North) => Direction.West,
 
-                _ => direction
+                _ => initialDirection
             };
 
-        public void TurnLeft(int degree)
-            => TurnRight(360 - degree);
+        public record Position(int X, int Y);
     }
 
     public enum Direction
@@ -129,8 +154,7 @@ namespace AdventOfCode.Day12
     public abstract record NavigationInstruction(char Action, int Value)
     {
         public static NavigationInstruction CreateInstance(char action, int value)
-        {
-            return action switch
+            => action switch
             {
                 'N' => new NorthNavigationInstruction(action, value),
                 'S' => new SouthNavigationInstruction(action, value),
@@ -141,7 +165,6 @@ namespace AdventOfCode.Day12
                 'F' => new ForwardNavigationInstruction(action, value),
                 _ => throw new ArgumentOutOfRangeException(nameof(action), action, null)
             };
-        }
 
         public abstract void Execute(Ship ship);
     }
@@ -191,7 +214,7 @@ namespace AdventOfCode.Day12
         }
 
         public override void Execute(Ship ship)
-            => ship.MoveTo(Direction.West, Value);
+            => ship.MoveWest(Value);
     }
 
     public record EastNavigationInstruction
@@ -204,7 +227,7 @@ namespace AdventOfCode.Day12
         }
 
         public override void Execute(Ship ship)
-            => ship.MoveTo(Direction.East, Value);
+            => ship.MoveEst(Value);
     }
 
     public record NorthNavigationInstruction
@@ -216,7 +239,7 @@ namespace AdventOfCode.Day12
         }
 
         public override void Execute(Ship ship)
-            => ship.MoveTo(Direction.North, Value);
+            => ship.MoveNorth(Value);
     }
 
     public record SouthNavigationInstruction
@@ -228,6 +251,6 @@ namespace AdventOfCode.Day12
         }
 
         public override void Execute(Ship ship)
-            => ship.MoveTo(Direction.South, Value);
+            => ship.MoveSouth(Value);
     }
 }
