@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -15,18 +16,18 @@ namespace AdventOfCode.Day13
             int expectedWaitingMinutes)
         {
             // Given
-            Notes notes = NotesParser.Parse(notesDescription);
-            int earliestDepartureTimestamp = notes.EarliestDepartureTimestamp;
-            IEnumerable<Bus> buses = notes.Buses;
+            var notes = NotesParser.Parse(notesDescription);
+            var earliestDepartureTimestamp = notes.EarliestDepartureTimestamp;
+            var buses = notes.Buses;
 
             // When
             var earliestBusWithNextDepart = buses
                 .Select(bus => (bus, nextDepart: bus.GetNextDepartAt(earliestDepartureTimestamp)))
                 .OrderBy(busWithNextDepart => busWithNextDepart.nextDepart)
                 .First();
-            int actualEarliestBusId = earliestBusWithNextDepart.bus.Id;
-            int actualWaitingMinutes = earliestBusWithNextDepart.nextDepart - earliestDepartureTimestamp;
-            
+            var actualEarliestBusId = earliestBusWithNextDepart.bus.Id;
+            var actualWaitingMinutes = earliestBusWithNextDepart.nextDepart - earliestDepartureTimestamp;
+
             // Then
             Assert.Equal(expectedEarliestBusId, actualEarliestBusId);
             Assert.Equal(expectedWaitingMinutes, actualWaitingMinutes);
@@ -37,22 +38,37 @@ namespace AdventOfCode.Day13
     {
         public static Notes Parse(string notesDescription)
         {
-            throw new System.NotImplementedException();
+            var notesDescriptionLines = notesDescription.Split("\n");
+            var earliestDepartureTimestamp = int.Parse(notesDescriptionLines[0]);
+            var buses = notesDescriptionLines[1]
+                .Split(",")
+                .Where(busIdDescription => busIdDescription != "x")
+                .Select(int.Parse)
+                .Select(busId => new Bus(busId))
+                .ToList();
+            return new Notes(earliestDepartureTimestamp, buses);
         }
     }
 
     public class Bus
     {
-        public int GetNextDepartAt(int fromTimestamp)
-        {
-            throw new System.NotImplementedException();
-        }
+        public Bus(int id)
+            => Id = id;
 
         public int Id { get; }
+
+        public int GetNextDepartAt(int fromTimestamp)
+            => throw new NotImplementedException();
     }
 
     public class Notes
     {
+        public Notes(int earliestDepartureTimestamp, List<Bus> buses)
+        {
+            EarliestDepartureTimestamp = earliestDepartureTimestamp;
+            Buses = buses;
+        }
+
         public int EarliestDepartureTimestamp { get; }
         public IEnumerable<Bus> Buses { get; }
     }
