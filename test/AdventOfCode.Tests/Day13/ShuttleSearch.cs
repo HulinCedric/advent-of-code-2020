@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -7,9 +6,9 @@ namespace AdventOfCode.Day13
 {
     public class ShuttleSearch
     {
-        // [Theory]
-        // [InlineData(NotesDescription.Example, 59, 5)]
-        // [InputFileData("Day13/input.txt", ?, ?)]
+        [Theory]
+        [InlineData(NotesDescription.Example, 59, 5)]
+        [InputFileData("Day13/input.txt", 19, 9)]
         public void Determine_the_earliest_bus_id_and_the_waiting_minutes_to_take_it(
             string notesDescription,
             int expectedEarliestBusId,
@@ -17,16 +16,16 @@ namespace AdventOfCode.Day13
         {
             // Given
             var notes = NotesParser.Parse(notesDescription);
-            var earliestDepartureTimestamp = notes.EarliestDepartureTimestamp;
+            var departureTimestamp = notes.EarliestDepartureTimestamp;
             var buses = notes.Buses;
 
             // When
-            var earliestBusWithNextDepart = buses
-                .Select(bus => (bus, nextDepart: bus.GetNextDepartAt(earliestDepartureTimestamp)))
-                .OrderBy(busWithNextDepart => busWithNextDepart.nextDepart)
+            var (earliestBus, nextDepartTimestamp) = buses
+                .Select(bus => (bus, nextDepartTimestamp: bus.GetNextDepartTimestamp(departureTimestamp)))
+                .OrderBy(busWithNextDepart => busWithNextDepart.nextDepartTimestamp)
                 .First();
-            var actualEarliestBusId = earliestBusWithNextDepart.bus.Id;
-            var actualWaitingMinutes = earliestBusWithNextDepart.nextDepart - earliestDepartureTimestamp;
+            var actualEarliestBusId = earliestBus.Id;
+            var actualWaitingMinutes = nextDepartTimestamp - departureTimestamp;
 
             // Then
             Assert.Equal(expectedEarliestBusId, actualEarliestBusId);
@@ -57,8 +56,8 @@ namespace AdventOfCode.Day13
 
         public int Id { get; }
 
-        public int GetNextDepartAt(int fromTimestamp)
-            => throw new NotImplementedException();
+        public int GetNextDepartTimestamp(int timestamp)
+            => Id * (timestamp / Id + 1);
     }
 
     public class Notes
