@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -31,44 +30,5 @@ namespace AdventOfCode.Day13
             Assert.Equal(expectedEarliestBusId, actualEarliestBusId);
             Assert.Equal(expectedWaitingMinutes, actualWaitingMinutes);
         }
-    }
-
-    public static class NotesParser
-    {
-        public static Notes Parse(string notesDescription)
-        {
-            var notesDescriptionLines = notesDescription.Split("\n");
-            var earliestDepartureTimestamp = int.Parse(notesDescriptionLines[0]);
-            var buses = notesDescriptionLines[1]
-                .Split(",")
-                .Where(busIdDescription => busIdDescription != "x")
-                .Select(int.Parse)
-                .Select(busId => new Bus(busId))
-                .ToList();
-            return new Notes(earliestDepartureTimestamp, buses);
-        }
-    }
-
-    public class Bus
-    {
-        public Bus(int id)
-            => Id = id;
-
-        public int Id { get; }
-
-        public int GetNextDepartTimestamp(int timestamp)
-            => Id * (timestamp / Id + 1);
-    }
-
-    public class Notes
-    {
-        public Notes(int earliestDepartureTimestamp, List<Bus> buses)
-        {
-            EarliestDepartureTimestamp = earliestDepartureTimestamp;
-            Buses = buses;
-        }
-
-        public int EarliestDepartureTimestamp { get; }
-        public IEnumerable<Bus> Buses { get; }
     }
 }
