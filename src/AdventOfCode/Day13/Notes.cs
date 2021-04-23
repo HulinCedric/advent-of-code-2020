@@ -10,8 +10,7 @@ namespace AdventOfCode.Day13
             Buses = buses;
         }
 
-        public IEnumerable<Bus> Buses { get; }
-
         public int EarliestDepartureTimestamp { get; }
+        public IEnumerable<Bus> Buses { get; }
     }
 }

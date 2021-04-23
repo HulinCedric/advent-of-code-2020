@@ -20,6 +20,7 @@ namespace AdventOfCode.Day13
 
             // When
             var (earliestBus, nextDepartTimestamp) = buses
+                .OfType<InServiceBus>()
                 .Select(bus => (bus, nextDepartTimestamp: bus.GetNextDepartTimestamp(departureTimestamp)))
                 .OrderBy(busWithNextDepart => busWithNextDepart.nextDepartTimestamp)
                 .First();

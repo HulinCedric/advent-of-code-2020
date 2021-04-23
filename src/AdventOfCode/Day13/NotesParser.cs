@@ -10,9 +10,12 @@ namespace AdventOfCode.Day13
             var earliestDepartureTimestamp = int.Parse(notesDescriptionLines[0]);
             var buses = notesDescriptionLines[1]
                 .Split(",")
-                .Where(busIdDescription => busIdDescription != "x")
-                .Select(int.Parse)
-                .Select(busId => new Bus(busId))
+                // .Where(busIdDescription => busIdDescription != "x")
+                .Select<string, Bus>(
+                    busIdDescription =>
+                        busIdDescription == "x" ?
+                            new OutOfServiceBus() :
+                            new InServiceBus(int.Parse(busIdDescription)))
                 .ToList();
             return new Notes(earliestDepartureTimestamp, buses);
         }
