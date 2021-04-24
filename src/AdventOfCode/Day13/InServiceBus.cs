@@ -13,5 +13,18 @@ namespace AdventOfCode.Day13
 
         public long GetNextDepartTimestamp(long timestamp)
             => Id * (timestamp / Id + 1);
+
+        public long GetCommonDepartureTimestamp(int busPosition, long timestamp, long increment)
+        {
+            while (!IsDepartureTimestamp(timestamp, busPosition))
+                timestamp += increment;
+            return timestamp;
+        }
+
+        private bool IsDepartureTimestamp(long timestamp, int busPosition)
+        {
+            var modValue = Id - busPosition % Id;
+            return timestamp % Id == modValue;
+        }
     }
 }
