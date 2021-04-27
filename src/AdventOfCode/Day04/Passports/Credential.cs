@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using AdventOfCode.Day04.PassportFields;
 
-namespace AdventOfCode.Day04
+namespace AdventOfCode.Day04.Passports
 {
     public class Credential : AbstractPassport
     {

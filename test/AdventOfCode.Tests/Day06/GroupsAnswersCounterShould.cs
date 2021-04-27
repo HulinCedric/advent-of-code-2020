@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace AdventOfCode.Day06.Tests
+namespace AdventOfCode.Day06
 {
 
     public class GroupsAnswersCounterShould

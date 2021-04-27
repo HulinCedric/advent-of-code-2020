@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace AdventOfCode.Day04
+namespace AdventOfCode.Day04.PassportFields
 {
     public class HeightInInchPassportField
         : HeightPassportField

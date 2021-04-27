@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace AdventOfCode.Day04.Tests
+namespace AdventOfCode.Day04.PassportFields
 {
     public class PassportFieldFactoryShould
     {

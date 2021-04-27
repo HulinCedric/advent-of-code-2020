@@ -1,6 +1,7 @@
+using AdventOfCode.Day04.Inputs;
 using Xunit;
 
-namespace AdventOfCode.Day04.Tests
+namespace AdventOfCode.Day04.Passports
 {
     public class PassportShould
     {

@@ -1,7 +1,6 @@
-using AdventOfCode.Day08.Programs;
 using Xunit;
 
-namespace AdventOfCode.Day08
+namespace AdventOfCode.Day08.Programs
 {
     public class ProgramParserShould
     {

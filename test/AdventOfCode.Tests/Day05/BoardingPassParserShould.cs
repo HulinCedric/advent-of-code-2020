@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace AdventOfCode.Day05.Tests
+namespace AdventOfCode.Day05
 {
 
     public class BoardingPassParserShould

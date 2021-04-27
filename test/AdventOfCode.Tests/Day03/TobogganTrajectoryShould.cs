@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace AdventOfCode.Day03.Tests
+namespace AdventOfCode.Day03
 {
     public class TobogganTrajectoryShould
     {

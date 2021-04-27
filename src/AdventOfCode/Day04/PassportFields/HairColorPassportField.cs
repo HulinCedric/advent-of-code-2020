@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace AdventOfCode.Day04
+namespace AdventOfCode.Day04.PassportFields
 {
     public class HairColorPassportField
         : PassportField

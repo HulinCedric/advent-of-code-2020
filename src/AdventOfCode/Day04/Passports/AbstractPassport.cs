@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AdventOfCode.Day04.PassportFields;
 
-namespace AdventOfCode.Day04
+namespace AdventOfCode.Day04.Passports
 {
     public abstract class AbstractPassport
     {

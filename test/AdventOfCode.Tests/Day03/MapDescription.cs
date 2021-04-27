@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace AdventOfCode.Day03.Tests
+namespace AdventOfCode.Day03
 {
     public static class MapDescription
     {

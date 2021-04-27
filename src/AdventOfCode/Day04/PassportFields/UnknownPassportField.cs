@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Day04
+﻿namespace AdventOfCode.Day04.PassportFields
 {
     public class UnknownPassportField
         : PassportField

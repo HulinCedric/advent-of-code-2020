@@ -1,7 +1,7 @@
 using System.Linq;
 using Xunit;
 
-namespace AdventOfCode.Day07.Tests
+namespace AdventOfCode.Day07
 {
     public class BagContentsRulesParserShould
     {

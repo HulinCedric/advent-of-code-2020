@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace AdventOfCode.Day01.Tests
+namespace AdventOfCode.Day01
 {
     public class ReportRepairShould
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace AdventOfCode.Day04.Tests
+namespace AdventOfCode.Day04.Inputs
 {
     public static class BatchFileDescription
     {

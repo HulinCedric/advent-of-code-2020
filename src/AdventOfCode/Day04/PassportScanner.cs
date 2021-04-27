@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using AdventOfCode.Day04.Passports;
 
 namespace AdventOfCode.Day04
 {

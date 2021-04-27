@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace AdventOfCode.Day02.Tests
+namespace AdventOfCode.Day02
 {
     public class PasswordFactoryTests
     {
