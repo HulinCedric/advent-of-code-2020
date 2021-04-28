@@ -17,7 +17,7 @@ namespace AdventOfCode.Day02
             this.atMost = atMost;
             this.character = character;
         }
-
+        // refactor: Rename variable to suppress warning 
         public bool Validate(string password)
         {
             var characterCount = ComputeCharacterCount(password);
@@ -26,7 +26,7 @@ namespace AdventOfCode.Day02
 
         private int ComputeCharacterCount(string password)
             => password
-            .GroupBy(character => character)
+            .GroupBy(passwordCharacter => passwordCharacter)
             .Where(groupedCharacters => groupedCharacters.Key == character)
             .Select(c => c.Count())
             .SingleOrDefault();
