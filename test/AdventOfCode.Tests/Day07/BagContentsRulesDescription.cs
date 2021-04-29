@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace AdventOfCode.Day07
+﻿namespace AdventOfCode.Day07
 {
     public static class BagContentsRulesDescription
     {
