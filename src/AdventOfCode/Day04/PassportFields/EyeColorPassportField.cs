@@ -6,7 +6,7 @@ namespace AdventOfCode.Day04.PassportFields
     public class EyeColorPassportField
         : PassportField
     {
-        private static readonly IEnumerable<string> eyeColors = new List<string>
+        private static readonly IEnumerable<string> EyeColors = new List<string>
         {
             "amb",
             "blu",
@@ -22,6 +22,6 @@ namespace AdventOfCode.Day04.PassportFields
         { }
 
         public override bool IsValid()
-            => eyeColors.Any(eyeColor => eyeColor == value);
+            => EyeColors.Any(eyeColor => eyeColor == value);
     }
 }

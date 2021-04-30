@@ -5,8 +5,8 @@ namespace AdventOfCode.Day04.PassportFields
     public class HairColorPassportField
         : PassportField
     {
-        private const string Characters_0_9 = "[0-9]";
-        private const string Characters_a_f = "[a-f]";
+        private const string CharactersFrom0To9 = "[0-9]";
+        private const string CharactersFromaTof = "[a-f]";
         private const int Exactly6 = 6;
         private const string StartWithSharp = "#";
 
@@ -15,7 +15,7 @@ namespace AdventOfCode.Day04.PassportFields
         { }
 
         private string ValidRegexPattern
-            => $"{StartWithSharp}({Characters_0_9}|{Characters_a_f}){{{Exactly6}}}";
+            => $"{StartWithSharp}({CharactersFrom0To9}|{CharactersFromaTof}){{{Exactly6}}}";
 
         public override bool IsValid()
             => Regex.IsMatch(value, ValidRegexPattern);
