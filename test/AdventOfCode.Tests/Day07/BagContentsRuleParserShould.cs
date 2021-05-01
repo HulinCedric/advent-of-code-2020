@@ -28,36 +28,6 @@ namespace AdventOfCode.Day07
 
         [Theory]
         [InlineData(
-            "light red bags contain 1 bright white bag, 2 muted yellow bags.",
-            "light red", 1, "bright white", 2, "muted yellow")]
-        [InlineData(
-            "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
-            "dark orange", 3, "bright white", 4, "muted yellow")]
-        public void Parse_bag_content_rule_hold_two_bag_types(
-            string bagContentsRuleDescription,
-            string expectedBagColor,
-            int firstExpectedHoldBagNumber,
-            string firstExpectedHoldBagColor,
-            int secondExpectedHoldBagNumber,
-            string secondExpectedHoldBagColor)
-        {
-            // When
-            var bagContentsRule = BagContentsRuleParser
-                .Parse(bagContentsRuleDescription);
-
-            //Then
-            Assert.Equal(bagContentsRule.Bag.Color, expectedBagColor);
-            Assert.Collection(bagContentsRule.HoldBagCounts,
-                holdBagCount => Assert.Equal(
-                    new BagCount(firstExpectedHoldBagNumber, new Bag(firstExpectedHoldBagColor)),
-                    holdBagCount),
-                holdBagCount => Assert.Equal(
-                    new BagCount(secondExpectedHoldBagNumber, new Bag(secondExpectedHoldBagColor)),
-                    holdBagCount));
-        }
-
-        [Theory]
-        [InlineData(
             "vibrant indigo bags contain 2 striped purple bags, 4 vibrant green bags, 3 dotted purple bags, 1 vibrant turquoise bag.",
             "vibrant indigo",
             2, "striped purple",
