@@ -7,7 +7,7 @@ namespace AdventOfCode.Day01
     {
         private const int TargetedSum = 2020;
 
-        public static int GetFixedExpenseReportValueWithThreeEntries(string expenseReportDescription) 
+        public static int GetFixedExpenseReportValueWithThreeEntries(string expenseReportDescription)
             =>
             (from first in ParseExpenseReport(expenseReportDescription)
              from second in ParseExpenseReport(expenseReportDescription)
@@ -15,9 +15,9 @@ namespace AdventOfCode.Day01
              where first + second + third == TargetedSum
              select first * second * third)
             .First();
-        
-        public static int GetFixedExpenseReportValueWithTwoEntries(string expenseReportDescription) 
-            => 
+
+        public static int GetFixedExpenseReportValueWithTwoEntries(string expenseReportDescription)
+            =>
             (from first in ParseExpenseReport(expenseReportDescription)
              from second in ParseExpenseReport(expenseReportDescription)
              where first + second == TargetedSum

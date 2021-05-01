@@ -5,7 +5,7 @@ namespace AdventOfCode.Day08.Programs
     public class ProgramParserShould
     {
         [Theory]
-        [InlineData("nop +0\nacc +1\njmp +4\n", new[] {"nop +0", "acc +1", "jmp +4"})]
+        [InlineData("nop +0\nacc +1\njmp +4\n", new[] { "nop +0", "acc +1", "jmp +4" })]
         public void Parse_instructions_split_by_a_new_line(
             string programDescription,
             string[] instructionsDescriptions)

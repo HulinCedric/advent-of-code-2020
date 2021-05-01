@@ -34,7 +34,7 @@ namespace AdventOfCode.Day08.Fixers
                 .DefaultIfEmpty(program)
                 .FirstOrDefault()!;
 
-        
+
         /// <summary>
         /// Fix a program by switching only one instruction.
         /// </summary>

@@ -12,7 +12,7 @@
             "acc +1\n" +
             "jmp -4\n" +
             "acc +6";
-        
+
         public const string TerminableExampleDescription =
             "nop +0\n" +
             "acc +1\n" +

@@ -15,10 +15,10 @@ namespace AdventOfCode.Day06
         public static int SumQuestionsToWhichEveryoneAnsweredYes(string groupsAnswersDescription)
             => groupsAnswersDescription
             .Split("\n\n")
-            .Select(groupAnswers => 
-                (PersonCount: groupAnswers.Where(c => c == '\n').Count() + 1, 
+            .Select(groupAnswers =>
+                (PersonCount: groupAnswers.Where(c => c == '\n').Count() + 1,
                  Answers: groupAnswers.Replace("\n", "")))
-            .Select(groupPersonCountAndAnswers => 
+            .Select(groupPersonCountAndAnswers =>
                 groupPersonCountAndAnswers.Answers
                 .GroupBy(answer => answer)
                 .Where(sameAnswers => sameAnswers.Count() == groupPersonCountAndAnswers.PersonCount)

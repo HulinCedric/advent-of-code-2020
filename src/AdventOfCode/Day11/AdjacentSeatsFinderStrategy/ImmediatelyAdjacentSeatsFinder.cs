@@ -15,15 +15,15 @@ namespace AdventOfCode.Day11.AdjacentSeatsFinderStrategy
             var layoutMinRowIndex = 0;
 
             for (var seatRowIndex = centralSeatRowIndex - 1; seatRowIndex <= centralSeatRowIndex + 1; seatRowIndex++)
-            for (var seatColumnIndex = centralSeatColumnIndex - 1;
-                seatColumnIndex <= centralSeatColumnIndex + 1;
-                seatColumnIndex++)
-                if (seatRowIndex >= layoutMinRowIndex &&
-                    seatRowIndex <= layoutMaxRowIndex &&
-                    seatColumnIndex >= layoutMinColumnIndex &&
-                    seatColumnIndex <= layoutMaxColumnIndex &&
-                    !(seatRowIndex == centralSeatRowIndex && seatColumnIndex == centralSeatColumnIndex))
-                    yield return seatLayoutDescription[seatRowIndex][seatColumnIndex];
+                for (var seatColumnIndex = centralSeatColumnIndex - 1;
+                    seatColumnIndex <= centralSeatColumnIndex + 1;
+                    seatColumnIndex++)
+                    if (seatRowIndex >= layoutMinRowIndex &&
+                        seatRowIndex <= layoutMaxRowIndex &&
+                        seatColumnIndex >= layoutMinColumnIndex &&
+                        seatColumnIndex <= layoutMaxColumnIndex &&
+                        !(seatRowIndex == centralSeatRowIndex && seatColumnIndex == centralSeatColumnIndex))
+                        yield return seatLayoutDescription[seatRowIndex][seatColumnIndex];
         }
     }
 }

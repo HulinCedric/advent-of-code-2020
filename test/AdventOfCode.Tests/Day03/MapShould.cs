@@ -17,7 +17,7 @@ namespace AdventOfCode.Day03
         [InlineData(MapDescription.ExampleDescription, 11, 31, true)]
         public void Give_tree_presence_at(
             string mapDescription,
-            int lineNumber, 
+            int lineNumber,
             int position,
             bool expectedTreePresence)
         {

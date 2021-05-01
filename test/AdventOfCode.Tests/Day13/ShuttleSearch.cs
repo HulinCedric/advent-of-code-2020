@@ -45,7 +45,7 @@ namespace AdventOfCode.Day13
             var buses = notes.Buses.ToList();
 
             // When
-            var actualCommonDepartureTimestamp = buses.Cast<InServiceBus>().Select(bus => (long) bus.Id).First();
+            var actualCommonDepartureTimestamp = buses.Cast<InServiceBus>().Select(bus => (long)bus.Id).First();
             var increment = actualCommonDepartureTimestamp;
             foreach (var (bus, busPosition) in buses.Skip(1).Select((bus, index) => (bus, index + 1)))
                 switch (bus)

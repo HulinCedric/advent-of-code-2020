@@ -5,7 +5,7 @@ namespace AdventOfCode.Day08.Instructions
     public class JumpInstruction : Instruction
     {
         public const string OperationName = "jmp";
-        
+
         public JumpInstruction(int argument) :
             base(argument)
         {

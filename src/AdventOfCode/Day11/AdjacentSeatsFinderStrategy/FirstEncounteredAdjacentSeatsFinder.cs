@@ -10,14 +10,14 @@ namespace AdventOfCode.Day11.AdjacentSeatsFinderStrategy
             int centralSeatRowIndex,
             int centralSeatColumnIndex)
             => from direction in Directions.All
-                select FirstSeatInDirection(
-                    seatLayoutDescription,
-                    centralSeatRowIndex,
-                    centralSeatColumnIndex,
-                    direction)
+               select FirstSeatInDirection(
+                   seatLayoutDescription,
+                   centralSeatRowIndex,
+                   centralSeatColumnIndex,
+                   direction)
                 into potentialSeat
-                where potentialSeat != null
-                select potentialSeat.Value;
+               where potentialSeat != null
+               select potentialSeat.Value;
 
         private static char? FirstSeatInDirection(
             IReadOnlyList<string> seatLayoutDescription,

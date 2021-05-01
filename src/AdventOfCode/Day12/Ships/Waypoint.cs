@@ -34,15 +34,18 @@
             {
                 90 => Position with
                 {
-                    X = Position.Y, Y = -Position.X
+                    X = Position.Y,
+                    Y = -Position.X
                 },
                 180 => Position with
                 {
-                    X = -Position.X, Y = -Position.Y
+                    X = -Position.X,
+                    Y = -Position.Y
                 },
                 270 => Position with
                 {
-                    X = -Position.Y, Y = Position.X
+                    X = -Position.Y,
+                    Y = Position.X
                 },
 
                 _ => Position

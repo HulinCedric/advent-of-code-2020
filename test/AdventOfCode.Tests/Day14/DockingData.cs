@@ -14,7 +14,7 @@ namespace AdventOfCode.Day14
             // Given
 
             // When
-          
+
             // Then
             Assert.Equal(expectedSum, expectedSum);
         }

@@ -57,7 +57,7 @@ namespace AdventOfCode.Day11
                             StringComparison.OrdinalIgnoreCase));
 
         public override bool Equals(object? obj)
-            => obj?.GetType() == GetType() && Equals((SeatLayout) obj);
+            => obj?.GetType() == GetType() && Equals((SeatLayout)obj);
 
         public override int GetHashCode()
             => seatLayout.GetHashCode();
