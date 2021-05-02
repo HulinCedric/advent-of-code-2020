@@ -16,7 +16,7 @@ namespace AdventOfCode.Day07
 
         private static string ExtractBagColor(string bagContentRuleDescription)
         {
-            var bagIndex = bagContentRuleDescription.IndexOf(" bags");
+            var bagIndex = bagContentRuleDescription.IndexOf(" bags", StringComparison.InvariantCulture);
             return bagContentRuleDescription[0..bagIndex];
         }
 
@@ -27,7 +27,7 @@ namespace AdventOfCode.Day07
                 return Enumerable.Empty<BagCount>();
             }
 
-            var contentDelimiterIndex = bagContentRuleDescription.IndexOf("contain ") + "contain ".Length;
+            var contentDelimiterIndex = bagContentRuleDescription.IndexOf("contain ", StringComparison.InvariantCulture) + "contain ".Length;
             var contentDescription = bagContentRuleDescription.Substring(contentDelimiterIndex);
 
             return contentDescription
@@ -44,14 +44,14 @@ namespace AdventOfCode.Day07
 
         private static int ExtractHoldBagNumber(string contentDescription)
         {
-            var holdBagIndex = contentDescription.IndexOf(" ");
+            var holdBagIndex = contentDescription.IndexOf(" ", StringComparison.InvariantCulture);
             return int.Parse(contentDescription[..holdBagIndex]);
         }
 
         private static string ExtractHoldBagColor(string contentDescription)
         {
-            var holdBagIndex = contentDescription.IndexOf(" bag");
-            var skipNumberOfBag = contentDescription.IndexOf(" ") + " ".Length;
+            var holdBagIndex = contentDescription.IndexOf(" bag", StringComparison.InvariantCulture);
+            var skipNumberOfBag = contentDescription.IndexOf(" ", StringComparison.InvariantCulture) + " ".Length;
             return contentDescription[skipNumberOfBag..holdBagIndex];
         }
     }
