@@ -53,7 +53,7 @@ namespace AdventOfCode.Day07
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

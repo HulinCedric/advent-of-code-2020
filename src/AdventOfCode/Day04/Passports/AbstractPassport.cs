@@ -10,7 +10,7 @@ namespace AdventOfCode.Day04.Passports
         private IEnumerable<PassportField> passportFields;
 
         protected AbstractPassport(string passportDescription)
-        => this.passportFields = PassportParser.ParsePassportDescription(passportDescription)
+        => passportFields = PassportParser.ParsePassportDescription(passportDescription)
             .Select(passportFieldDescription => PassportFieldFactory.Create(passportFieldDescription));
 
         public bool ContainsAllRequiredFields()

@@ -17,7 +17,7 @@ namespace AdventOfCode.Day07
         private static string ExtractBagColor(string bagContentRuleDescription)
         {
             var bagIndex = bagContentRuleDescription.IndexOf(" bags", StringComparison.InvariantCulture);
-            return bagContentRuleDescription[0..bagIndex];
+            return bagContentRuleDescription[..bagIndex];
         }
 
         private static IEnumerable<BagCount> ExtractHoldBagCounts(string bagContentRuleDescription)
