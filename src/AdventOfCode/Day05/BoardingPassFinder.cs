@@ -6,9 +6,9 @@ namespace AdventOfCode.Day05
     {
         public static int FindAvailableSeatId(string boardingPassesDescription)
         {
-            var bookeadSeatIds = BoardingPassParser.ParseBoardingPassesToSeatIds(boardingPassesDescription);
-            var allSeatIds = Enumerable.Range(bookeadSeatIds.Min(), bookeadSeatIds.Count());
-            return allSeatIds.Except(bookeadSeatIds).Single();
+            var bookedSeatIds = BoardingPassParser.ParseBoardingPassesToSeatIds(boardingPassesDescription).ToArray();
+            var allSeatIds = Enumerable.Range(bookedSeatIds.Min(), bookedSeatIds.Length);
+            return allSeatIds.Except(bookedSeatIds).Single();
         }
     }
 }
