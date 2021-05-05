@@ -52,7 +52,7 @@ namespace AdventOfCode.Day09
             // Given
             var numbers = portOutputs.Split("\n").Select(long.Parse).ToList();
             var contiguousNumberSearchIndex = 0;
-            IEnumerable<long> contiguousNumbers;
+            List<long> contiguousNumbers;
 
             // When
             do
@@ -60,7 +60,7 @@ namespace AdventOfCode.Day09
                 contiguousNumbers = GetContiguousNumbersOrEmpty(
                     invalidNumber,
                     contiguousNumberSearchIndex++,
-                    numbers);
+                    numbers).ToList();
             } while (!contiguousNumbers.Any());
 
             var actualSmallestWeaknessNumber = contiguousNumbers.Min();
