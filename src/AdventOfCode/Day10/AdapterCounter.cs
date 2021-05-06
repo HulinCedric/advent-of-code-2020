@@ -35,22 +35,24 @@ namespace AdventOfCode.Day10
             this IEnumerable<int> adaptersJoltages,
             IDictionary<int, long> memoizedSum)
         {
-            if (adaptersJoltages.Count() == 1)
+            var adaptersJoltagesList = adaptersJoltages.ToList();
+            if (adaptersJoltagesList.Count == 1)
                 return 1;
 
-            if (memoizedSum.ContainsKey(adaptersJoltages.First()))
-                return memoizedSum[adaptersJoltages.First()];
+            var firstAdapterJoltage = adaptersJoltagesList.First();
+            if (memoizedSum.ContainsKey(firstAdapterJoltage))
+                return memoizedSum[firstAdapterJoltage];
 
-            var sum = adaptersJoltages
+            var sum = adaptersJoltagesList
                 .Select((adapterJoltage, index) => (adapterJoltage, index))
                 .Skip(1)
-                .TakeWhile(item => item.adapterJoltage - adaptersJoltages.First() <= 3)
+                .TakeWhile(item => item.adapterJoltage - firstAdapterJoltage <= 3)
                 .Sum(
                     item => CountTotalNumberOfArrangements(
-                        adaptersJoltages.Skip(item.index),
+                        adaptersJoltagesList.Skip(item.index),
                         memoizedSum));
 
-            memoizedSum.Add(adaptersJoltages.First(), sum);
+            memoizedSum.Add(firstAdapterJoltage, sum);
 
             return sum;
         }
