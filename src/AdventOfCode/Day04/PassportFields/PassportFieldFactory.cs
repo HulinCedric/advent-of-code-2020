@@ -17,7 +17,7 @@ namespace AdventOfCode.Day04.PassportFields
                 ("ecl", _) => new EyeColorPassportField(passportFieldInformations.Value),
                 ("pid", _) => new PassportIdPassportField(passportFieldInformations.Value),
                 ("cid", _) => new CountryIdPassportField(passportFieldInformations.Value),
-                _ => new UnknownPassportField(passportFieldInformations.Name, passportFieldInformations.Value),
+                _ => new UnknownPassportField(passportFieldInformations.Value),
             };
         }
     }
