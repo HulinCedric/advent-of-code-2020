@@ -11,6 +11,6 @@ namespace AdventOfCode.Day04.PassportFields
 
         public override bool IsValid()
             => value.Length == 9 &&
-            value.All(c => char.IsDigit(c));
+            value.All(char.IsDigit);
     }
 }

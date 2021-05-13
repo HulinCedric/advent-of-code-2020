@@ -8,6 +8,6 @@ namespace AdventOfCode.Day05
         public static IEnumerable<int> ParseBoardingPassesToSeatIds(string boardingPassesDescription)
             => boardingPassesDescription
             .Split("\n")
-            .Select(boardingPass => SeatIdDecoder.Decode(boardingPass));
+            .Select(SeatIdDecoder.Decode);
     }
 }

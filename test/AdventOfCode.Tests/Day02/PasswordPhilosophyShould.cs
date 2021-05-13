@@ -16,7 +16,7 @@ namespace AdventOfCode.Day02
         {
             //Given
             var passwordsWithOccurrencePolicy = PasswsordAndPolicyParser.ParsePasswsordsAndPoliciesDescriptions(passwsordsAndPoliciesDescriptions)
-                .Select(passwsordsAndPoliciesDescription => PasswordFactory.CreatePasswordWithOccurrencePolicy(passwsordsAndPoliciesDescription));
+                .Select(PasswordFactory.CreatePasswordWithOccurrencePolicy);
 
             //When
             var validPasswordsCount = passwordsWithOccurrencePolicy
@@ -36,7 +36,7 @@ namespace AdventOfCode.Day02
         {
             //Given
             var passwordsWithPositionPolicy = PasswsordAndPolicyParser.ParsePasswsordsAndPoliciesDescriptions(passwsordsAndPoliciesDescriptions)
-                .Select(passwsordsAndPoliciesDescription => PasswordFactory.CreatePasswordWithPositionPolicy(passwsordsAndPoliciesDescription));
+                .Select(PasswordFactory.CreatePasswordWithPositionPolicy);
 
             //When
             var validPasswordsCount = passwordsWithPositionPolicy

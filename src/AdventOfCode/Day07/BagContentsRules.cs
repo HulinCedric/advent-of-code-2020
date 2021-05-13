@@ -12,7 +12,7 @@ namespace AdventOfCode.Day07
         public BagContentsRules(List<string> bagContentsRulesDescription)
         {
             bagContentRules = bagContentsRulesDescription
-                .Select(ruleDescription => BagContentsRuleParser.Parse(ruleDescription))
+                .Select(BagContentsRuleParser.Parse)
                 .ToList();
         }
 

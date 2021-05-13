@@ -14,7 +14,7 @@ namespace AdventOfCode.Day04.PassportFields
 
         public override bool IsValid()
             =>
-            value.All(c => char.IsDigit(c)) &&
+            value.All(char.IsDigit) &&
             int.Parse(value) >= AtLeast &&
             int.Parse(value) <= AtMost;
     }

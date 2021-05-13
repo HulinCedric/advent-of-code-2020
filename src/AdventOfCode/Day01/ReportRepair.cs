@@ -27,6 +27,6 @@ namespace AdventOfCode.Day01
         private static IEnumerable<int> ParseExpenseReport(string expenseReportDescription)
             => expenseReportDescription
             .Split("\n")
-            .Select(expenseReportEntryDescription => int.Parse(expenseReportEntryDescription));
+            .Select(int.Parse);
     }
 }

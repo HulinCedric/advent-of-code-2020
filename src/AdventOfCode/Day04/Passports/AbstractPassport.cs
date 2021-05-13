@@ -11,13 +11,13 @@ namespace AdventOfCode.Day04.Passports
 
         protected AbstractPassport(string passportDescription)
         => passportFields = PassportParser.ParsePassportDescription(passportDescription)
-            .Select(passportFieldDescription => PassportFieldFactory.Create(passportFieldDescription));
+            .Select(PassportFieldFactory.Create);
 
         public bool ContainsAllRequiredFields()
             => GetRequiredFields()
             .All(requiredFieldType => passportFields
                 .Select(passportField => passportField.GetType())
-                .Any(passportFieldType => requiredFieldType.IsAssignableFrom(passportFieldType)));
+                .Any(requiredFieldType.IsAssignableFrom));
 
         public bool ContainsAllRequiredValidFields()
             => ContainsAllRequiredFields() &&

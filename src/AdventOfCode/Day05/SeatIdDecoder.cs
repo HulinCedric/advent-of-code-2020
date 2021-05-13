@@ -11,7 +11,7 @@ namespace AdventOfCode.Day05
         private static string MapToBinary(string boardingPassDescription)
             => new string(
                 boardingPassDescription
-                .Select(boardingPassCharacterDescription => MapToBit(boardingPassCharacterDescription))
+                .Select(MapToBit)
                 .ToArray());
 
         private static char MapToBit(char boardingPassCharacterDescription)

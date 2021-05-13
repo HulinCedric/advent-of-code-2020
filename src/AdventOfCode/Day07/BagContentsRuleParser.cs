@@ -32,7 +32,7 @@ namespace AdventOfCode.Day07
 
             return contentDescription
                 .Split(",", options: StringSplitOptions.TrimEntries)
-                .Select(holdBagDescription => ExtractHoldBagCount(holdBagDescription));
+                .Select(ExtractHoldBagCount);
         }
 
         private static BagCount ExtractHoldBagCount(string contentDescription)

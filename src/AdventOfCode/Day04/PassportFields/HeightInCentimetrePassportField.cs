@@ -17,7 +17,7 @@ namespace AdventOfCode.Day04.PassportFields
             if (value.EndsWith("cm"))
             {
                 var numberPart = value[..^2];
-                return numberPart.All(c => char.IsDigit(c)) &&
+                return numberPart.All(char.IsDigit) &&
                     int.Parse(numberPart) >= AtLeast &&
                     int.Parse(numberPart) <= AtMost;
             }
