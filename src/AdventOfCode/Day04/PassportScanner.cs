@@ -7,16 +7,14 @@ namespace AdventOfCode.Day04
     {
         public static int CountValidPassports(string batchFileDescription)
             => PassportParser
-            .ParseBatchFile(batchFileDescription)
-            .Select(PassportFactory.Create)
-            .Where(passport => passport.ContainsAllRequiredFields())
-            .Count();
+                .ParseBatchFile(batchFileDescription)
+                .Select(PassportFactory.Create)
+                .Count(passport => passport.ContainsAllRequiredFields());
 
         public static int CountValidPassportsWithValidValues(string batchFileDescription)
-           => PassportParser
-           .ParseBatchFile(batchFileDescription)
-           .Select(PassportFactory.Create)
-           .Where(passport => passport.ContainsAllRequiredValidFields())
-           .Count();
+            => PassportParser
+                .ParseBatchFile(batchFileDescription)
+                .Select(PassportFactory.Create)
+                .Count(passport => passport.ContainsAllRequiredValidFields());
     }
 }

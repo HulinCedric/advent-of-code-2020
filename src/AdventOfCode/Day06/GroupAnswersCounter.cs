@@ -6,23 +6,26 @@ namespace AdventOfCode.Day06
     {
         public static int SumDisctintYesAnswers(string groupsAnswersDescription)
             => groupsAnswersDescription
-            .Split("\n\n")
-            .Select(personAnswers => personAnswers.Replace("\n", ""))
-            .Select(groupAnswers => new string(groupAnswers.Distinct().ToArray()))
-            .Select(distinctGroupAnswers => distinctGroupAnswers.Count())
-            .Aggregate((accumulator, distinctGroupAnswersCount) => accumulator + distinctGroupAnswersCount);
+                .Split("\n\n")
+                .Select(personAnswers => personAnswers.Replace("\n", ""))
+                .Select(groupAnswers => new string(groupAnswers.Distinct().ToArray()))
+                .Select(distinctGroupAnswers => distinctGroupAnswers.Count())
+                .Aggregate((accumulator, distinctGroupAnswersCount) => accumulator + distinctGroupAnswersCount);
 
         public static int SumQuestionsToWhichEveryoneAnsweredYes(string groupsAnswersDescription)
             => groupsAnswersDescription
-            .Split("\n\n")
-            .Select(groupAnswers =>
-                (PersonCount: groupAnswers.Where(c => c == '\n').Count() + 1,
-                 Answers: groupAnswers.Replace("\n", "")))
-            .Select(groupPersonCountAndAnswers =>
-                groupPersonCountAndAnswers.Answers
-                .GroupBy(answer => answer)
-                .Where(sameAnswers => sameAnswers.Count() == groupPersonCountAndAnswers.PersonCount)
-                .Count())
-            .Aggregate((accumulator, questionsEveryoneAnsweredYesByGroupCount) => accumulator + questionsEveryoneAnsweredYesByGroupCount);
+                .Split("\n\n")
+                .Select(
+                    groupAnswers =>
+                        (PersonCount: groupAnswers.Count(c => c == '\n') + 1,
+                            Answers: groupAnswers.Replace("\n", "")))
+                .Select(
+                    groupPersonCountAndAnswers =>
+                        groupPersonCountAndAnswers.Answers
+                            .GroupBy(answer => answer)
+                            .Count(sameAnswers => sameAnswers.Count() == groupPersonCountAndAnswers.PersonCount))
+                .Aggregate(
+                    (accumulator, questionsEveryoneAnsweredYesByGroupCount)
+                        => accumulator + questionsEveryoneAnsweredYesByGroupCount);
     }
 }

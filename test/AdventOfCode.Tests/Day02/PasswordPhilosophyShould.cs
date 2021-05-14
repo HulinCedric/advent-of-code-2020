@@ -15,13 +15,13 @@ namespace AdventOfCode.Day02
             int expectedValidPasswordsCount)
         {
             //Given
-            var passwordsWithOccurrencePolicy = PasswsordAndPolicyParser.ParsePasswsordsAndPoliciesDescriptions(passwsordsAndPoliciesDescriptions)
+            var passwordsWithOccurrencePolicy = PasswsordAndPolicyParser
+                .ParsePasswsordsAndPoliciesDescriptions(passwsordsAndPoliciesDescriptions)
                 .Select(PasswordFactory.CreatePasswordWithOccurrencePolicy);
 
             //When
             var validPasswordsCount = passwordsWithOccurrencePolicy
-                .Where(password => password.IsValid())
-                .Count();
+                .Count(password => password.IsValid());
 
             //Then
             Assert.Equal(expectedValidPasswordsCount, validPasswordsCount);
@@ -35,13 +35,13 @@ namespace AdventOfCode.Day02
             int expectedValidPasswordsCount)
         {
             //Given
-            var passwordsWithPositionPolicy = PasswsordAndPolicyParser.ParsePasswsordsAndPoliciesDescriptions(passwsordsAndPoliciesDescriptions)
+            var passwordsWithPositionPolicy = PasswsordAndPolicyParser
+                .ParsePasswsordsAndPoliciesDescriptions(passwsordsAndPoliciesDescriptions)
                 .Select(PasswordFactory.CreatePasswordWithPositionPolicy);
 
             //When
             var validPasswordsCount = passwordsWithPositionPolicy
-                .Where(password => password.IsValid())
-                .Count();
+                .Count(password => password.IsValid());
 
             //Then
             Assert.Equal(expectedValidPasswordsCount, validPasswordsCount);
