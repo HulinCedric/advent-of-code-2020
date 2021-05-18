@@ -9,7 +9,7 @@ namespace AdventOfCode.Day05
             => Convert.ToInt32(MapToBinary(boardingPassDescription), 2);
 
         private static string MapToBinary(string boardingPassDescription)
-            => new string(
+            => new(
                 boardingPassDescription
                 .Select(MapToBit)
                 .ToArray());

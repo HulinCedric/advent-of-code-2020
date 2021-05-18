@@ -5,6 +5,6 @@ namespace AdventOfCode.Day07
     public static class BagContentsRulesParser
     {
         public static BagContentsRules Parse(string bagContentsRulesDescription)
-            => new BagContentsRules(bagContentsRulesDescription.Split("\n").ToList());
+            => new(bagContentsRulesDescription.Split("\n").ToList());
     }
 }

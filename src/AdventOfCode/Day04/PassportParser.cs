@@ -21,7 +21,7 @@ namespace AdventOfCode.Day04
 
         public static PassportFieldInformations ParsePassportFieldDescription(
             string passportFieldDescription)
-            => new PassportFieldInformations(
+            => new(
                 passportFieldDescription.Split(":").First(),
                 passportFieldDescription.Split(":").Last());
     }

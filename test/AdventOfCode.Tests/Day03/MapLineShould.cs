@@ -9,7 +9,7 @@ namespace AdventOfCode.Day03
         private readonly MapLine mapLine;
 
         public MapLineShould()
-            => mapLine = new(LineDescription);
+            => mapLine = new MapLine(LineDescription);
 
         [Theory]
         [InlineData(1, true)]

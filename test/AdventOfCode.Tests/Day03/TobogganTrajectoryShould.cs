@@ -63,11 +63,11 @@ namespace AdventOfCode.Day03
             var map = new Map(mapDescription);
             var toboggans = new List<Toboggan>
             {
-                new Toboggan(map, new Slope(1, 1)),
-                new Toboggan(map, new Slope(3, 1)),
-                new Toboggan(map, new Slope(5, 1)),
-                new Toboggan(map, new Slope(7, 1)),
-                new Toboggan(map, new Slope(1, 2)),
+                new(map, new Slope(1, 1)),
+                new(map, new Slope(3, 1)),
+                new(map, new Slope(5, 1)),
+                new(map, new Slope(7, 1)),
+                new(map, new Slope(1, 2)),
             };
 
             //When

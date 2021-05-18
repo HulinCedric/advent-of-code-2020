@@ -3,7 +3,7 @@
     public class PasswordFactory
     {
         public static Password CreatePasswordWithOccurrencePolicy(string passwordAndPoliciyDescriptions)
-            => new Password(
+            => new(
                 GetPassword(passwordAndPoliciyDescriptions),
                 new PasswordOccurrencePolicy(
                     GetFirstParameterPolicy(passwordAndPoliciyDescriptions),
@@ -11,7 +11,7 @@
                     GetCharacter(passwordAndPoliciyDescriptions)));
 
         public static Password CreatePasswordWithPositionPolicy(string passwordAndPoliciyDescriptions)
-            => new Password(
+            => new(
                 GetPassword(passwordAndPoliciyDescriptions),
                 new PasswordPositionPolicy(
                     GetFirstParameterPolicy(passwordAndPoliciyDescriptions),
