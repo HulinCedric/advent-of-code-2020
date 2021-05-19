@@ -38,12 +38,12 @@ namespace AdventOfCode.Day07
         public int SumRequiredBagsFor(Bag targetBag)
         {
             var requiredBadSum = 0;
-            foreach (var requiredBagsCount in bagContentRules
+            foreach (var (bagNumber, bag) in bagContentRules
                 .Where(rule => rule.Bag == targetBag)
                 .SelectMany(rule => rule.HoldBagCounts))
             {
-                requiredBadSum += requiredBagsCount.BagNumber;
-                requiredBadSum += requiredBagsCount.BagNumber * SumRequiredBagsFor(requiredBagsCount.Bag);
+                requiredBadSum += bagNumber;
+                requiredBadSum += bagNumber * SumRequiredBagsFor(bag);
             }
 
             return requiredBadSum;

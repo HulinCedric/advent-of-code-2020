@@ -19,12 +19,12 @@ namespace AdventOfCode.Day08.Runners
             {
                 var instruction = program.ElementAt(currentInstructionIndex);
 
-                var executionResult = instruction.Execute(new ProgramContext(accumulator, currentInstructionIndex));
+                var (nextInstructionIndex, accumulatorValue) = instruction.Execute(new ProgramContext(accumulator, currentInstructionIndex));
 
                 executedInstructionsIndexes.Add(currentInstructionIndex);
 
-                accumulator = executionResult.AccumulatorValue;
-                currentInstructionIndex = executionResult.NextInstructionIndex;
+                accumulator = accumulatorValue;
+                currentInstructionIndex = nextInstructionIndex;
 
                 if (currentInstructionIndex >= terminatesInstructionIndex)
                     isProgramTerminates = true;

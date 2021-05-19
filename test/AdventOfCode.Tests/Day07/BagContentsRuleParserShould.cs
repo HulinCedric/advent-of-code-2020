@@ -15,12 +15,12 @@ namespace AdventOfCode.Day07
             string expectedHoldBagColor)
         {
             // When
-            var bagContentsRule = BagContentsRuleParser
+            var (bag, holdBagCounts) = BagContentsRuleParser
                 .Parse(bagContentsRuleDescription);
 
             //Then
-            Assert.Equal(expectedBagColor, bagContentsRule.Bag.Color);
-            Assert.Collection(bagContentsRule.HoldBagCounts,
+            Assert.Equal(expectedBagColor, bag.Color);
+            Assert.Collection(holdBagCounts,
                 holdBagCount => Assert.Equal(
                     new BagCount(expectedHoldBagNumber, new Bag(expectedHoldBagColor)),
                     holdBagCount));
@@ -47,12 +47,12 @@ namespace AdventOfCode.Day07
             string fourthExpectedHoldBagColor)
         {
             // When
-            var bagContentsRule = BagContentsRuleParser
+            var (bag, holdBagCounts) = BagContentsRuleParser
                 .Parse(bagContentsRuleDescription);
 
             //Then
-            Assert.Equal(bagContentsRule.Bag.Color, expectedBagColor);
-            Assert.Collection(bagContentsRule.HoldBagCounts,
+            Assert.Equal(bag.Color, expectedBagColor);
+            Assert.Collection(holdBagCounts,
                 holdBagCount => Assert.Equal(
                     new BagCount(firstExpectedHoldBagNumber, new Bag(firstExpectedHoldBagColor)),
                     holdBagCount),
@@ -75,12 +75,12 @@ namespace AdventOfCode.Day07
             string expectedBagColor)
         {
             // When
-            var bagContentsRule = BagContentsRuleParser
+            var (bag, holdBagCounts) = BagContentsRuleParser
                 .Parse(bagContentsRuleDescription);
 
             //Then
-            Assert.Equal(expectedBagColor, bagContentsRule.Bag.Color);
-            Assert.Empty(bagContentsRule.HoldBagCounts);
+            Assert.Equal(expectedBagColor, bag.Color);
+            Assert.Empty(holdBagCounts);
         }
     }
 }

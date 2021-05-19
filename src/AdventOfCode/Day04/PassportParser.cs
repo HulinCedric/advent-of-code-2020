@@ -19,7 +19,7 @@ namespace AdventOfCode.Day04
         .Split(new[] { " ", "\n" }, StringSplitOptions.RemoveEmptyEntries)
         .Select(passportFieldDescription => passportFieldDescription);
 
-        public static PassportFieldInformations ParsePassportFieldDescription(
+        public static PassportFieldInformation ParsePassportFieldDescription(
             string passportFieldDescription)
             => new(
                 passportFieldDescription.Split(":").First(),

@@ -16,11 +16,11 @@ namespace AdventOfCode.Day08.Runners
             var program = ProgramParser.Parse(programDescription);
 
             // When
-            var executionResult = IsolatedProgramRunner.Execute(program);
+            var (actualAccumulatorValue, _, isInfiniteLoop) = IsolatedProgramRunner.Execute(program);
 
             // Then
-            Assert.Equal(expectedAccumulatorValue, executionResult.AccumulatorValue);
-            Assert.True(executionResult.IsInfiniteLoop);
+            Assert.Equal(expectedAccumulatorValue, actualAccumulatorValue);
+            Assert.True(isInfiniteLoop);
         }
 
         [Theory]
@@ -33,11 +33,11 @@ namespace AdventOfCode.Day08.Runners
             var program = ProgramParser.Parse(programDescription);
 
             // When
-            var executionResult = IsolatedProgramRunner.Execute(program);
+            var (actualAccumulatorValue, isProgramTerminates, _) = IsolatedProgramRunner.Execute(program);
 
             // Then
-            Assert.Equal(expectedAccumulatorValue, executionResult.AccumulatorValue);
-            Assert.True(executionResult.IsProgramTerminates);
+            Assert.Equal(expectedAccumulatorValue, actualAccumulatorValue);
+            Assert.True(isProgramTerminates);
         }
     }
 }

@@ -14,8 +14,8 @@ namespace AdventOfCode.Day10
                 adaptersJoltages.Skip(1),
                 (fromAdapter, toAdapter) => (fromAdapter, toAdapter));
 
-            foreach (var pluggedAdapters in chainedAdapters)
-                switch (pluggedAdapters.toAdapter - pluggedAdapters.fromAdapter)
+            foreach (var (fromAdapter, toAdapter) in chainedAdapters)
+                switch (toAdapter - fromAdapter)
                 {
                     case 1:
                         count1JoltDifferences++;
