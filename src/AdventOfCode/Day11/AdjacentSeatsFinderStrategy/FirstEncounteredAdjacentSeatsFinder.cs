@@ -34,9 +34,10 @@ namespace AdventOfCode.Day11.AdjacentSeatsFinderStrategy
             var currentSeatCoords = (rowIndex: centralSeatRowIndex, columnIndex: centralSeatColumnIndex);
             do
             {
+                var (rowDirection, columnDirection) = direction;
                 currentSeatCoords = (
-                    currentSeatCoords.rowIndex + direction.rowDirection,
-                    currentSeatCoords.columnIndex + direction.columnDirection);
+                    currentSeatCoords.rowIndex + rowDirection,
+                    currentSeatCoords.columnIndex + columnDirection);
 
                 if (currentSeatCoords.rowIndex < layoutMinRowIndex ||
                     currentSeatCoords.rowIndex > layoutMaxRowIndex ||

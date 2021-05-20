@@ -17,8 +17,7 @@ namespace AdventOfCode.Day08.Fixers
             => program
                 .Select((instruction, index) => (instruction, index))
                 .Where(switchable =>
-                    switchable.instruction is JumpInstruction ||
-                    switchable.instruction is NoOperationInstruction)
+                    switchable.instruction is JumpInstruction or NoOperationInstruction)
                 .Select(switchable
                     => FixInstruction(
                         program,
@@ -46,8 +45,7 @@ namespace AdventOfCode.Day08.Fixers
             foreach (var (switchableInstruction, switchableIndex) in program
                 .Select((instruction, index) => (instruction, index))
                 .Where(instructionAndIndex =>
-                    instructionAndIndex.instruction is JumpInstruction ||
-                    instructionAndIndex.instruction is NoOperationInstruction)
+                    instructionAndIndex.instruction is JumpInstruction or NoOperationInstruction)
                 .ToList())
             {
                 var fixedProgram = FixInstruction(program, switchableInstruction, switchableIndex);
