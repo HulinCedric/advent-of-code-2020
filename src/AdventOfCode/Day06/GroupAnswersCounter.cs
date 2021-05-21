@@ -9,7 +9,7 @@ namespace AdventOfCode.Day06
                 .Split("\n\n")
                 .Select(personAnswers => personAnswers.Replace("\n", ""))
                 .Select(groupAnswers => new string(groupAnswers.Distinct().ToArray()))
-                .Select(distinctGroupAnswers => distinctGroupAnswers.Count())
+                .Select(distinctGroupAnswers => distinctGroupAnswers.Length)
                 .Aggregate((accumulator, distinctGroupAnswersCount) => accumulator + distinctGroupAnswersCount);
 
         public static int SumQuestionsToWhichEveryoneAnsweredYes(string groupsAnswersDescription)
