@@ -18,7 +18,7 @@ namespace AdventOfCode.Day06
             int expectedYesAnswersSum)
         {
             //When
-            var yesAnswersSum = GroupsAnswersCounter.SumDisctintYesAnswers(groupAnswersDescription);
+            var yesAnswersSum = GroupsAnswersCounter.SumDistinctYesAnswers(groupAnswersDescription);
 
             //Then
             Assert.Equal(expectedYesAnswersSum, yesAnswersSum);

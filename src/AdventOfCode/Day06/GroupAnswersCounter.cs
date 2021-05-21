@@ -4,7 +4,7 @@ namespace AdventOfCode.Day06
 {
     public static class GroupsAnswersCounter
     {
-        public static int SumDisctintYesAnswers(string groupsAnswersDescription)
+        public static int SumDistinctYesAnswers(string groupsAnswersDescription)
             => groupsAnswersDescription
                 .Split("\n\n")
                 .Select(personAnswers => personAnswers.Replace("\n", ""))
