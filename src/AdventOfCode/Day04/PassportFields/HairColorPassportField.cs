@@ -12,9 +12,10 @@ namespace AdventOfCode.Day04.PassportFields
 
         internal HairColorPassportField(string value)
             : base(value)
-        { }
+        {
+        }
 
-        private string ValidRegexPattern
+        private static string ValidRegexPattern
             => $"{StartWithSharp}({CharactersFrom0To9}|{CharactersFromaTof}){{{Exactly6}}}";
 
         public override bool IsValid()
