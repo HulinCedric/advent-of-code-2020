@@ -74,7 +74,7 @@ namespace AdventOfCode.Day09
         private static IEnumerable<long> GetContiguousNumbersOrEmpty(
             long numberToFind,
             int startIndex,
-            List<long> numbers)
+            IEnumerable<long> numbers)
         {
             var sum = 0L;
             var contiguousNumbers = numbers

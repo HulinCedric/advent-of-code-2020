@@ -9,7 +9,7 @@ namespace AdventOfCode.Day07
     {
         private readonly List<BagContentsRule> bagContentRules;
 
-        public BagContentsRules(List<string> bagContentsRulesDescription)
+        public BagContentsRules(IEnumerable<string> bagContentsRulesDescription)
             => bagContentRules = bagContentsRulesDescription
                 .Select(BagContentsRuleParser.Parse)
                 .ToList();
