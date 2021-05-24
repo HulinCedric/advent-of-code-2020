@@ -20,7 +20,7 @@ namespace AdventOfCode.Day04.Passports
                 typeof(HeightPassportField),
                 typeof(HairColorPassportField),
                 typeof(EyeColorPassportField),
-                typeof(PassportIdPassportField),
+                typeof(PassportIdPassportField)
             };
     }
 }

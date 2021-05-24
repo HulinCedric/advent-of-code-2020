@@ -67,7 +67,7 @@ namespace AdventOfCode.Day03
                 new(map, new Slope(3, 1)),
                 new(map, new Slope(5, 1)),
                 new(map, new Slope(7, 1)),
-                new(map, new Slope(1, 2)),
+                new(map, new Slope(1, 2))
             };
 
             //When
