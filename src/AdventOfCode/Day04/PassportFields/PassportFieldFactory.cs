@@ -5,7 +5,7 @@ namespace AdventOfCode.Day04.PassportFields
         public static PassportField Create(string passportFieldDescription)
         {
             var passportFieldInformations = PassportParser.ParsePassportFieldDescription(passportFieldDescription);
-            return (passportFieldInformations) switch
+            return passportFieldInformations switch
             {
                 ("byr", _) => new BirthYearPassportField(passportFieldInformations.Value),
                 ("iyr", _) => new IssueYearPassportField(passportFieldInformations.Value),
