@@ -10,19 +10,18 @@ namespace AdventOfCode.Day04.PassportFields
 
         internal HeightInCentimetrePassportField(string value)
             : base(value)
-        { }
+        {
+        }
 
         public override bool IsValid()
         {
-            if (value.EndsWith("cm"))
-            {
-                var numberPart = value[..^2];
-                return numberPart.All(char.IsDigit) &&
-                    int.Parse(numberPart) >= AtLeast &&
-                    int.Parse(numberPart) <= AtMost;
-            }
+            if (!value.EndsWith("cm"))
+                return false;
 
-            return false;
+            var numberPart = value[..^2];
+            return numberPart.All(char.IsDigit) &&
+                   int.Parse(numberPart) >= AtLeast &&
+                   int.Parse(numberPart) <= AtMost;
         }
     }
 }
