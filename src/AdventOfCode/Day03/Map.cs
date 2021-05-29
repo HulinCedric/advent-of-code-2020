@@ -5,21 +5,19 @@ namespace AdventOfCode.Day03
 {
     public class Map
     {
-        private IEnumerable<MapLine> lines;
-
         public Map(string description)
-            => lines = Parse(description);
+            => Lines = Parse(description);
 
-        internal IEnumerable<MapLine> Lines => lines;
-
-        public bool GetTreePresenceAt(int lineNumber, int position)
-            => lines
-            .ElementAt(lineNumber - 1)
-            .GetTreePresenceAtPosition(position);
+        internal IEnumerable<MapLine> Lines { get; }
 
         private static IEnumerable<MapLine> Parse(string mapDescription)
             => mapDescription
-            .Split("\n")
-            .Select(lineDescription => new MapLine(lineDescription));
+                .Split("\n")
+                .Select(lineDescription => new MapLine(lineDescription));
+
+        public bool GetTreePresenceAt(int lineNumber, int position)
+            => Lines
+                .ElementAt(lineNumber - 1)
+                .GetTreePresenceAtPosition(position);
     }
 }
