@@ -6,6 +6,13 @@ namespace AdventOfCode.Day11
 {
     public class SeatingSystem
     {
+        private static IAdjacentSeatsFinder InstantiateAdjacentSeatsFinderStrategy(Type adjacentSeatsFinderStrategyType)
+            => Activator.CreateInstance(adjacentSeatsFinderStrategyType) is IAdjacentSeatsFinder
+                adjacentSeatsFinderStrategy ?
+                adjacentSeatsFinderStrategy :
+                throw new InvalidOperationException(
+                    $"Couldn't instantiate {nameof(IAdjacentSeatsFinder)} for {nameof(adjacentSeatsFinderStrategyType)}");
+
         [Theory]
         [InlineData(SeatLayoutDescription.Example, 4, typeof(ImmediatelyAdjacentSeatsFinder), 37)]
         [InlineData(SeatLayoutDescription.Example, 5, typeof(FirstEncounteredAdjacentSeatsFinder), 26)]
@@ -29,11 +36,5 @@ namespace AdventOfCode.Day11
             // Then
             Assert.Equal(expectedSeatsOccupiedCount, actualSeatsOccupiedCount);
         }
-
-        private static IAdjacentSeatsFinder InstantiateAdjacentSeatsFinderStrategy(Type adjacentSeatsFinderStrategyType)
-            => Activator.CreateInstance(adjacentSeatsFinderStrategyType) is IAdjacentSeatsFinder
-                adjacentSeatsFinderStrategy ?
-                adjacentSeatsFinderStrategy :
-                throw new ArgumentNullException(nameof(adjacentSeatsFinderStrategy));
     }
 }

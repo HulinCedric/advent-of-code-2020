@@ -42,7 +42,7 @@ namespace AdventOfCode.Day12.Ships
                 {
                     Y = initialPosition.Y - unit
                 },
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(instructionDirection))
             };
 
         private static Direction GetNewDirection(Direction initialDirection, int degree)
