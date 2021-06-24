@@ -10,7 +10,7 @@ namespace AdventOfCode.Day02
             //Given
             var passwordPolicy = new PasswordPositionPolicy(2, 9, 'c');
             var password = new Password("ccccccccc", passwordPolicy);
-            var expectedPasswordValidity = false;
+            const bool expectedPasswordValidity = false;
 
             //When
             var passwordValidity = password.IsValid();
@@ -25,7 +25,7 @@ namespace AdventOfCode.Day02
             //Given
             var passwordPolicy = new PasswordPositionPolicy(1, 3, 'b');
             var password = new Password("cdefg", passwordPolicy);
-            var expectedPasswordValidity = false;
+            const bool expectedPasswordValidity = false;
 
             //When
             var passwordValidity = password.IsValid();
@@ -40,7 +40,7 @@ namespace AdventOfCode.Day02
             //Given
             var passwordPolicy = new PasswordPositionPolicy(1, 3, 'a');
             var password = new Password("abcde", passwordPolicy);
-            var expectedPasswordValidity = true;
+            const bool expectedPasswordValidity = true;
 
             //When
             var passwordValidity = password.IsValid();

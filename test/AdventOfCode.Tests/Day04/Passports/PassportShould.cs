@@ -14,7 +14,7 @@ namespace AdventOfCode.Day04.Passports
         {
             //Given
             var passport = PassportFactory.Create(passportDescription);
-            var expectedPassportValidity = false;
+            const bool expectedPassportValidity = false;
 
             //When
             var passportValidity = passport.ContainsAllRequiredValidFields();
@@ -28,7 +28,7 @@ namespace AdventOfCode.Day04.Passports
         {
             //Given
             var passport = PassportFactory.Create(PassportDescription.Fourth);
-            var expectedPassportValidity = false;
+            const bool expectedPassportValidity = false;
 
             //When
             var passportValidity = passport.ContainsAllRequiredFields();
@@ -42,7 +42,7 @@ namespace AdventOfCode.Day04.Passports
         {
             //Given
             var passport = PassportFactory.Create(PassportDescription.Second);
-            var expectedPassportValidity = false;
+            const bool expectedPassportValidity = false;
 
             //When
             var passportValidity = passport.ContainsAllRequiredFields();
@@ -56,7 +56,7 @@ namespace AdventOfCode.Day04.Passports
         {
             //Given
             var passport = PassportFactory.Create(PassportDescription.First);
-            var expectedPassportValidity = true;
+            const bool expectedPassportValidity = true;
 
             //When
             var passportValidity = passport.ContainsAllRequiredFields();
@@ -74,7 +74,7 @@ namespace AdventOfCode.Day04.Passports
         {
             //Given
             var passport = PassportFactory.Create(passportDescription);
-            var expectedPassportValidity = true;
+            const bool expectedPassportValidity = true;
 
             //When
             var passportValidity = passport.ContainsAllRequiredValidFields();
@@ -88,7 +88,7 @@ namespace AdventOfCode.Day04.Passports
         {
             //Given
             var passport = PassportFactory.Create(PassportDescription.Third);
-            var expectedPassportValidity = true;
+            const bool expectedPassportValidity = true;
 
             //When
             var passportValidity = passport.ContainsAllRequiredFields();

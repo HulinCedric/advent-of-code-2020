@@ -28,8 +28,8 @@ namespace AdventOfCode.Day11.AdjacentSeatsFinderStrategy
         {
             var layoutMaxColumnIndex = seatLayoutDescription[0].Length - 1;
             var layoutMaxRowIndex = seatLayoutDescription.Count - 1;
-            var layoutMinColumnIndex = 0;
-            var layoutMinRowIndex = 0;
+            const int layoutMinColumnIndex = 0;
+            const int layoutMinRowIndex = 0;
 
             var currentSeatCoords = (rowIndex: centralSeatRowIndex, columnIndex: centralSeatColumnIndex);
             do

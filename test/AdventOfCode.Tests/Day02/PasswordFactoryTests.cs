@@ -9,7 +9,7 @@ namespace AdventOfCode.Day02
         {
             //Given
             var password = PasswordFactory.CreatePasswordWithOccurrencePolicy("1-3 b: cdefg");
-            var expectedPasswordValidity = false;
+            const bool expectedPasswordValidity = false;
 
             //When
             var passwordValidity = password.IsValid();
@@ -23,7 +23,7 @@ namespace AdventOfCode.Day02
         {
             //Given
             var password = PasswordFactory.CreatePasswordWithOccurrencePolicy("1-3 a: abcde");
-            var expectedPasswordValidity = true;
+            const bool expectedPasswordValidity = true;
 
             //When
             var passwordValidity = password.IsValid();
@@ -37,7 +37,7 @@ namespace AdventOfCode.Day02
         {
             //Given
             var password = PasswordFactory.CreatePasswordWithOccurrencePolicy("2-9 c: ccccccccc");
-            var expectedPasswordValidity = true;
+            const bool expectedPasswordValidity = true;
 
             //When
             var passwordValidity = password.IsValid();

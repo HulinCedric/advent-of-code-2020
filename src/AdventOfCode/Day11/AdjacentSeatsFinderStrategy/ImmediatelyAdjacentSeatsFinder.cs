@@ -11,8 +11,8 @@ namespace AdventOfCode.Day11.AdjacentSeatsFinderStrategy
         {
             var layoutMaxColumnIndex = seatLayoutDescription[0].Length - 1;
             var layoutMaxRowIndex = seatLayoutDescription.Length - 1;
-            var layoutMinColumnIndex = 0;
-            var layoutMinRowIndex = 0;
+            const int layoutMinColumnIndex = 0;
+            const int layoutMinRowIndex = 0;
 
             for (var seatRowIndex = centralSeatRowIndex - 1; seatRowIndex <= centralSeatRowIndex + 1; seatRowIndex++)
                 for (var seatColumnIndex = centralSeatColumnIndex - 1;

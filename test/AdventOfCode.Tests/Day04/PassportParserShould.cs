@@ -37,7 +37,7 @@ namespace AdventOfCode.Day04
             int expectedPassportFieldsCount)
         {
             //Given
-            var batchFileDescription = BatchFileDescription.PartOneExampleDescription;
+            const string batchFileDescription = BatchFileDescription.PartOneExampleDescription;
 
             //When
             var passportFieldsCount = PassportParser.ParsePassportDescription(
@@ -54,8 +54,8 @@ namespace AdventOfCode.Day04
         public void Give_passeports_separate_by_blank_lines()
         {
             //Given
-            var batchFileDescription = BatchFileDescription.PartOneExampleDescription;
-            var expectedPassportsCount = 4;
+            const string batchFileDescription = BatchFileDescription.PartOneExampleDescription;
+            const int expectedPassportsCount = 4;
 
             //When
             var passportsCount = PassportParser.ParseBatchFile(batchFileDescription).Count();

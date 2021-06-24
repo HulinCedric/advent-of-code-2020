@@ -7,7 +7,7 @@ namespace AdventOfCode.Day04
 {
     public static class PassportParser
     {
-        private static readonly string BlankLineDescription = "\n\n";
+        private const string BlankLineDescription = "\n\n";
 
         public static IEnumerable<string> ParseBatchFile(string batchFileDescription)
         => batchFileDescription
