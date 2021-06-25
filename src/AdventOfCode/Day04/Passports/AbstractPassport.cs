@@ -7,7 +7,7 @@ namespace AdventOfCode.Day04.Passports
 {
     public abstract class AbstractPassport
     {
-        private IEnumerable<PassportField> passportFields;
+        private readonly IEnumerable<PassportField> passportFields;
 
         protected AbstractPassport(string passportDescription)
         => passportFields = PassportParser.ParsePassportDescription(passportDescription)
