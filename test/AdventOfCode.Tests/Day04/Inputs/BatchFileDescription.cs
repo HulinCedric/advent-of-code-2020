@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace AdventOfCode.Day04.Inputs
+﻿namespace AdventOfCode.Day04.Inputs
 {
     public static class BatchFileDescription
     {
@@ -45,12 +42,5 @@ namespace AdventOfCode.Day04.Inputs
             "hgt:59cm ecl:zzz" + "\n" +
             "eyr:2038 hcl:74454a iyr:2023" + "\n" +
             "pid:3556412378 byr:2007" + "\n";
-
-        public static string ProblemDescription
-            => string.Join(
-                "\n",
-                File.ReadAllLines(
-                    Path.Combine(
-                        AppDomain.CurrentDomain.BaseDirectory, "Day04/input.txt")));
     }
 }
