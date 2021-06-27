@@ -54,7 +54,7 @@ namespace AdventOfCode.Day11.AdjacentSeatsFinderStrategy
             return null;
         }
 
-        internal static class Directions
+        private static class Directions
         {
             private static readonly (int, int) Up = (-1, 0);
             private static readonly (int, int) Down = (1, 0);
