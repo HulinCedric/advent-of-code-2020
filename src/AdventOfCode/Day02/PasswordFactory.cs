@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Day02
 {
-    public class PasswordFactory
+    public static class PasswordFactory
     {
         public static Password CreatePasswordWithOccurrencePolicy(string passwordAndPoliciyDescriptions)
             => new(

@@ -1,6 +1,6 @@
 namespace AdventOfCode.Day04.PassportFields
 {
-    public class PassportFieldFactory
+    public static class PassportFieldFactory
     {
         public static PassportField Create(string passportFieldDescription)
         {
