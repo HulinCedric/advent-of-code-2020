@@ -14,7 +14,7 @@ namespace AdventOfCode.Day04.PassportFields
             "gry",
             "grn",
             "hzl",
-            "oth",
+            "oth"
         };
 
         internal EyeColorPassportField(string value)
