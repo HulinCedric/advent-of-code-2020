@@ -28,7 +28,7 @@ namespace AdventOfCode.Day07
             }
 
             var contentDelimiterIndex = bagContentRuleDescription.IndexOf("contain ", StringComparison.InvariantCulture) + "contain ".Length;
-            var contentDescription = bagContentRuleDescription.Substring(contentDelimiterIndex);
+            var contentDescription = bagContentRuleDescription[contentDelimiterIndex..];
 
             return contentDescription
                 .Split(",", options: StringSplitOptions.TrimEntries)
