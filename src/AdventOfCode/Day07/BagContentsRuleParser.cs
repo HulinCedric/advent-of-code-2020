@@ -31,7 +31,7 @@ namespace AdventOfCode.Day07
             var contentDescription = bagContentRuleDescription[contentDelimiterIndex..];
 
             return contentDescription
-                .Split(",", options: StringSplitOptions.TrimEntries)
+                .Split(",", StringSplitOptions.TrimEntries)
                 .Select(ExtractHoldBagCount);
         }
 

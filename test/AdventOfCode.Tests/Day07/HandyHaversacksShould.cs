@@ -14,7 +14,7 @@ namespace AdventOfCode.Day07
         {
             //Given
             var bagContentsRules = BagContentsRulesParser.Parse(bagContentsRulesDescription);
-            var shinyGoldBag = new Bag(Color: "shiny gold");
+            var shinyGoldBag = new Bag("shiny gold");
 
             //When
             var bagColorsCount = bagContentsRules
@@ -37,7 +37,7 @@ namespace AdventOfCode.Day07
         {
             //Given
             var bagContentsRules = BagContentsRulesParser.Parse(bagContentsRulesDescription);
-            var shinyGoldBag = new Bag(Color: "shiny gold");
+            var shinyGoldBag = new Bag("shiny gold");
 
             //When
             var requiredBagsCount = bagContentsRules
