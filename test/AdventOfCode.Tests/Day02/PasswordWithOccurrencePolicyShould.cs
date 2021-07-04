@@ -5,7 +5,7 @@ namespace AdventOfCode.Day02
     public class PasswordWithOccurrencePolicyShould
     {
         [Fact]
-        public void Be_Invalid_when_AtLeast_1_and_AtMost_3_charater_b_for_Password_cdefg()
+        public void Be_Invalid_when_AtLeast_1_and_AtMost_3_character_b_for_Password_cdefg()
         {
             //Given
             var passwordPolicy = new PasswordOccurrencePolicy(1, 3, 'b');
@@ -20,7 +20,7 @@ namespace AdventOfCode.Day02
         }
 
         [Fact]
-        public void Be_Valid_when_AtLeast_1_and_AtMost_3_charater_a_for_Password_abcde()
+        public void Be_Valid_when_AtLeast_1_and_AtMost_3_character_a_for_Password_abcde()
         {
             //Given
             var passwordPolicy = new PasswordOccurrencePolicy(1, 3, 'a');
@@ -35,7 +35,7 @@ namespace AdventOfCode.Day02
         }
 
         [Fact]
-        public void Be_Valid_when_AtLeast_2_and_AtMost_9_charater_c_for_Password_ccccccccc()
+        public void Be_Valid_when_AtLeast_2_and_AtMost_9_character_c_for_Password_ccccccccc()
         {
             //Given
             var passwordPolicy = new PasswordOccurrencePolicy(2, 9, 'c');

@@ -5,18 +5,18 @@ namespace AdventOfCode.Day02
 {
     public class PasswordPhilosophyShould
     {
-        private const string PasswsordsAndPoliciesDescriptionsExample = "1-3 a: abcde\n1-3 b: cdefg\n2-9 c: ccccccccc";
+        private const string PasswordsAndPoliciesDescriptionsExample = "1-3 a: abcde\n1-3 b: cdefg\n2-9 c: ccccccccc";
 
         [Theory]
-        [InlineData(PasswsordsAndPoliciesDescriptionsExample, 2)]
+        [InlineData(PasswordsAndPoliciesDescriptionsExample, 2)]
         [InputFileData("Day02/input.txt", 474)]
         public void Count_x_valid_Passwords_with_OccurencePolicy(
-            string passwsordsAndPoliciesDescriptions,
+            string passwordsAndPoliciesDescriptions,
             int expectedValidPasswordsCount)
         {
             //Given
             var passwordsWithOccurrencePolicy = PasswsordAndPolicyParser
-                .ParsePasswsordsAndPoliciesDescriptions(passwsordsAndPoliciesDescriptions)
+                .ParsePasswordsAndPoliciesDescriptions(passwordsAndPoliciesDescriptions)
                 .Select(PasswordFactory.CreatePasswordWithOccurrencePolicy);
 
             //When
@@ -28,15 +28,15 @@ namespace AdventOfCode.Day02
         }
 
         [Theory]
-        [InlineData(PasswsordsAndPoliciesDescriptionsExample, 1)]
+        [InlineData(PasswordsAndPoliciesDescriptionsExample, 1)]
         [InputFileData("Day02/input.txt", 745)]
         public void Count_x_valid_Passwords_with_PositionPolicy(
-            string passwsordsAndPoliciesDescriptions,
+            string passwordsAndPoliciesDescriptions,
             int expectedValidPasswordsCount)
         {
             //Given
             var passwordsWithPositionPolicy = PasswsordAndPolicyParser
-                .ParsePasswsordsAndPoliciesDescriptions(passwsordsAndPoliciesDescriptions)
+                .ParsePasswordsAndPoliciesDescriptions(passwordsAndPoliciesDescriptions)
                 .Select(PasswordFactory.CreatePasswordWithPositionPolicy);
 
             //When

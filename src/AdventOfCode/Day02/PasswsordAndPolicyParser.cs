@@ -4,8 +4,8 @@ namespace AdventOfCode.Day02
 {
     public static class PasswsordAndPolicyParser
     {
-        public static IEnumerable<string> ParsePasswsordsAndPoliciesDescriptions(
-            string passwsordsAndPoliciesDescriptions)
-            => passwsordsAndPoliciesDescriptions.Split("\n");
+        public static IEnumerable<string> ParsePasswordsAndPoliciesDescriptions(
+            string passwordsAndPoliciesDescriptions)
+            => passwordsAndPoliciesDescriptions.Split("\n");
     }
 }

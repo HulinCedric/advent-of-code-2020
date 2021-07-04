@@ -14,10 +14,10 @@ namespace AdventOfCode.Day04.PassportFields
             var passportField = PassportFieldFactory.Create(passportFieldDescription);
 
             //When
-            var passportFieldValidty = passportField.IsValid();
+            var passportFieldValidity = passportField.IsValid();
 
             //Then
-            Assert.False(passportFieldValidty);
+            Assert.False(passportFieldValidity);
         }
 
         [Theory]
@@ -34,10 +34,10 @@ namespace AdventOfCode.Day04.PassportFields
             var passportField = PassportFieldFactory.Create(passportFieldDescription);
 
             //When
-            var passportFieldValidty = passportField.IsValid();
+            var passportFieldValidity = passportField.IsValid();
 
             //Then
-            Assert.True(passportFieldValidty);
+            Assert.True(passportFieldValidity);
         }
     }
 }

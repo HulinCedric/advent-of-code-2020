@@ -2,41 +2,41 @@
 {
     public static class PasswordFactory
     {
-        public static Password CreatePasswordWithOccurrencePolicy(string passwordAndPoliciyDescriptions)
+        public static Password CreatePasswordWithOccurrencePolicy(string passwordAndPolicyDescriptions)
             => new(
-                GetPassword(passwordAndPoliciyDescriptions),
+                GetPassword(passwordAndPolicyDescriptions),
                 new PasswordOccurrencePolicy(
-                    GetFirstParameterPolicy(passwordAndPoliciyDescriptions),
-                    GetSecondParameterPolicy(passwordAndPoliciyDescriptions),
-                    GetCharacter(passwordAndPoliciyDescriptions)));
+                    GetFirstParameterPolicy(passwordAndPolicyDescriptions),
+                    GetSecondParameterPolicy(passwordAndPolicyDescriptions),
+                    GetCharacter(passwordAndPolicyDescriptions)));
 
-        public static Password CreatePasswordWithPositionPolicy(string passwordAndPoliciyDescriptions)
+        public static Password CreatePasswordWithPositionPolicy(string passwordAndPolicyDescriptions)
             => new(
-                GetPassword(passwordAndPoliciyDescriptions),
+                GetPassword(passwordAndPolicyDescriptions),
                 new PasswordPositionPolicy(
-                    GetFirstParameterPolicy(passwordAndPoliciyDescriptions),
-                    GetSecondParameterPolicy(passwordAndPoliciyDescriptions),
-                    GetCharacter(passwordAndPoliciyDescriptions)));
+                    GetFirstParameterPolicy(passwordAndPolicyDescriptions),
+                    GetSecondParameterPolicy(passwordAndPolicyDescriptions),
+                    GetCharacter(passwordAndPolicyDescriptions)));
 
-        private static int GetFirstParameterPolicy(string passwordAndPoliciyDescriptions)
-            => int.Parse(passwordAndPoliciyDescriptions[..IndexOfPolicySeparator(passwordAndPoliciyDescriptions)]);
+        private static int GetFirstParameterPolicy(string passwordAndPolicyDescriptions)
+            => int.Parse(passwordAndPolicyDescriptions[..IndexOfPolicySeparator(passwordAndPolicyDescriptions)]);
 
-        private static int GetSecondParameterPolicy(string passwordAndPoliciyDescriptions)
-            => int.Parse(passwordAndPoliciyDescriptions[(IndexOfPolicySeparator(passwordAndPoliciyDescriptions) + 1)..IndexOfCharacterSeparator(passwordAndPoliciyDescriptions)]);
+        private static int GetSecondParameterPolicy(string passwordAndPolicyDescriptions)
+            => int.Parse(passwordAndPolicyDescriptions[(IndexOfPolicySeparator(passwordAndPolicyDescriptions) + 1)..IndexOfCharacterSeparator(passwordAndPolicyDescriptions)]);
 
-        private static char GetCharacter(string passwordAndPoliciyDescriptions)
-            => char.Parse(passwordAndPoliciyDescriptions[(IndexOfCharacterSeparator(passwordAndPoliciyDescriptions) + 1)..IndexOfPasswordSeparator(passwordAndPoliciyDescriptions)]);
+        private static char GetCharacter(string passwordAndPolicyDescriptions)
+            => char.Parse(passwordAndPolicyDescriptions[(IndexOfCharacterSeparator(passwordAndPolicyDescriptions) + 1)..IndexOfPasswordSeparator(passwordAndPolicyDescriptions)]);
 
-        private static string GetPassword(string passwordAndPoliciyDescriptions)
-            => passwordAndPoliciyDescriptions[(IndexOfPasswordSeparator(passwordAndPoliciyDescriptions) + 1)..];
+        private static string GetPassword(string passwordAndPolicyDescriptions)
+            => passwordAndPolicyDescriptions[(IndexOfPasswordSeparator(passwordAndPolicyDescriptions) + 1)..];
 
-        private static int IndexOfCharacterSeparator(string passwordAndPoliciyDescriptions)
-            => passwordAndPoliciyDescriptions.IndexOf(' ');
+        private static int IndexOfCharacterSeparator(string passwordAndPolicyDescriptions)
+            => passwordAndPolicyDescriptions.IndexOf(' ');
 
-        private static int IndexOfPasswordSeparator(string passwordAndPoliciyDescriptions)
-            => passwordAndPoliciyDescriptions.IndexOf(':');
+        private static int IndexOfPasswordSeparator(string passwordAndPolicyDescriptions)
+            => passwordAndPolicyDescriptions.IndexOf(':');
 
-        private static int IndexOfPolicySeparator(string passwordAndPoliciyDescriptions)
-            => passwordAndPoliciyDescriptions.IndexOf('-');
+        private static int IndexOfPolicySeparator(string passwordAndPolicyDescriptions)
+            => passwordAndPolicyDescriptions.IndexOf('-');
     }
 }
