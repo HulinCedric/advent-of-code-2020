@@ -19,7 +19,7 @@ namespace AdventOfCode.Day14
             var memValue = new MemoryValue(value);
 
             // Then
-            Assert.Equal(expectedRepresentation, memValue.ToString());
+            Assert.Equal(expectedRepresentation, $"{memValue}");
         }
     }
 
