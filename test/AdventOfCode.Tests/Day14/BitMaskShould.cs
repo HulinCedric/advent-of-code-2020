@@ -3,16 +3,16 @@ using Xunit;
 
 namespace AdventOfCode.Day14
 {
-    public class MaskShould
+    public class BitMaskShould
     {
         [Fact]
         public void Have_a_default_value()
         {
             // Given
-            var expectedMask = new Mask("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            var expectedMask = new BitMask("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
             // When
-            var actualMask = Mask.Default;
+            var actualMask = BitMask.Default;
 
             // Then
             Assert.Equal(expectedMask, actualMask);
@@ -30,7 +30,7 @@ namespace AdventOfCode.Day14
             // Given
             var expectedMemoryValue = new MemoryValue(expectedRepresentation);
             var memoryValue = new MemoryValue(value);
-            var mask = new Mask(maskDescription);
+            var mask = new BitMask(maskDescription);
 
             // When
             var overwrittenMemoryValue = mask.Overwrite(memoryValue);
@@ -40,21 +40,21 @@ namespace AdventOfCode.Day14
         }
     }
 
-    public record Mask
+    public record BitMask
     {
-        private readonly string maskDescription;
+        private readonly string bitMaskDescription;
 
-        public Mask(string maskDescription)
-            => this.maskDescription = maskDescription;
+        public BitMask(string bitMaskDescription)
+            => this.bitMaskDescription = bitMaskDescription;
 
-        public static Mask Default
+        public static BitMask Default
             => new("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
         public MemoryValue Overwrite(MemoryValue memoryValue)
             => new(string.Concat(
                 memoryValue.ToString()
                     .Zip(
-                        maskDescription,
+                        bitMaskDescription,
                         (memoryValueBit, maskBit) => maskBit == 'X' ? memoryValueBit : maskBit)));
     }
 }

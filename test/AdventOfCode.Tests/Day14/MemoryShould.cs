@@ -40,7 +40,7 @@ namespace AdventOfCode.Day14
         {
             // Given
             var memory = new Memory();
-            var expectedMask = new Mask("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X");
+            var expectedMask = new BitMask("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X");
 
             // When
             memory.UpdateBitMask(expectedMask);
@@ -70,15 +70,15 @@ namespace AdventOfCode.Day14
         private readonly Dictionary<int, MemoryValue> values = new();
 
         public Memory()
-            => BitMask = Mask.Default;
+            => BitMask = Day14.BitMask.Default;
 
-        public Mask BitMask { get; private set; }
+        public BitMask BitMask { get; private set; }
 
         public IReadOnlyCollection<MemoryValue> Values
             => values.Values;
 
-        public void UpdateBitMask(Mask mask)
-            => BitMask = mask;
+        public void UpdateBitMask(BitMask bitMask)
+            => BitMask = bitMask;
 
         public MemoryValue ValueAt(int position)
             => values[position];
