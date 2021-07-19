@@ -15,6 +15,7 @@ namespace AdventOfCode.Day14
             string expectedRepresentation)
         {
             // Given
+            var expectedMemoryValue = new MemoryValue(expectedRepresentation);
             var memoryValue = new MemoryValue(value);
             var mask = new Mask(maskDescription);
 
@@ -22,7 +23,7 @@ namespace AdventOfCode.Day14
             var overwrittenMemoryValue = mask.Overwrite(memoryValue);
 
             // Then
-            Assert.Equal(expectedRepresentation, $"{overwrittenMemoryValue}");
+            Assert.Equal(expectedMemoryValue, overwrittenMemoryValue);
         }
     }
 
@@ -33,11 +34,11 @@ namespace AdventOfCode.Day14
         public Mask(string maskDescription)
             => this.maskDescription = maskDescription;
 
-        public string Overwrite(MemoryValue memoryValue)
-            => string.Concat(
+        public MemoryValue Overwrite(MemoryValue memoryValue)
+            => new(string.Concat(
                 memoryValue.ToString()
                     .Zip(
                         maskDescription,
-                        (memoryValueBit, maskBit) => maskBit == 'X' ? memoryValueBit : maskBit));
+                        (memoryValueBit, maskBit) => maskBit == 'X' ? memoryValueBit : maskBit)));
     }
 }
