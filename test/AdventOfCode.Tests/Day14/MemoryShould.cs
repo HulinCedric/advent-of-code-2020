@@ -63,6 +63,27 @@ namespace AdventOfCode.Day14
             Assert.NotEmpty(memory.Values);
             Assert.Equal(1, memory.Values.Count);
         }
+
+        [Theory]
+        [InlineData(11, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001001001")]
+        [InlineData(101, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001100101")]
+        [InlineData(0, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001000000")]
+        public void Write_value_with_bitmask_overwrite_value(
+            int value,
+            string maskDescription,
+            string expectedRepresentation)
+        {
+            // Given
+            var memory = new Memory();
+            memory.UpdateBitMask(new BitMask(maskDescription));
+            var expectedMemoryValue = new MemoryValue(expectedRepresentation);
+
+            // When
+            memory.WriteAt(1, value);
+
+            // Then
+            Assert.Equal(expectedMemoryValue, memory.ValueAt(1));
+        }
     }
 
     public class Memory
@@ -70,7 +91,7 @@ namespace AdventOfCode.Day14
         private readonly Dictionary<int, MemoryValue> values = new();
 
         public Memory()
-            => BitMask = Day14.BitMask.Default;
+            => BitMask = BitMask.Default;
 
         public BitMask BitMask { get; private set; }
 
@@ -84,6 +105,6 @@ namespace AdventOfCode.Day14
             => values[position];
 
         public void WriteAt(int position, int value)
-            => values[position] = new MemoryValue(value);
+            => values[position] = BitMask.Overwrite(new MemoryValue(value));
     }
 }
