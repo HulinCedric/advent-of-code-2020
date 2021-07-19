@@ -5,6 +5,19 @@ namespace AdventOfCode.Day14
 {
     public class MaskShould
     {
+        [Fact]
+        public void Have_a_default_value()
+        {
+            // Given
+            var expectedMask = new Mask("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+            // When
+            var actualMask = Mask.Default;
+
+            // Then
+            Assert.Equal(expectedMask, actualMask);
+        }
+
         [Theory]
         [InlineData(11, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001001001")]
         [InlineData(101, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001100101")]
@@ -27,12 +40,15 @@ namespace AdventOfCode.Day14
         }
     }
 
-    public class Mask
+    public record Mask
     {
         private readonly string maskDescription;
 
         public Mask(string maskDescription)
             => this.maskDescription = maskDescription;
+
+        public static Mask Default
+            => new("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
         public MemoryValue Overwrite(MemoryValue memoryValue)
             => new(string.Concat(
