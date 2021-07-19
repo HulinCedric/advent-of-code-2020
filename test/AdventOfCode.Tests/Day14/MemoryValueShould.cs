@@ -6,6 +6,26 @@ namespace AdventOfCode.Day14
     public class MemoryValueShould
     {
         [Theory]
+        [InlineData(1, 1, 2)]
+        [InlineData(3, 6, 9)]
+        public void Be_add_up(
+            int firstValue,
+            int secondValue,
+            int totalValue)
+        {
+            // Given
+            var firstMemoryValue = new MemoryValue(firstValue);
+            var secondMemoryValue = new MemoryValue(secondValue);
+            var expectedTotalMemoryValue = new MemoryValue(totalValue);
+
+            // When
+            var actualTotalMemoryValue = firstMemoryValue + secondMemoryValue;
+
+            // Then
+            Assert.Equal(expectedTotalMemoryValue, actualTotalMemoryValue);
+        }
+
+        [Theory]
         [InlineData("000000000000000000000000000000001011", 11)]
         [InlineData("000000000000000000000000000001100101", 101)]
         [InlineData("000000000000000000000000000000000000", 0)]
@@ -58,6 +78,9 @@ namespace AdventOfCode.Day14
             representation = Convert.ToString(value, 2)
                 .PadLeft(36, '0');
         }
+
+        public static MemoryValue operator +(MemoryValue first, MemoryValue second)
+            => new(first.value + second.value);
 
         public override string ToString()
             => representation;
