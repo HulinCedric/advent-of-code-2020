@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace AdventOfCode.Day14
@@ -33,6 +34,30 @@ namespace AdventOfCode.Day14
             // Then
             Assert.NotEmpty(memory.Values);
             Assert.Equal(1, memory.Values.Count);
+        }
+
+
+        [Fact]
+        public void Sum_all_values()
+        {
+            // Given
+            var memory = new Memory();
+
+            var mask = new BitMask("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X");
+
+            memory.UpdateBitMask(mask);
+
+            memory.WriteAt(8, 11);
+            memory.WriteAt(7, 101);
+            memory.WriteAt(8, 0);
+
+            var expectedSumMemoryValue = new MemoryValue(165);
+
+            // When
+            var actualSumMemoryValue = memory.Sum;
+
+            // Then
+            Assert.Equal(expectedSumMemoryValue, actualSumMemoryValue);
         }
 
         [Fact]
@@ -94,6 +119,11 @@ namespace AdventOfCode.Day14
             => BitMask = BitMask.Default;
 
         public BitMask BitMask { get; private set; }
+
+        public MemoryValue Sum
+            => values.Values.Aggregate(
+                new MemoryValue(0),
+                (acc, current) => acc + current);
 
         public IReadOnlyCollection<MemoryValue> Values
             => values.Values;
