@@ -82,7 +82,7 @@ namespace AdventOfCode.Day14
 
             // When
             memory.WriteAt(8, 11);
-            memory.WriteAt(8, 12);
+            memory.WriteAt(8, 8);
 
             // Then
             Assert.NotEmpty(memory.Values);
@@ -94,7 +94,7 @@ namespace AdventOfCode.Day14
         [InlineData(101, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001100101")]
         [InlineData(0, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001000000")]
         public void Write_value_with_bitmask_overwrite_value(
-            int value,
+            long value,
             string maskDescription,
             string expectedRepresentation)
         {
@@ -113,7 +113,7 @@ namespace AdventOfCode.Day14
 
     public class Memory
     {
-        private readonly Dictionary<int, MemoryValue> values = new();
+        private readonly Dictionary<uint, MemoryValue> values = new();
 
         public Memory()
             => BitMask = BitMask.Default;
@@ -131,10 +131,10 @@ namespace AdventOfCode.Day14
         public void UpdateBitMask(BitMask bitMask)
             => BitMask = bitMask;
 
-        public MemoryValue ValueAt(int position)
+        public MemoryValue ValueAt(uint position)
             => values[position];
 
-        public void WriteAt(int position, int value)
+        public void WriteAt(uint position, long value)
             => values[position] = BitMask.Overwrite(new MemoryValue(value));
     }
 }

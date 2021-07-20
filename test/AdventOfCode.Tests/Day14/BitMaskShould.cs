@@ -23,7 +23,7 @@ namespace AdventOfCode.Day14
         [InlineData(101, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001100101")]
         [InlineData(0, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", "000000000000000000000000000001000000")]
         public void Overwrite_memory_value(
-            int value,
+            long value,
             string maskDescription,
             string expectedRepresentation)
         {

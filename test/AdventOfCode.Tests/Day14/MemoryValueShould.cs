@@ -9,9 +9,9 @@ namespace AdventOfCode.Day14
         [InlineData(1, 1, 2)]
         [InlineData(3, 6, 9)]
         public void Be_add_up(
-            int firstValue,
-            int secondValue,
-            int totalValue)
+            long firstValue,
+            long secondValue,
+            long totalValue)
         {
             // Given
             var firstMemoryValue = new MemoryValue(firstValue);
@@ -31,7 +31,7 @@ namespace AdventOfCode.Day14
         [InlineData("000000000000000000000000000000000000", 0)]
         public void Be_construct_through_representation(
             string memoryValueRepresentation,
-            int expectedValue)
+            long expectedValue)
         {
             // Given
             var expectedMemoryValue = new MemoryValue(expectedValue);
@@ -48,7 +48,7 @@ namespace AdventOfCode.Day14
         [InlineData(101, "000000000000000000000000000001100101")]
         [InlineData(0, "000000000000000000000000000000000000")]
         public void Be_represented_on_36bits(
-            int value,
+            long value,
             string expectedRepresentation)
         {
             // Given
@@ -64,15 +64,15 @@ namespace AdventOfCode.Day14
     public record MemoryValue
     {
         private readonly string representation;
-        private readonly int value;
+        private readonly long value;
 
         public MemoryValue(string representation)
         {
             this.representation = representation;
-            value = Convert.ToInt32(representation, 2);
+            value = Convert.ToInt64(representation, 2);
         }
 
-        public MemoryValue(int value)
+        public MemoryValue(long value)
         {
             this.value = value;
             representation = Convert.ToString(value, 2)

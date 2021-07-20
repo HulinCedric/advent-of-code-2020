@@ -8,7 +8,7 @@ namespace AdventOfCode.Day14
         [Theory]
         [InlineData("mem[8] = 11", 8, 11)]
         [InlineData("mem[7] = 101", 7, 101)]
-        public void Read_set_memory_instruction(string programInstruction, int memoryPosition, int value)
+        public void Read_set_memory_instruction(string programInstruction, uint memoryPosition, long value)
         {
             // Given
             var expectedMemoryValue = new MemoryValue(value);
@@ -54,19 +54,19 @@ namespace AdventOfCode.Day14
             return memory;
         }
 
-        private static int ExtractPosition(string programInstruction)
+        private static uint ExtractPosition(string programInstruction)
         {
             const int startIndex = 4;
             var endIndex = programInstruction.IndexOf(']');
             var rawPosition = programInstruction[startIndex..endIndex];
-            return int.Parse(rawPosition.Trim());
+            return uint.Parse(rawPosition.Trim());
         }
 
-        private static int ExtractValue(string programInstruction)
+        private static uint ExtractValue(string programInstruction)
         {
             var startIndex = programInstruction.IndexOf("= ", StringComparison.Ordinal) + 2;
             var rawValue = programInstruction[startIndex..];
-            return int.Parse(rawValue.Trim());
+            return uint.Parse(rawValue.Trim());
         }
     }
 }
